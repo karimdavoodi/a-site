@@ -1,0 +1,56 @@
+[
+  {
+    "id": "about",
+    "title": "About Us",
+    "description": "Our mission is to serve the spiritual and communal needs of the Muslim community in Faith City.",
+    "imageUrl": "https://via.placeholder.com/150"
+  },
+  {
+    "id": "mission",
+    "title": "Our Mission",
+    "description": "To provide a place of worship, education, and community for all.",
+    "imageUrl": "https://via.placeholder.com/150"
+  },
+  {
+    "id": "services",
+    "title": "Services",
+    "description": "Daily prayers, Friday sermons, Quran classes, and more.",
+    "imageUrl": "https://via.placeholder.com/150"
+  },
+  {
+    "id": "events",
+    "title": "Events",
+    "description": "Community iftars, Eid celebrations, and guest lectures.",
+    "imageUrl": "https://via.placeholder.com/150"
+  },
+  {
+    "id": "donate",
+    "title": "Donate",
+    "description": "Your contributions help us maintain and expand our services.",
+    "imageUrl": "https://via.placeholder.com/150"
+  },
+  {
+    "id": "volunteer",
+    "title": "Volunteer",
+    "description": "Join our team of dedicated volunteers.",
+    "imageUrl": "https://via.placeholder.com/150"
+  },
+  {
+    "id": "imam",
+    "title": "Our Imam",
+    "description": "Meet our respected Imam and scholar.",
+    "imageUrl": "https://via.placeholder.com/150"
+  },
+  {
+    "id": "community",
+    "title": "Community",
+    "description": "A vibrant and welcoming community for all.",
+    "imageUrl": "https://via.placeholder.com/150"
+  },
+  {
+    "id": "contact",
+    "title": "Contact Us",
+    "description": "Get in touch with us for any inquiries.",
+    "imageUrl": "https://via.placeholder.com/150"
+  }
+]
