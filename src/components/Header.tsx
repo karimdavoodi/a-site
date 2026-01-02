@@ -1,23 +1,26 @@
-import { Info } from '@/types';
 import Image from 'next/image';
 import infoData from '../../public/data/info.json';
+import {DonateButton} from './DonateButton';
+
+const SOCIAL_ICON_SIZE = 15;
 
 const Header = () => {
   return (
     <header style={styles.header}>
       <div style={styles.logo}>
-        <Image src="/file.svg" alt="Logo" width={40} height={40} />
-        <h1 style={styles.logoText}>{infoData.masjidName}</h1>
+        <Image src="/assets/logo.png" alt="Logo" width={35} height={25} />
       </div>
-      <div style={styles.donate}>
-        <button style={styles.donateButton}>Donate</button>
-      </div>
+      <DonateButton/>
       <div style={styles.contact}>
-        <p>{infoData.contact.phone}</p>
+        <p>{infoData.contact.phones.map(phone => <a style={styles.phone} key={phone} href={`tel:${phone}`}>{phone}</a>)}</p>
         <div style={styles.socialIcons}>
-          <a href={infoData.contact.socialMedia.facebook}><Image src="/file.svg" alt="Facebook" width={20} height={20} /></a>
-          <a href={infoData.contact.socialMedia.twitter}><Image src="/file.svg" alt="Twitter" width={20} height={20} /></a>
-          <a href={infoData.contact.socialMedia.instagram}><Image src="/file.svg" alt="Instagram" width={20} height={20} /></a>
+
+        {infoData.contact.socialMedia.x && <a href={infoData.contact.socialMedia.x}><Image src="/assets/icons/x.svg" alt="X" width={SOCIAL_ICON_SIZE} height={SOCIAL_ICON_SIZE} style={styles.icon} /></a>}
+
+        {infoData.contact.socialMedia.instagram && <a href={infoData.contact.socialMedia.instagram}><Image src="/assets/icons/instagram.svg" alt="Instagram" width={SOCIAL_ICON_SIZE} height={SOCIAL_ICON_SIZE} style={styles.icon} /></a>}
+        {infoData.contact.socialMedia.youtube && <a href={infoData.contact.socialMedia.youtube}><Image src="/assets/icons/youtube.svg" alt="YouTube" width={SOCIAL_ICON_SIZE} height={SOCIAL_ICON_SIZE} style={styles.icon}/></a>}
+        {infoData.contact.socialMedia.facebook && <a href={infoData.contact.socialMedia.facebook}><Image src="/assets/icons/facebook.svg" alt="Facebook" width={SOCIAL_ICON_SIZE} height={SOCIAL_ICON_SIZE} style={styles.icon} /></a>}
+          
         </div>
       </div>
     </header>
@@ -26,7 +29,7 @@ const Header = () => {
 
 const styles: { [key: string]: React.CSSProperties } = {
   header: {
-    height: '6vh',
+    height: '1.7rem',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -38,26 +41,34 @@ const styles: { [key: string]: React.CSSProperties } = {
     display: 'flex',
     alignItems: 'center',
   },
-  logoText: {
-    marginLeft: '10px',
-    fontSize: '1.5rem',
-  },
-  donate: {},
-  donateButton: {
-    padding: '10px 20px',
-    backgroundColor: 'var(--gold)',
-    color: 'var(--deep-green)',
-    border: 'none',
-    borderRadius: '5px',
-    cursor: 'pointer',
-  },
+  // donateButton: {
+  //   padding: '3px 12px',
+  //   backgroundColor: 'var(--gold)',
+  //   color: 'var(--deep-green)',
+  //   border: 'none',
+  //   borderRadius: '3px',
+  //   fontSize: '0.7rem',
+  //   fontWeight: 'bold',
+  //   marginLeft: '5rem',
+  //   cursor: 'pointer',
+  // },
   contact: {
     display: 'flex',
     alignItems: 'center',
+    fontSize: '0.6rem',
+  },
+  phone: {
+    marginRight: '5px',
+    color: 'white',
   },
   socialIcons: {
     display: 'flex',
-    marginLeft: '10px',
+    marginLeft: '5px',
+    alignItems: 'center',
+  },
+  icon: {
+    marginLeft: '5px',
+    borderRadius: '2px',
   },
 };
 

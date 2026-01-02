@@ -15,13 +15,13 @@ const Title = () => {
 
 const styles: { [key: string]: React.CSSProperties } = {
   titleContainer: {
-    height: '12vh',
+    height: '10rem',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundImage: `url('/assets/title_background.jpg')`,
     backgroundSize: 'cover',
-    backgroundPosition: 'bottom',
+    backgroundPosition: 'center',
     position: 'relative',
   },
   overlay: {
@@ -38,13 +38,13 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   title: {
     color: 'white',
-    fontSize: '3rem',
+    fontSize: '2rem',
     zIndex: 1,
   },
   slogan: {
     color: 'white',
-    fontSize: '1.2rem',
-    marginTop: '-2em',
+    fontSize: '0.7rem',
+    marginTop: '-18px',
   },
 };
 

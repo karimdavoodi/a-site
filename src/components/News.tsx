@@ -1,19 +1,16 @@
+import {getNews} from '@/utils'
+import {ComponentsHeader} from "./ComponentsHeader";
+
 
 const News = async () => {
-  // In a real app, you'd fetch news from a file or API
-  const newsItems = [
-    "Community Iftar this Friday",
-    "Quran classes for kids starting next month",
-    "Guest lecture by Sheikh Yusuf on Sunday",
-    "Eid prayers will be held at 8:00 AM",
-    "Volunteer opportunities available for the upcoming event",
-    "Weekly sisters' halaqa every Wednesday",
-  ];
+  // Get news from /pu
+
+  const newsItems = getNews();
 
   return (
     <div style={styles.newsContainer}>
-      <h2 style={styles.title}>News & Announcements</h2>
-      <div style={styles.scrollBox}>
+      <ComponentsHeader title={'News'}/>
+        <div style={styles.scrollBox}>
         {newsItems.map((item, index) => (
           <div key={index} style={styles.newsItem}>
             {item}
@@ -26,24 +23,21 @@ const News = async () => {
 
 const styles: { [key: string]: React.CSSProperties } = {
   newsContainer: {
-    height: '12vh',
-    padding: '10px',
-    backgroundColor: '#f9f9f9',
-    display: 'flex',
+    display: "flex",
     flexDirection: 'column',
+    // alignContent: 'center',
+    // alignItems: 'center'
   },
-  title: {
-    fontSize: '1.2rem',
-    marginBottom: '10px',
-    color: 'var(--deep-green)',
-  },
+
   scrollBox: {
+    width: '80%',
     overflowY: 'auto',
-    flex: 1,
+    marginLeft: '10%'
+    // flex: 1,
   },
   newsItem: {
     padding: '5px 0',
-    borderBottom: '1px solid #eee',
+    borderBottom: '1px solid #048d42ff',
   },
 };
 

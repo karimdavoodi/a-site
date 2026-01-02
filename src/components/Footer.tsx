@@ -1,47 +1,75 @@
-import { Info } from '@/types';
-import infoData from '../../public/data/info.json';
+import { Info } from "@/types";
+import infoData from "../../public/data/info.json";
 
 const Footer = () => {
+  const phones = infoData.contact.phones.join(", ");
   return (
-    <footer style={styles.footer}>
-      <div style={styles.section}>
-        <h3>Address</h3>
-        <a href={infoData.googleMapsUrl} target="_blank" rel="noopener noreferrer">
-          {infoData.address}
-        </a>
-      </div>
-      <div style={styles.section}>
-        <h3>Contact</h3>
-        <p>Phone: {infoData.contact.phone}</p>
+    <footer style={styles.buttom}>
+      <div style={styles.footer}>
+      <div style={styles.address}>
+        <p style={styles.addressTitle}>{infoData.masjidName}</p>
+        <p>{infoData.contact.address}</p>
+        <p>Tels: {phones}</p>
         <p>Email: {infoData.contact.email}</p>
       </div>
-      <div style={styles.section}>
-        <h3>Useful Links</h3>
-        <ul>
+
+      <div style={styles.links}>
+        <p style={styles.addressTitle}>Useful Links</p>
+        <ul style={styles.list}>
           {infoData.usefulLinks.map((link, index) => (
             <li key={index}>
-              <a href={link.url}>{link.title}</a>
+              <a href={link.url} style={styles.alink}>{link.title}</a>
             </li>
           ))}
         </ul>
       </div>
+      </div>
+      <p style={styles.copyright}>
+        Copyright 2025 Alsalaam. All Rights Reserved
+      </p>
     </footer>
   );
 };
 
 const styles: { [key: string]: React.CSSProperties } = {
+  buttom:{
+    display: "flex",
+    flexDirection: "column",
+  },
   footer: {
-    height: '13vh',
-    display: 'flex',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    backgroundColor: 'var(--deep-green)',
-    color: 'white',
-    padding: '20px',
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    backgroundColor: "var(--deep-dark)",
+    color: "white",
+    paddingTop: "10px",
   },
-  section: {
-    textAlign: 'center',
+  address: {
+    fontSize: "0.6rem",
+    paddingLeft:'20px'
+
   },
+  addressTitle: {
+    fontWeight: "bold",
+    fontSize: "0.9rem",
+  },
+  links:{
+    paddingRight:'20px'
+  },
+  list:{
+        paddingInlineStart: '15px',
+        color: 'white'
+  },
+  alink:{
+    color:'white',
+    fontSize:'0.7rem'
+  },
+  copyright:{
+    fontSize: '0.5rem',
+    height: '0.3rem',
+    textAlign:'center' 
+  }
 };
 
 export default Footer;

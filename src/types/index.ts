@@ -1,14 +1,19 @@
 export interface Info {
   masjidName: string;
-  address: string;
+  masjidSlogan: string;
   googleMapsUrl: string;
+  prayerTimeUrl: string;
+  noticeMessage: string;
   contact: {
-    phone: string;
+    phone: string[];
+    address: string;
     email: string;
     socialMedia: {
       facebook: string;
-      twitter: string;
       instagram: string;
+      x: string;
+      youtube: string;
+      tiktok: string;
     };
   };
   usefulLinks: {
@@ -24,6 +29,8 @@ export interface Notice {
 export interface Component {
   id: string;
   title: string;
+  titleImageUrl: string;
+  summary: string;
   description: string;
-  imageUrl: string;
+  imagesUrls: string[];
 }

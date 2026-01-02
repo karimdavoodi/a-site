@@ -1,18 +1,22 @@
 import { Notice as NoticeType } from '@/types';
-import noticeData from '../../public/data/notice.json';
+import infoData from '../../public/data/info.json';
 
 
 const Notice = () => {
+  if(!infoData.noticeMessage || infoData.noticeMessage.trim() === "") {
+    return null;
+  }
+
   return (
     <div style={styles.notice}>
-      <p>{noticeData.message}</p>
+      <p>{infoData.noticeMessage}</p>
     </div>
   );
 };
 
 const styles: { [key: string]: React.CSSProperties } = {
   notice: {
-    height: '2vh',
+    height: '1rem',
     backgroundColor: 'var(--gold)',
     color: 'var(--deep-green)',
     display: 'flex',

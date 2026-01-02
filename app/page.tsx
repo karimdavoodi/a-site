@@ -4,7 +4,7 @@ import Title from "@/components/Title";
 import PrayerTimes from "@/components/PrayerTimes";
 import News from "@/components/News";
 import Footer from "@/components/Footer";
-import InteractiveGridSection from "@/components/InteractiveGridSection";
+import GridSection from "@/components/GridSection";
 const OLD = true;
 
 export default function Home() {
@@ -21,7 +21,9 @@ export default function Home() {
           <Header />
           <Title />
           <PrayerTimes />
-          <InteractiveGridSection />
+          <GridSection gridTitle='Objects' />
+          <GridSection gridTitle='Programs' />
+          <GridSection gridTitle='Services' />
           <News />
           <Footer />
         </>
