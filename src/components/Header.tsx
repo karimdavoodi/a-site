@@ -1,27 +1,29 @@
 import Image from 'next/image';
 import infoData from '../../public/data/info.json';
 import {DonateButton} from './DonateButton';
+import { getComponent } from '@/utils';
+import { SocialMedia } from './SocialMedia';
 
 const SOCIAL_ICON_SIZE = 15;
 
 const Header = () => {
+
+  const donate = getComponent('donation');
   return (
     <header style={styles.header}>
       <div style={styles.logo}>
         <Image src="/assets/logo.png" alt="Logo" width={35} height={25} />
       </div>
-      <DonateButton/>
+      <DonateButton
+         title={donate.title}
+         summary={donate.summary}
+         titleImageUrl={donate.titleImageUrl}
+         description={donate.description}
+         imagesUrls={donate.imagesUrls}
+      />
       <div style={styles.contact}>
         <p>{infoData.contact.phones.map(phone => <a style={styles.phone} key={phone} href={`tel:${phone}`}>{phone}</a>)}</p>
-        <div style={styles.socialIcons}>
-
-        {infoData.contact.socialMedia.x && <a href={infoData.contact.socialMedia.x}><Image src="/assets/icons/x.svg" alt="X" width={SOCIAL_ICON_SIZE} height={SOCIAL_ICON_SIZE} style={styles.icon} /></a>}
-
-        {infoData.contact.socialMedia.instagram && <a href={infoData.contact.socialMedia.instagram}><Image src="/assets/icons/instagram.svg" alt="Instagram" width={SOCIAL_ICON_SIZE} height={SOCIAL_ICON_SIZE} style={styles.icon} /></a>}
-        {infoData.contact.socialMedia.youtube && <a href={infoData.contact.socialMedia.youtube}><Image src="/assets/icons/youtube.svg" alt="YouTube" width={SOCIAL_ICON_SIZE} height={SOCIAL_ICON_SIZE} style={styles.icon}/></a>}
-        {infoData.contact.socialMedia.facebook && <a href={infoData.contact.socialMedia.facebook}><Image src="/assets/icons/facebook.svg" alt="Facebook" width={SOCIAL_ICON_SIZE} height={SOCIAL_ICON_SIZE} style={styles.icon} /></a>}
-          
-        </div>
+        <SocialMedia/>
       </div>
     </header>
   );
@@ -41,17 +43,6 @@ const styles: { [key: string]: React.CSSProperties } = {
     display: 'flex',
     alignItems: 'center',
   },
-  // donateButton: {
-  //   padding: '3px 12px',
-  //   backgroundColor: 'var(--gold)',
-  //   color: 'var(--deep-green)',
-  //   border: 'none',
-  //   borderRadius: '3px',
-  //   fontSize: '0.7rem',
-  //   fontWeight: 'bold',
-  //   marginLeft: '5rem',
-  //   cursor: 'pointer',
-  // },
   contact: {
     display: 'flex',
     alignItems: 'center',
@@ -60,15 +51,6 @@ const styles: { [key: string]: React.CSSProperties } = {
   phone: {
     marginRight: '5px',
     color: 'white',
-  },
-  socialIcons: {
-    display: 'flex',
-    marginLeft: '5px',
-    alignItems: 'center',
-  },
-  icon: {
-    marginLeft: '5px',
-    borderRadius: '2px',
   },
 };
 

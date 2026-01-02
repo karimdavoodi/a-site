@@ -1,7 +1,8 @@
-import { Info } from "@/types";
 import infoData from "../../public/data/info.json";
+import { SocialMedia } from "./SocialMedia";
 
 const Footer = () => {
+  const year = new Date().getFullYear();
   const phones = infoData.contact.phones.join(", ");
   return (
     <footer style={styles.buttom}>
@@ -11,6 +12,7 @@ const Footer = () => {
         <p>{infoData.contact.address}</p>
         <p>Tels: {phones}</p>
         <p>Email: {infoData.contact.email}</p>
+       <SocialMedia/>
       </div>
 
       <div style={styles.links}>
@@ -25,7 +27,7 @@ const Footer = () => {
       </div>
       </div>
       <p style={styles.copyright}>
-        Copyright 2025 Alsalaam. All Rights Reserved
+        {`Copyright ${year} ${infoData.masjidName}. All Rights Reserved`}
       </p>
     </footer>
   );

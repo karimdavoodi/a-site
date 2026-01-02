@@ -1,12 +1,10 @@
 "use client";
-
 import { useState } from "react";
 import { ModalDialog } from "./ModalDialog";
 import { Component } from "@/types";
 
 
 export const ComponentBox = ({
-    id,
     title,
     titleImageUrl,
     summary,
@@ -20,14 +18,6 @@ export const ComponentBox = ({
       <div
         style={styles.container}
         onClick={() => {
-        //   console.log("ssee more...", {
-        //     id,
-        //     title,
-        //     titleImageUrl,
-        //     summary,
-        //     description,
-        //     imagesUrls  
-        //   });
           setShowDialog(true);
         }}
       >
@@ -37,7 +27,6 @@ export const ComponentBox = ({
       </div>
       {showDialog && (
         <ModalDialog
-            id={id}
             title={title}
             titleImageUrl={titleImageUrl}
             summary={summary}
@@ -50,7 +39,7 @@ export const ComponentBox = ({
   );
 };
 
-const styles: Record<string, any> = {
+const styles: { [key: string]: React.CSSProperties } = {
   container: {
     width: "100%",
     height: "100%",
@@ -73,15 +62,14 @@ const styles: Record<string, any> = {
     width: "auto",
     objectFit: "contain",
     borderRadius: "5px",
-    // marginTop: '-1.6rem',
   },
   title: {
     height: "10%",
-    fontSize: "0.8rem",
+    fontSize: "0.7rem",
     fontWeight: "bold",
     margin: "0.5rem 0",
     textOverflow: "ellipsis",
-    whiteSpace: "nowrap",
+    whiteSpace: "break-space",
   },
   summary: {
     height: "50%",
@@ -89,6 +77,6 @@ const styles: Record<string, any> = {
     margin: "0.5rem 0",
     textOverflow: "ellipsis",
     overflow: "hidden",
-    textAlign: "justify",
+    textAlign: "left",
   },
 };

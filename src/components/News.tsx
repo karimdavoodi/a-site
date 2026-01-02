@@ -1,6 +1,5 @@
-import {getNews} from '@/utils'
-import {ComponentsHeader} from "./ComponentsHeader";
-
+import { getNews } from "@/utils";
+import { ComponentsHeader } from "./ComponentsHeader";
 
 const News = async () => {
   // Get news from /pu
@@ -9,8 +8,8 @@ const News = async () => {
 
   return (
     <div style={styles.newsContainer}>
-      <ComponentsHeader title={'News'}/>
-        <div style={styles.scrollBox}>
+      <ComponentsHeader title={"News"} />
+      <div style={styles.scrollBox}>
         {newsItems.map((item, index) => (
           <div key={index} style={styles.newsItem}>
             {item}
@@ -24,20 +23,18 @@ const News = async () => {
 const styles: { [key: string]: React.CSSProperties } = {
   newsContainer: {
     display: "flex",
-    flexDirection: 'column',
-    // alignContent: 'center',
-    // alignItems: 'center'
+    flexDirection: "column",
   },
 
   scrollBox: {
-    width: '80%',
-    overflowY: 'auto',
-    marginLeft: '10%'
-    // flex: 1,
+    width: "80%",
+    overflowY: "auto",
+    marginLeft: "10%",
   },
   newsItem: {
-    padding: '5px 0',
-    borderBottom: '1px solid #048d42ff',
+    padding: "5px 0",
+    fontSize: '0.8rem',
+    borderBottom: "1px solid #048d42ff",
   },
 };
 

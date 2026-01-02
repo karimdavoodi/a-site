@@ -27,7 +27,7 @@ export interface Notice {
 }
 
 export interface Component {
-  id: string;
+  id?: string;
   title: string;
   titleImageUrl: string;
   summary: string;

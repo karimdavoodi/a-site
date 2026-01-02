@@ -9,7 +9,7 @@ export const ComponentsHeader = ({title}) => {
 };
 
 
-const styles:Record<string, any>  = {
+const styles: { [key: string]: React.CSSProperties } = {
   header: {
     fontSize: "1.3rem",
     display: "flex",

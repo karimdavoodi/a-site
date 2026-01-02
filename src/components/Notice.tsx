@@ -1,4 +1,3 @@
-import { Notice as NoticeType } from '@/types';
 import infoData from '../../public/data/info.json';
 
 

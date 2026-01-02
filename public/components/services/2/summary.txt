@@ -1,2 +1,1 @@
-this is summary of a component that we want to create here.
-this is seconf line of summary
+This is the summary of the service

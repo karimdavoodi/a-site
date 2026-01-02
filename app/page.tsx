@@ -1,18 +1,26 @@
 import Notice from "@/components/Notice";
 import Header from "@/components/Header";
 import Title from "@/components/Title";
-import PrayerTimes from "@/components/PrayerTimes";
 import News from "@/components/News";
 import Footer from "@/components/Footer";
 import GridSection from "@/components/GridSection";
-const OLD = true;
+import PrayerAndMap from "@/components/PrayerAndMap";
 
-export default function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<{ mode?: string }>;
+  }
+) {
+  const resolvedSearchParams = await searchParams;
+  const mode = resolvedSearchParams.mode ?? 'default';
+
+  console.log('KKKL', mode);
   return (
     <div className="app-container">
-      {OLD ? (
+      {mode !== 'new' ? (
         <iframe
-        src='/AIC-site/aic.html'
+        src='/old-site/aic.html'
         style={styles.iframe}
         ></iframe>
       ) : (
@@ -20,7 +28,7 @@ export default function Home() {
           <Notice />
           <Header />
           <Title />
-          <PrayerTimes />
+          <PrayerAndMap />
           <GridSection gridTitle='Objects' />
           <GridSection gridTitle='Programs' />
           <GridSection gridTitle='Services' />
@@ -32,7 +40,7 @@ export default function Home() {
   );
 }
 
-const styles: Record<string, any> = {
+const styles: { [key: string]: React.CSSProperties } = {
   iframe: {
     height: '100%',
     width: '100%',

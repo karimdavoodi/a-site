@@ -26,7 +26,7 @@ export default function GridSection({ gridTitle }: { gridTitle: string }) {
   );
 }
 
-const styles: Record<string, any> = {
+const styles: { [key: string]: React.CSSProperties } = {
   parent:{
     display: "flex",
     flexDirection: 'column',

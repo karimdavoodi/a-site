@@ -1,25 +1,47 @@
-`use client`
+"use client";
 
-export const DonateButton = () => {
-  
+import { useState } from "react";
+import { ModalDialog } from "./ModalDialog";
+import { Component } from "@/types";
 
+export const DonateButton = (
+{
+    title,
+    titleImageUrl,
+    summary,
+    description,
+    imagesUrls
+} : Component
 
-    return (
-    <button style={styles.donateButton} >Donate</button>
-    )
-}
+) => {
+  const [showDialog, setShowDialog] = useState(false);
+  return (
+    <>
+      <button style={styles.donateButton} onClick={()=> setShowDialog(true)}>Donate</button>
+      {showDialog && (
+        <ModalDialog
+          title={title}
+          titleImageUrl={titleImageUrl}
+          summary={summary}
+          description={description}
+          imagesUrls={imagesUrls}
+          onClose={() => setShowDialog(false)}
+        />
+      )}
+    </>
+  );
+};
 
 const styles: { [key: string]: React.CSSProperties } = {
   donateButton: {
-    padding: '3px 12px',
-    backgroundColor: 'var(--gold)',
-    color: 'var(--deep-green)',
-    border: 'none',
-    borderRadius: '3px',
-    fontSize: '0.7rem',
-    fontWeight: 'bold',
-    marginLeft: '5rem',
-    cursor: 'pointer',
+    backgroundColor: "var(--gold)",
+    color: "var(--deep-green)",
+    border: "none",
+    padding: "3px 12px",
+    borderRadius: "3px",
+    fontSize: "0.7rem",
+    fontWeight: "bold",
+    marginLeft: "5rem",
+    cursor: "pointer",
   },
-
-}
+};
