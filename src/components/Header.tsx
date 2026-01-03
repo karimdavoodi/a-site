@@ -4,8 +4,6 @@ import {DonateButton} from './DonateButton';
 import { getComponent } from '@/utils';
 import { SocialMedia } from './SocialMedia';
 
-const SOCIAL_ICON_SIZE = 15;
-
 const Header = () => {
 
   const donate = getComponent('donation');

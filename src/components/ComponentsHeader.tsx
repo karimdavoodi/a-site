@@ -1,4 +1,4 @@
-export const ComponentsHeader = ({title}) => {
+export const ComponentsHeader = ({title}:{title:string}) => {
   return (
     <div style={styles.header}>
       <hr style={styles.line} />
