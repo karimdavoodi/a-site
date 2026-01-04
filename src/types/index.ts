@@ -3,7 +3,7 @@ export interface Info {
   masjidSlogan: string;
   googleMapsUrl: string;
   prayerTimeUrl: string;
-  noticeMessage: string;
+  pinMessage: string;
   contact: {
     phone: string[];
     address: string;
@@ -32,5 +32,18 @@ export interface Component {
   titleImageUrl: string;
   summary: string;
   description: string;
-  imagesUrls: string[];
 }
+
+export type PrayerTime = {
+  fajr: string;
+  dhuhr: string;
+  asr: string;
+  maghrib: string;
+  isha: string;
+};
+
+export type PrayerTimes = {
+  day: number;
+  azan?: PrayerTime;
+  iqama?: PrayerTime;
+};

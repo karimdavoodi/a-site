@@ -9,7 +9,6 @@ export const ComponentBox = ({
     titleImageUrl,
     summary,
     description,
-    imagesUrls
 } : Component) => {
   const [showDialog, setShowDialog] = useState(false);
 
@@ -24,6 +23,7 @@ export const ComponentBox = ({
         <img src={titleImageUrl} alt={title} style={styles.image} />
         <p style={styles.title}>{title}</p>
         <p style={styles.summary}>{summary}</p>
+        <p style={styles.more}>Click to see more...</p>
       </div>
       {showDialog && (
         <ModalDialog
@@ -31,7 +31,6 @@ export const ComponentBox = ({
             titleImageUrl={titleImageUrl}
             summary={summary}
             description={description}
-            imagesUrls={imagesUrls}
           onClose={() => setShowDialog(false)}
         />
       )}
@@ -45,12 +44,9 @@ const styles: { [key: string]: React.CSSProperties } = {
     height: "100%",
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: "0.5rem",
+    alignItems: "flex-start",
+    padding: "1rem",
     boxSizing: "border-box",
-    textAlign: "center",
-    overflow: "hidden",
     backgroundColor: "var(--box-color)",
     boxShadow: "var(--border-shadow)",
     border: "0px",
@@ -59,13 +55,12 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   image: {
     height: "40%",
-    width: "auto",
-    objectFit: "contain",
+    maxWidth: "100%",
     borderRadius: "5px",
   },
   title: {
-    height: "10%",
-    fontSize: "0.7rem",
+    height: "7%",
+    fontSize: "1.1rem",
     fontWeight: "bold",
     margin: "0.5rem 0",
     textOverflow: "ellipsis",
@@ -73,10 +68,17 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   summary: {
     height: "50%",
-    fontSize: "0.5rem",
+    fontSize: "0.9rem",
     margin: "0.5rem 0",
     textOverflow: "ellipsis",
     overflow: "hidden",
     textAlign: "left",
+  },
+  more: {
+    height: "1%",
+    fontSize: "0.7rem",
+    textAlign: "right",
+    color: 'var(--gold)',
+    alignSelf: 'flex-end'
   },
 };

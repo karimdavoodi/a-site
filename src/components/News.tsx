@@ -29,11 +29,11 @@ const styles: { [key: string]: React.CSSProperties } = {
   scrollBox: {
     width: "80%",
     overflowY: "auto",
-    marginLeft: "10%",
+    marginLeft: "7%",
   },
   newsItem: {
-    padding: "5px 0",
-    fontSize: '0.8rem',
+    paddingTop: "5px",
+    fontSize: '0.9rem',
     borderBottom: "1px solid #048d42ff",
   },
 };

@@ -10,14 +10,13 @@ const Header = () => {
   return (
     <header style={styles.header}>
       <div style={styles.logo}>
-        <Image src="/assets/logo.png" alt="Logo" width={35} height={25} />
+        <Image src="/assets/logo.png" alt="Logo" width={33} height={20} />
       </div>
       <DonateButton
          title={donate.title}
          summary={donate.summary}
          titleImageUrl={donate.titleImageUrl}
          description={donate.description}
-         imagesUrls={donate.imagesUrls}
       />
       <div style={styles.contact}>
         <p>{infoData.contact.phones.map(phone => <a style={styles.phone} key={phone} href={`tel:${phone}`}>{phone}</a>)}</p>
@@ -34,8 +33,8 @@ const styles: { [key: string]: React.CSSProperties } = {
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: '0 20px',
-    backgroundColor: 'var(--deep-green)',
-    color: 'white',
+    backgroundColor: 'var(--backgroud-color)',
+    color: 'var(--text-color)',
   },
   logo: {
     display: 'flex',
@@ -44,11 +43,11 @@ const styles: { [key: string]: React.CSSProperties } = {
   contact: {
     display: 'flex',
     alignItems: 'center',
-    fontSize: '0.6rem',
+    fontSize: '0.7rem',
   },
   phone: {
     marginRight: '5px',
-    color: 'white',
+    color: 'var(--text-color)',
   },
 };
 

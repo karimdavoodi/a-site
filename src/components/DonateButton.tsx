@@ -10,7 +10,6 @@ export const DonateButton = (
     titleImageUrl,
     summary,
     description,
-    imagesUrls
 } : Component
 
 ) => {
@@ -24,7 +23,6 @@ export const DonateButton = (
           titleImageUrl={titleImageUrl}
           summary={summary}
           description={description}
-          imagesUrls={imagesUrls}
           onClose={() => setShowDialog(false)}
         />
       )}
@@ -35,11 +33,11 @@ export const DonateButton = (
 const styles: { [key: string]: React.CSSProperties } = {
   donateButton: {
     backgroundColor: "var(--gold)",
-    color: "var(--deep-green)",
+    color: "var(--backgroud-color)",
     border: "none",
-    padding: "3px 12px",
+    padding: "1px 5px",
     borderRadius: "3px",
-    fontSize: "0.7rem",
+    fontSize: "0.9rem",
     fontWeight: "bold",
     marginLeft: "5rem",
     cursor: "pointer",

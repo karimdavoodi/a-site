@@ -10,7 +10,6 @@ export const ModalDialog = ({
   titleImageUrl,
   summary,
   description,
-  imagesUrls,
   onClose,
 }: ModalProps) => {
   return (
@@ -29,17 +28,11 @@ export const ModalDialog = ({
         </div>
         <div style={styles.summary}>{summary && <p>{summary}</p>}</div>
         <div style={styles.description}>
-          {description && <p>{description}</p>}
-        </div>
-        <div style={styles.images}>
-          {imagesUrls.map((url, index) => (
-            <img
-              key={index}
-              src={url}
-              alt={`${title} ${index + 1}`}
-              style={styles.image}
-            />
-          ))}
+          {description && 
+          <div 
+          dangerouslySetInnerHTML={{ __html: description }} 
+          />
+        }
         </div>
       </div>
     </div>
@@ -59,7 +52,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     zIndex: 1000,
   },
   dialog: {
-    backgroundColor: "var(--deep-green)",
+    backgroundColor: "var(--box-color)",
     borderRadius: "8px",
     width: "80%",
     maxHeight: "70%",
@@ -86,14 +79,15 @@ const styles: { [key: string]: React.CSSProperties } = {
     width: "75%",
   },
   summary: {
-    color: "white",
-    fontSize: "0.8rem",
+    color: 'var(--text-color)',
+    fontSize: "1rem",
     fontWeight: "bold",
+    marginTop: '2rem'
   },
   description: {
     fontSize: "0.9rem",
     textAlign: "justify",
-    color: "white",
+    color: 'var(--text-color)',
   },
   images: {
     display: "flex",
@@ -109,7 +103,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   closeButton: {
     padding: "3px 12px",
     backgroundColor: "var(--gold)",
-    color: "var(--deep-green)",
+    color: "var(--backgroud-color)",
     fontWeight: "bold",
     border: "none",
     borderRadius: "3px",

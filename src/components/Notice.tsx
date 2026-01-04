@@ -2,26 +2,28 @@ import infoData from '../../public/data/info.json';
 
 
 const Notice = () => {
-  if(!infoData.noticeMessage || infoData.noticeMessage.trim() === "") {
+  if(!infoData.pinMessage || infoData.pinMessage.trim() === "") {
     return null;
   }
 
   return (
     <div style={styles.notice}>
-      <p>{infoData.noticeMessage}</p>
+      <p>{infoData.pinMessage}</p>
     </div>
   );
 };
 
 const styles: { [key: string]: React.CSSProperties } = {
   notice: {
-    height: '1rem',
+    // height: '1rem',
     backgroundColor: 'var(--gold)',
-    color: 'var(--deep-green)',
+    color: 'var(--backgroud-color)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    fontSize: '0.8rem',
+    textAlign:"center",
+    fontSize: '0.5rem',
+    overflowY: 'auto',
   },
 };
 

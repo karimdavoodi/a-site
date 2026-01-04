@@ -1,7 +1,7 @@
 import Image from "next/image";
 import infoData from "../../public/data/info.json";
 
-const SOCIAL_ICON_SIZE = 15;
+const SOCIAL_ICON_SIZE = 18;
 
 export const SocialMedia = () => {
   return (

@@ -4,7 +4,7 @@ import Title from "@/components/Title";
 import News from "@/components/News";
 import Footer from "@/components/Footer";
 import GridSection from "@/components/GridSection";
-import PrayerAndMap from "@/components/PrayerAndMap";
+import PrayerTimes from "@/components/PrayerTime";
 
 export default async function Home({
   searchParams,
@@ -13,11 +13,12 @@ export default async function Home({
   }
 ) {
   const resolvedSearchParams = await searchParams;
-  const mode = resolvedSearchParams.mode ?? 'default';
+  const mode = resolvedSearchParams.mode ?? 'old';
 
-  console.log('KKKL', mode);
   return (
     <div className="app-container">
+      <div className="content-shield">
+
       {mode !== 'new' ? (
         <iframe
         src='/old-site/aic.html'
@@ -28,14 +29,16 @@ export default async function Home({
           <Notice />
           <Header />
           <Title />
-          <PrayerAndMap />
-          <GridSection gridTitle='Objects' />
-          <GridSection gridTitle='Programs' />
-          <GridSection gridTitle='Services' />
+          <PrayerTimes />
+      
+          <GridSection gridTitle='About Us' folder='about_us' />
+          <GridSection gridTitle='Programs' folder='programs'/>
+          <GridSection gridTitle='Services' folder='services'/>
           <News />
           <Footer />
         </>
       )}
+      </div>
     </div>
   );
 }

@@ -65,25 +65,32 @@ export const PrayerTimes = async () => {
 
 const styles: { [key: string]: React.CSSProperties } = {
   prayerTimesContainer: {
+    marginTop:"2rem",
+    padding: "0.5rem",
+    width: "85%",
+    boxShadow: "var(--border-shadow)",
+    borderRadius: "var(--border-radius)",
+    backgroundColor: "var(--box-color)",
     margin: "0.3rem",
-    fontSize: "0.6rem",
-    color: "while",
+    fontSize: "1.2rem",
+    color: 'var(--text-color)',
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    alignContent: "center",
+    alignSelf:"center"
   },
   title: {
-    fontSize: "0.9rem",
+    fontSize: "1.3rem",
     fontWeight: "bold",
   },
   juma: {
-    fontSize: "0.7rem",
+    fontSize: "1rem",
     marginTop: "5px",
     fontWeight: "bold",
   },
   daily: {
     width: "100%",
+    maxWidth: '100%',
     display: "flex",
     flexDirection: "row",
     alignSelf: "center",
@@ -91,26 +98,28 @@ const styles: { [key: string]: React.CSSProperties } = {
     gap: "0.4rem",
   },
   prayerTime: {
-    border: "0.3px solid var(--black)",
-    boxShadow: "2px 2px 5px 1px #000000",
-    borderRadius: "4px",
+    // border: "0.3px solid var(--black)",
+    // boxShadow: "2px 2px 3px 1px #000000",
+    // borderRadius: "30px",
     display: "flex",
     flexDirection: "column",
-    fontSize: "0.5rem",
+    fontSize: "0.8rem",
     alignItems: "center",
     fontWeight: "bold",
     width: "20%",
+    maxWidth: '20%',
     padding: "5px",
+    textAlign:"center"
   },
   name: {
-    fontSize: "0.6rem",
+    fontSize: "1rem",
     marginBottom: '5px'
   },
   timeLabel: {
-    fontSize: "0.4rem",
+    fontSize: "0.6rem",
   },
   yellow: {
-    color: "yellow",
+    color: "var(--gold)",
   },
 };
 export default PrayerTimes;

@@ -37,13 +37,13 @@ const styles: { [key: string]: React.CSSProperties } = {
     textAlign: 'center',
   },
   title: {
-    color: 'white',
+    color: 'var(--text-color)',
     fontSize: '2rem',
     zIndex: 1,
   },
   slogan: {
-    color: 'white',
-    fontSize: '0.7rem',
+    color: 'var(--text-color)',
+    fontSize: '0.95rem',
     marginTop: '-18px',
   },
 };
