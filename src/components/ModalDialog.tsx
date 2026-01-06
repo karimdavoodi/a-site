@@ -86,7 +86,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   description: {
     fontSize: "0.9rem",
-    textAlign: "justify",
+    textAlign: "left",
     color: 'var(--text-color)',
   },
   images: {

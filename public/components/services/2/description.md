@@ -1,1 +1,3 @@
-Description
+Al Slaam Quran Academy takes immense pride in offering comprehensive Quran classes tailored for all ages, with the vision of spreading knowledge and understanding of the Holy Quran among individuals from diverse backgrounds. From young children to seasoned adults, our qualified and compassionate instructors ensure that each student receives personalized attention and guidance on their Quranic journey.
+
+For teenagers and adults seeking to deepen their understanding of the Quran and its meanings, we offer insightful classes and discussions on the profound messages within the Quranic verses. Our Quran classes for all ages encompass not only the recitation and memorization of the Quran but also the practical application of its principles in daily life.

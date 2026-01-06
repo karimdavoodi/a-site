@@ -6,14 +6,15 @@ import Footer from "@/components/Footer";
 import GridSection from "@/components/GridSection";
 import PrayerTimes from "@/components/PrayerTime";
 
-export default async function Home({
-  searchParams,
-}: {
-  searchParams: Promise<{ mode?: string }>;
-  }
+export default async function Home(
+//   {
+//   searchParams,
+// }: {
+//   searchParams: Promise<{ mode?: string }>;
+//   }
 ) {
-  const resolvedSearchParams = await searchParams;
-  const mode = resolvedSearchParams.mode ?? 'old';
+  // const resolvedSearchParams = await searchParams;
+  const mode =  'new';
 
   return (
     <div className="app-container">

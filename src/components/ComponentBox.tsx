@@ -21,8 +21,10 @@ export const ComponentBox = ({
         }}
       >
         <img src={titleImageUrl} alt={title} style={styles.image} />
+        <div style={styles.titleAndSummary}>
         <p style={styles.title}>{title}</p>
         <p style={styles.summary}>{summary}</p>
+        </div>
         <p style={styles.more}>Click to see more...</p>
       </div>
       {showDialog && (
@@ -58,20 +60,23 @@ const styles: { [key: string]: React.CSSProperties } = {
     maxWidth: "100%",
     borderRadius: "5px",
   },
+  titleAndSummary: {
+    height: "55%",
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    overflowY: "auto",
+    overflow: "hidden",
+  },
   title: {
-    height: "7%",
-    fontSize: "1.1rem",
+    fontSize: "1rem",
     fontWeight: "bold",
     margin: "0.5rem 0",
-    textOverflow: "ellipsis",
     whiteSpace: "break-space",
   },
   summary: {
-    height: "50%",
     fontSize: "0.9rem",
     margin: "0.5rem 0",
-    textOverflow: "ellipsis",
-    overflow: "hidden",
     textAlign: "left",
   },
   more: {

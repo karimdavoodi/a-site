@@ -2,11 +2,13 @@ import fs from "fs";
 import path from "path";
 import MarkdownIt from "markdown-it";
 import imsize from "markdown-it-imsize";
+import attrs from "markdown-it-attrs";
 import infoData from "../public/data/info.json";
 import { Component, PrayerTimes } from "@/types";
 
-const md = new MarkdownIt({});
+const md = new MarkdownIt({html: true});
 md.use(imsize);
+md.use(attrs);
 
 export function renderMarkdown(content: string) {
   return md.render(content);
