@@ -6,7 +6,9 @@ import attrs from "markdown-it-attrs";
 import infoData from "../public/data/info.json";
 import { Component, PrayerTimes } from "@/types";
 
-const md = new MarkdownIt({html: true});
+const SYNC_TIME_MINUTE = 5;
+
+const md = new MarkdownIt({ html: true });
 md.use(imsize);
 md.use(attrs);
 
@@ -33,7 +35,7 @@ export const getComponents = (pFolder: string): Component[] | undefined => {
 
     return comps;
   } catch (e) {
-    console.log("Error in getComponent", e);
+    console.error(e, "Error in getComponent");
     return undefined;
   }
 };
@@ -67,19 +69,19 @@ export const getComponent = (folder: string, parent?: string) => {
   try {
     component.title = fs.readFileSync(titlePath, "utf-8").trim();
   } catch (err) {
-    console.error(`Error reading title for ${folderPath}:`, err);
+    console.error(err, `Error reading title for ${folderPath}:`);
   }
   try {
     component.summary = fs.readFileSync(summaryPath, "utf-8").trim();
   } catch (err) {
-    console.error(`Error reading summary for ${folderPath}:`, err);
+    console.error(err, `Error reading summary for ${folderPath}:`);
   }
 
   try {
     const description = fs.readFileSync(descriptionPath, "utf-8").trim();
     component.description = renderMarkdown(description);
   } catch (err) {
-    console.error(`Error reading description for ${folderPath}:`, err);
+    console.error(err, `Error reading description for ${folderPath}:`);
   }
 
   const base = parent
@@ -103,7 +105,7 @@ export const getNews = () => {
   try {
     news = fs.readFileSync(dir, "utf-8").trim();
   } catch (err) {
-    console.error(`Error reading description for ${dir}:`, err);
+    console.error(err, `Error reading description for ${dir}:`);
   }
   return news.split("\n");
 };
@@ -184,8 +186,146 @@ export const getPayerTime = async () => {
         break;
       }
     }
+    console.info(prayerTimes, 'Read prayer times');
   } catch (err) {
-    console.error("Error reading prayer times csv:", err);
+    console.error(err, "Error reading prayer times csv:");
   }
   return prayerTimes;
+};
+
+export const getImageListFromFolder = async (folderPath: string) => {
+  const path = `/tmp/${folderPath}`;
+  if (await folderNotSynced(path)) {
+    console.info(`Syncing folder ${folderPath} to ${path}`);
+    await syncGoogleDriveFolder(folderPath, path);
+  }
+  try {
+    const files = fs.readdirSync(path);
+    const images = files
+      .filter((file) =>
+        [".png", ".jpg", ".jpeg", ".gif", ".webp"].includes(
+          file.slice(file.lastIndexOf(".")).toLowerCase()
+        )
+      )
+      .map((file) => ({
+        name: file,
+        url: `/api/images/${folderPath}/${file}`,
+      }));
+    console.info(images, `Images in ${path}`);
+    return images;
+  } catch (err) {
+    console.error(err, `Error reading images from folder ${path}:`);
+    return null;
+  }
+};
+
+const folderNotSynced = async (localPath: string) => {
+  try {
+    console.debug('DEBUG...');
+    console.info('INFO...');
+    console.warn('WARN...');
+    console.error('ERROR...');
+
+    const stats = fs.statSync(`${localPath}/sync_time.txt`);
+    const now = new Date();
+    const modifiedTime = new Date(stats.mtime);
+    const diffMinutes = (now.getTime() - modifiedTime.getTime()) / (1000 * 60);
+    return diffMinutes > SYNC_TIME_MINUTE;
+  } catch(err) {
+    console.error(err, 'Error on check sync');
+    return true;
+  }
+};
+
+export const syncGoogleDriveFolder = async (
+  gdriveFolderName: string,
+  localPath: string
+) => {
+  const folderId =
+    gdriveFolderName === "programs"
+      ? process.env.GDRIVE_PROGRAMS_FOLDER_ID
+      : "";
+  const key = process.env.GDRIVE_KEY;
+
+  if (!folderId) {
+    console.error("GDRIVE_PROGRAMS_FOLDER_ID is not set");
+    return null;
+  }
+  if (!key) {
+    console.error("GDRIVE_KEY is not set");
+    return null;
+  }
+
+  const url =
+    "https://www.googleapis.com/drive/v3/files?" +
+    new URLSearchParams({
+      q: `'${folderId}' in parents and trashed = false`,
+      fields: "files(id,name,mimeType,size,modifiedTime)",
+      key: key,
+    });
+
+  try {
+    const res = await fetch(url);
+    const data = (await res.json()) as {
+      files: {
+        id: string;
+        name: string;
+        mimeType: string;
+        size: number;
+        modifiedTime: string;
+      }[];
+    };
+    if (!data.files) {
+      console.error("No files found in Google Drive folder");
+      return null;
+    }
+
+    data.files.sort(
+      (a, b) =>
+        new Date(b.modifiedTime).getTime() - new Date(a.modifiedTime).getTime()
+    );
+
+    fs.mkdirSync(localPath, { recursive: true });
+
+    let i = 1;
+    for (const file of data.files) {
+      if (
+        file.mimeType === "image/png" ||
+        file.mimeType === "image/jpeg" ||
+        file.mimeType === "image/jpg" ||
+        file.mimeType === "image/gif" ||
+        file.mimeType === "image/webp"
+      ) {
+        const downloadUrl = `https://www.googleapis.com/drive/v3/files/${file.id}?alt=media&key=${key}`;
+        try {
+          const fileRes = await fetch(downloadUrl);
+          if (!fileRes.ok) {
+            console.error(
+              `Failed to download file ${file.name}: ${fileRes.status}`
+            );
+            continue;
+          }
+
+          const arrayBuffer = await fileRes.arrayBuffer();
+          const buffer = Buffer.from(arrayBuffer);
+          const name = `${i}.` + file.name.split(".").pop()?.toLowerCase();
+          fs.writeFileSync(path.join(localPath, name), buffer);
+          console.info(`Saved ${file.name} =>  ${name}`);
+          i += 1;
+        } catch (err) {
+          console.error(err, `Error on fetching ${file.name}`);
+        }
+      }
+    }
+
+    // Update sync time
+    fs.writeFileSync(
+      path.join(localPath, "sync_time.txt"),
+      new Date().toISOString()
+    );
+    return true;
+  } catch (err) {
+    console.error(err, "Error fetching Google Drive files:");
+  }
+  return null;
 };

@@ -5,6 +5,9 @@ import News from "@/components/News";
 import Footer from "@/components/Footer";
 import GridSection from "@/components/GridSection";
 import PrayerTimes from "@/components/PrayerTime";
+import Programs from "@/components/Programs";
+
+export const dynamic = "force-dynamic";
 
 export default async function Home(
 //   {
@@ -33,7 +36,7 @@ export default async function Home(
           <PrayerTimes />
       
           <GridSection gridTitle='About Us' folder='about_us' />
-          <GridSection gridTitle='Programs' folder='programs'/>
+          <Programs title='Programs' />
           <GridSection gridTitle='Services' folder='services'/>
           <News />
           <Footer />
