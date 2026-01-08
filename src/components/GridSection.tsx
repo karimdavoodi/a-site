@@ -1,4 +1,4 @@
-import { getComponents } from "@/utils";
+import { getComponents } from "@/utils/components";
 import { ComponentBox } from "./ComponentBox";
 import { ComponentsHeader } from "./ComponentsHeader";
 

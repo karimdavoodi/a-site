@@ -1,9 +1,7 @@
-import { getNews } from "@/utils";
+import { getNews } from "@/utils/news";
 import { ComponentsHeader } from "./ComponentsHeader";
 
 const News = async () => {
-  // Get news from /pu
-
   const newsItems = getNews();
 
   return (

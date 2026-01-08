@@ -1,8 +1,8 @@
 import Image from "next/image";
 import infoData from "../../public/data/info.json";
 import { DonateButton } from "./DonateButton";
-import { getComponent } from "@/utils";
 import { SocialMedia } from "./SocialMedia";
+import { getComponent } from "@/utils/components";
 
 const Header = () => {
   const donate = getComponent("donation");

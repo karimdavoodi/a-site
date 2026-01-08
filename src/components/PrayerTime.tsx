@@ -1,4 +1,4 @@
-import { getPayerTime } from "@/utils";
+import { getPayerTime } from "@/utils/prayer";
 import infoData from "../../public/data/info.json";
 
 type prob = {

@@ -10,12 +10,6 @@ import Programs from "@/components/Programs";
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-//   {
-//   searchParams,
-// }: {
-//   searchParams: Promise<{ mode?: string }>;
-//   }
-  // const resolvedSearchParams = await searchParams;
   const mode = "new";
 
   return (

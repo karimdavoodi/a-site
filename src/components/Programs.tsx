@@ -1,4 +1,4 @@
-import { getImageListFromFolder } from "@/utils";
+import { getImageListFromFolder } from "@/utils/images";
 import { ComponentsHeader } from "./ComponentsHeader";
 
 export default async function Programs({ title }: { title: string }) {
