@@ -2,7 +2,7 @@ import { getNews } from "@/utils/news";
 import { ComponentsHeader } from "./ComponentsHeader";
 
 const News = async () => {
-  const newsItems = getNews();
+  const newsItems = await getNews();
 
   return (
     <div style={styles.newsContainer}>

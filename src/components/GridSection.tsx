@@ -2,14 +2,14 @@ import { getComponents } from "@/utils/components";
 import { ComponentBox } from "./ComponentBox";
 import { ComponentsHeader } from "./ComponentsHeader";
 
-export default function GridSection({
+export default async function GridSection({
   gridTitle,
   folder,
 }: {
   gridTitle: string;
   folder: string;
 }) {
-  const components = getComponents(folder);
+  const components = await getComponents(folder);
   if (!components) {
     return null;
   }

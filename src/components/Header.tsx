@@ -4,8 +4,8 @@ import { DonateButton } from "./DonateButton";
 import { SocialMedia } from "./SocialMedia";
 import { getComponent } from "@/utils/components";
 
-const Header = () => {
-  const donate = getComponent("donation");
+const Header = async () => {
+  const donate = await getComponent("donation");
   return (
     <header style={styles.header}>
       <div style={styles.logo}>
