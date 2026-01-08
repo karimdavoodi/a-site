@@ -4,19 +4,18 @@ import { useState } from "react";
 import { ModalDialog } from "./ModalDialog";
 import { Component } from "@/types";
 
-export const DonateButton = (
-{
-    title,
-    titleImageUrl,
-    summary,
-    description,
-} : Component
-
-) => {
+export const DonateButton = ({
+  title,
+  titleImageUrl,
+  summary,
+  description,
+}: Component) => {
   const [showDialog, setShowDialog] = useState(false);
   return (
     <>
-      <button style={styles.donateButton} onClick={()=> setShowDialog(true)}>Donate</button>
+      <button style={styles.donateButton} onClick={() => setShowDialog(true)}>
+        Donate
+      </button>
       {showDialog && (
         <ModalDialog
           title={title}

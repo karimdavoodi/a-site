@@ -22,7 +22,7 @@ export const getComponents = (pFolder: string): Component[] | undefined => {
       process.cwd(),
       "public",
       "components",
-      pFolder
+      pFolder,
     );
     const componentFolders = fs.readdirSync(componentsDir, {
       withFileTypes: true,
@@ -90,8 +90,8 @@ export const getComponent = (folder: string, parent?: string) => {
   component.titleImageUrl = fs.existsSync(`${folderPath}/title.png`)
     ? `${base}/title.png`
     : fs.existsSync(`${folderPath}/title.jpg`)
-    ? `${base}/title.jpg`
-    : "";
+      ? `${base}/title.jpg`
+      : "";
 
   return component;
 };
@@ -141,7 +141,7 @@ export const getPayerTime = async () => {
     ]);
     if (!athanRes.ok || !iqamaRes.ok) {
       throw new Error(
-        `Failed to fetch csv files: athan=${athanRes.status} iqama=${iqamaRes.status}`
+        `Failed to fetch csv files: athan=${athanRes.status} iqama=${iqamaRes.status}`,
       );
     }
 
@@ -186,7 +186,7 @@ export const getPayerTime = async () => {
         break;
       }
     }
-    console.info(prayerTimes, 'Read prayer times');
+    console.info(prayerTimes, "Read prayer times");
   } catch (err) {
     console.error(err, "Error reading prayer times csv:");
   }
@@ -204,8 +204,8 @@ export const getImageListFromFolder = async (folderPath: string) => {
     const images = files
       .filter((file) =>
         [".png", ".jpg", ".jpeg", ".gif", ".webp"].includes(
-          file.slice(file.lastIndexOf(".")).toLowerCase()
-        )
+          file.slice(file.lastIndexOf(".")).toLowerCase(),
+        ),
       )
       .map((file) => ({
         name: file,
@@ -221,25 +221,25 @@ export const getImageListFromFolder = async (folderPath: string) => {
 
 const folderNotSynced = async (localPath: string) => {
   try {
-    console.debug('DEBUG...');
-    console.info('INFO...');
-    console.warn('WARN...');
-    console.error('ERROR...');
+    console.debug("DEBUG...");
+    console.info("INFO...");
+    console.warn("WARN...");
+    console.error("ERROR...");
 
     const stats = fs.statSync(`${localPath}/sync_time.txt`);
     const now = new Date();
     const modifiedTime = new Date(stats.mtime);
     const diffMinutes = (now.getTime() - modifiedTime.getTime()) / (1000 * 60);
     return diffMinutes > SYNC_TIME_MINUTE;
-  } catch(err) {
-    console.error(err, 'Error on check sync');
+  } catch (err) {
+    console.error(err, "Error on check sync");
     return true;
   }
 };
 
 export const syncGoogleDriveFolder = async (
   gdriveFolderName: string,
-  localPath: string
+  localPath: string,
 ) => {
   const folderId =
     gdriveFolderName === "programs"
@@ -282,7 +282,7 @@ export const syncGoogleDriveFolder = async (
 
     data.files.sort(
       (a, b) =>
-        new Date(b.modifiedTime).getTime() - new Date(a.modifiedTime).getTime()
+        new Date(b.modifiedTime).getTime() - new Date(a.modifiedTime).getTime(),
     );
 
     fs.mkdirSync(localPath, { recursive: true });
@@ -301,7 +301,7 @@ export const syncGoogleDriveFolder = async (
           const fileRes = await fetch(downloadUrl);
           if (!fileRes.ok) {
             console.error(
-              `Failed to download file ${file.name}: ${fileRes.status}`
+              `Failed to download file ${file.name}: ${fileRes.status}`,
             );
             continue;
           }
@@ -321,7 +321,7 @@ export const syncGoogleDriveFolder = async (
     // Update sync time
     fs.writeFileSync(
       path.join(localPath, "sync_time.txt"),
-      new Date().toISOString()
+      new Date().toISOString(),
     );
     return true;
   } catch (err) {

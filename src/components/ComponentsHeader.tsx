@@ -1,28 +1,27 @@
-export const ComponentsHeader = ({title}:{title:string}) => {
+export const ComponentsHeader = ({ title }: { title: string }) => {
   return (
     <div style={styles.header}>
-      <div style={styles.titleText} >{title}</div>
+      <div style={styles.titleText}>{title}</div>
       <hr style={styles.line} />
     </div>
   );
 };
-
 
 const styles: { [key: string]: React.CSSProperties } = {
   header: {
     fontSize: "1.3rem",
     display: "flex",
     flexDirection: "row",
-    marginLeft: '1rem'
+    marginLeft: "1rem",
   },
-  line:{
+  line: {
     width: "60%",
-    opacity: '0.3',
-    height:'10px'
+    opacity: "0.3",
+    height: "10px",
   },
   titleText: {
-    fontSize: '1.5rem',
-    color: 'var(--text-color)',
-    marginLeft: '1rem'
-  }
-}
+    fontSize: "1.5rem",
+    color: "var(--text-color)",
+    marginLeft: "1rem",
+  },
+};

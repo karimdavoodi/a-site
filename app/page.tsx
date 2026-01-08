@@ -9,39 +9,34 @@ import Programs from "@/components/Programs";
 
 export const dynamic = "force-dynamic";
 
-export default async function Home(
+export default async function Home() {
 //   {
 //   searchParams,
 // }: {
 //   searchParams: Promise<{ mode?: string }>;
 //   }
-) {
   // const resolvedSearchParams = await searchParams;
-  const mode =  'new';
+  const mode = "new";
 
   return (
     <div className="app-container">
       <div className="content-shield">
+        {mode !== "new" ? (
+          <iframe src="/old-site/aic.html" style={styles.iframe}></iframe>
+        ) : (
+          <>
+            <Notice />
+            <Header />
+            <Title />
+            <PrayerTimes />
 
-      {mode !== 'new' ? (
-        <iframe
-        src='/old-site/aic.html'
-        style={styles.iframe}
-        ></iframe>
-      ) : (
-        <>
-          <Notice />
-          <Header />
-          <Title />
-          <PrayerTimes />
-      
-          <GridSection gridTitle='About Us' folder='about_us' />
-          <Programs title='Programs' />
-          <GridSection gridTitle='Services' folder='services'/>
-          <News />
-          <Footer />
-        </>
-      )}
+            <GridSection gridTitle="About Us" folder="about_us" />
+            <Programs title="Programs" />
+            <GridSection gridTitle="Services" folder="services" />
+            <News />
+            <Footer />
+          </>
+        )}
       </div>
     </div>
   );
@@ -49,7 +44,7 @@ export default async function Home(
 
 const styles: { [key: string]: React.CSSProperties } = {
   iframe: {
-    height: '100%',
-    width: '100%',
+    height: "100%",
+    width: "100%",
   },
 };

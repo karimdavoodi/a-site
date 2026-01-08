@@ -1,8 +1,7 @@
-import infoData from '../../public/data/info.json';
-
+import infoData from "../../public/data/info.json";
 
 const Notice = () => {
-  if(!infoData.pinMessage || infoData.pinMessage.trim() === "") {
+  if (!infoData.pinMessage || infoData.pinMessage.trim() === "") {
     return null;
   }
 
@@ -16,14 +15,14 @@ const Notice = () => {
 const styles: { [key: string]: React.CSSProperties } = {
   notice: {
     // height: '1rem',
-    backgroundColor: 'var(--gold)',
-    color: 'var(--backgroud-color)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    textAlign:"center",
-    fontSize: '0.5rem',
-    overflowY: 'auto',
+    backgroundColor: "var(--gold)",
+    color: "var(--backgroud-color)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    textAlign: "center",
+    fontSize: "0.5rem",
+    overflowY: "auto",
   },
 };
 

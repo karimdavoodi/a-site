@@ -15,7 +15,8 @@ const PrayerTime = ({ name, athan, iqama }: prob) => {
         <span style={styles.timeLabel}>Athan:</span> {athan}
       </div>
       <div>
-        <span style={styles.timeLabel}>Iqame:</span> <span style={styles.yellow}>{iqama}</span>
+        <span style={styles.timeLabel}>Iqame:</span>{" "}
+        <span style={styles.yellow}>{iqama}</span>
       </div>
     </div>
   );
@@ -31,7 +32,9 @@ export const PrayerTimes = async () => {
   return (
     <div style={styles.prayerTimesContainer}>
       <div style={styles.title}>Prayer Times</div>
-      <div style={styles.juma}>Juma Prayer <span style={styles.yellow}>{infoData.jumaPrayerTime}</span></div>
+      <div style={styles.juma}>
+        Juma Prayer <span style={styles.yellow}>{infoData.jumaPrayerTime}</span>
+      </div>
       <div style={styles.daily}>
         <PrayerTime
           name={"Fajr"}
@@ -65,7 +68,7 @@ export const PrayerTimes = async () => {
 
 const styles: { [key: string]: React.CSSProperties } = {
   prayerTimesContainer: {
-    marginTop:"2rem",
+    marginTop: "2rem",
     padding: "0.5rem",
     width: "85%",
     boxShadow: "var(--border-shadow)",
@@ -73,11 +76,11 @@ const styles: { [key: string]: React.CSSProperties } = {
     backgroundColor: "var(--box-color)",
     margin: "0.3rem",
     fontSize: "1.2rem",
-    color: 'var(--text-color)',
+    color: "var(--text-color)",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    alignSelf:"center"
+    alignSelf: "center",
   },
   title: {
     fontSize: "1.3rem",
@@ -90,7 +93,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   daily: {
     width: "100%",
-    maxWidth: '100%',
+    maxWidth: "100%",
     display: "flex",
     flexDirection: "row",
     alignSelf: "center",
@@ -107,13 +110,13 @@ const styles: { [key: string]: React.CSSProperties } = {
     alignItems: "center",
     fontWeight: "bold",
     width: "20%",
-    maxWidth: '20%',
+    maxWidth: "20%",
     padding: "5px",
-    textAlign:"center"
+    textAlign: "center",
   },
   name: {
     fontSize: "1rem",
-    marginBottom: '5px'
+    marginBottom: "5px",
   },
   timeLabel: {
     fontSize: "0.6rem",

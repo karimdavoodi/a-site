@@ -3,13 +3,12 @@ import { useState } from "react";
 import { ModalDialog } from "./ModalDialog";
 import { Component } from "@/types";
 
-
 export const ComponentBox = ({
-    title,
-    titleImageUrl,
-    summary,
-    description,
-} : Component) => {
+  title,
+  titleImageUrl,
+  summary,
+  description,
+}: Component) => {
   const [showDialog, setShowDialog] = useState(false);
 
   return (
@@ -22,17 +21,17 @@ export const ComponentBox = ({
       >
         <img src={titleImageUrl} alt={title} style={styles.image} />
         <div style={styles.titleAndSummary}>
-        <p style={styles.title}>{title}</p>
-        <p style={styles.summary}>{summary}</p>
+          <p style={styles.title}>{title}</p>
+          <p style={styles.summary}>{summary}</p>
         </div>
         <p style={styles.more}>Click to see more...</p>
       </div>
       {showDialog && (
         <ModalDialog
-            title={title}
-            titleImageUrl={titleImageUrl}
-            summary={summary}
-            description={description}
+          title={title}
+          titleImageUrl={titleImageUrl}
+          summary={summary}
+          description={description}
           onClose={() => setShowDialog(false)}
         />
       )}
@@ -83,7 +82,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     height: "1%",
     fontSize: "0.7rem",
     textAlign: "right",
-    color: 'var(--gold)',
-    alignSelf: 'flex-end'
+    color: "var(--gold)",
+    alignSelf: "flex-end",
   },
 };

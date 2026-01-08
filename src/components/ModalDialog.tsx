@@ -28,11 +28,9 @@ export const ModalDialog = ({
         </div>
         <div style={styles.summary}>{summary && <p>{summary}</p>}</div>
         <div style={styles.description}>
-          {description && 
-          <div 
-          dangerouslySetInnerHTML={{ __html: description }} 
-          />
-        }
+          {description && (
+            <div dangerouslySetInnerHTML={{ __html: description }} />
+          )}
         </div>
       </div>
     </div>
@@ -79,15 +77,15 @@ const styles: { [key: string]: React.CSSProperties } = {
     width: "75%",
   },
   summary: {
-    color: 'var(--text-color)',
+    color: "var(--text-color)",
     fontSize: "1rem",
     fontWeight: "bold",
-    marginTop: '2rem'
+    marginTop: "2rem",
   },
   description: {
     fontSize: "0.9rem",
     textAlign: "left",
-    color: 'var(--text-color)',
+    color: "var(--text-color)",
   },
   images: {
     display: "flex",

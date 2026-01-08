@@ -1,13 +1,12 @@
-
-import infoData from '../../public/data/info.json';
+import infoData from "../../public/data/info.json";
 
 const Title = () => {
   return (
     <div style={styles.titleContainer}>
       <div style={styles.overlay}></div>
       <div style={styles.content}>
-      <h1 style={styles.title}>{infoData.masjidName}</h1>
-      <h4 style={styles.slogan}>{infoData.masjidSlogan}</h4>
+        <h1 style={styles.title}>{infoData.masjidName}</h1>
+        <h4 style={styles.slogan}>{infoData.masjidSlogan}</h4>
       </div>
     </div>
   );
@@ -15,36 +14,36 @@ const Title = () => {
 
 const styles: { [key: string]: React.CSSProperties } = {
   titleContainer: {
-    height: '10rem',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    height: "10rem",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     backgroundImage: `url('/assets/title_background.jpg')`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    position: 'relative',
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    position: "relative",
   },
   overlay: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   content: {
-    position: 'relative',
-    textAlign: 'center',
+    position: "relative",
+    textAlign: "center",
   },
   title: {
-    color: 'var(--text-color)',
-    fontSize: '2rem',
+    color: "var(--text-color)",
+    fontSize: "2rem",
     zIndex: 1,
   },
   slogan: {
-    color: 'var(--text-color)',
-    fontSize: '0.95rem',
-    marginTop: '-18px',
+    color: "var(--text-color)",
+    fontSize: "0.95rem",
+    marginTop: "-18px",
   },
 };
 

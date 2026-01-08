@@ -33,7 +33,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   newsItem: {
     paddingTop: "5px",
-    fontSize: '0.9rem',
+    fontSize: "0.9rem",
     borderBottom: "1px solid #048d42ff",
   },
 };
