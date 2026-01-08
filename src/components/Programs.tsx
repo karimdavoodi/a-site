@@ -1,9 +1,25 @@
-import { getImageListFromFolder } from "@/utils/images";
+'use client';
+
+import React, { useEffect, useState } from "react";
 import { ComponentsHeader } from "./ComponentsHeader";
 
-export default async function Programs({ title }: { title: string }) {
-  const images = await getImageListFromFolder("programs");
-  console.info(images, "Programs images");
+
+export default function Programs({ title }: { title: string }) {
+  const [images, setImages] = useState<{ url: string; name: string }[]>([]);
+
+  useEffect(() => {
+    async function fetchImages() {
+      try {
+        const imagesRes = await fetch(`/api/images/listPrograms`);
+        const imagesData = await imagesRes.json();
+        setImages(imagesData);
+      } catch (error) {
+        console.error("Error fetching images:", error);
+      }
+    }
+    fetchImages();
+  }, []);
+
   if (!images || !images.length) {
     return null;
   }

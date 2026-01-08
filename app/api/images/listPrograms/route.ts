@@ -1,0 +1,22 @@
+import { NextResponse } from "next/server";
+import { getImageListFromFolder } from "@/utils/images";
+
+export const runtime = "nodejs";
+
+export async function GET() {
+
+  try {
+
+    const images = await getImageListFromFolder("programs");
+
+
+    return new NextResponse(JSON.stringify(images), {
+      headers: {
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+      },
+    });
+  } catch {
+    return new NextResponse("Not found", { status: 404 });
+  }
+}

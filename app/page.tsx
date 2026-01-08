@@ -7,7 +7,8 @@ import GridSection from "@/components/GridSection";
 import PrayerTimes from "@/components/PrayerTime";
 import Programs from "@/components/Programs";
 
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
+// export const runtime = "nodejs";
 
 export default async function Home() {
   const mode = "new";
