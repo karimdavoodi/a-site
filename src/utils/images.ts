@@ -23,7 +23,7 @@ export const getImageListFromFolder = async (
         name: file,
         url: `/api/images/${folderPath}/${file}`,
       }));
-    return images;
+    return images.sort().reverse();
   } catch (err) {
     console.error(err, `Error reading images from folder ${absPath}:`);
     return null;

@@ -44,14 +44,14 @@ export const syncGoogleDriveFolder = async (
       return null;
     }
 
-    data.files.sort(
-      (a, b) =>
-        new Date(b.modifiedTime).getTime() - new Date(a.modifiedTime).getTime(),
-    );
+    console.log(data.files);
+    // data.files.sort(
+    //   (a, b) =>
+    //     new Date(b.modifiedTime).getTime() - new Date(a.modifiedTime).getTime(),
+    // );
 
     await fs.mkdir(localPath, { recursive: true });
 
-    let i = 1;
     for (const file of data.files) {
       if (
         file.mimeType === "image/png" ||
@@ -72,10 +72,10 @@ export const syncGoogleDriveFolder = async (
 
           const arrayBuffer = await fileRes.arrayBuffer();
           const buffer = Buffer.from(arrayBuffer);
-          const name = `${i}.` + file.name.split(".").pop()?.toLowerCase();
+          const postfix = file.name.split(".").pop()?.toLowerCase() || "jpg";
+          const name = `${file.modifiedTime.replace(/[:.-]/g, "_")}.${postfix}`;
           await fs.writeFile(path.join(localPath, name), buffer);
           console.info(`Saved ${file.name} =>  ${name}`);
-          i += 1;
         } catch (err) {
           console.error(err, `Error on fetching ${file.name}`);
         }

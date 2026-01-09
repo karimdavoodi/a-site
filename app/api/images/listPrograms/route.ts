@@ -9,11 +9,10 @@ export async function GET() {
 
     const images = await getImageListFromFolder("programs");
 
-
     return new NextResponse(JSON.stringify(images), {
       headers: {
         "Content-Type": "application/json",
-        "Cache-Control": "no-store",
+        "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
       },
     });
   } catch {

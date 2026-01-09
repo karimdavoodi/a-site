@@ -16,7 +16,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   line: {
     width: "60%",
-    opacity: "0.3",
+    opacity: "0.5",
     height: "10px",
   },
   titleText: {

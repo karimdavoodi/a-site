@@ -38,7 +38,6 @@ const styles: { [key: string]: React.CSSProperties } = {
     borderRadius: "3px",
     fontSize: "0.9rem",
     fontWeight: "bold",
-    marginLeft: "5rem",
     cursor: "pointer",
   },
 };

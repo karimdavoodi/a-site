@@ -1,8 +1,7 @@
-'use client';
+"use client";
 
 import React, { useEffect, useState } from "react";
 import { ComponentsHeader } from "./ComponentsHeader";
-
 
 export default function Programs({ title }: { title: string }) {
   const [images, setImages] = useState<{ url: string; name: string }[]>([]);
@@ -10,7 +9,9 @@ export default function Programs({ title }: { title: string }) {
   useEffect(() => {
     async function fetchImages() {
       try {
-        const imagesRes = await fetch(`/api/images/listPrograms`);
+        const imagesRes = await fetch(`/api/images/listPrograms`, {
+          cache: "no-store",
+        });
         const imagesData = await imagesRes.json();
         setImages(imagesData);
       } catch (error) {
