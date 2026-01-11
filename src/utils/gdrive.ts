@@ -6,13 +6,11 @@ export const syncGoogleDriveFolder = async (
   localPath: string,
 ) => {
   const folderId =
-    gdriveFolderName === "programs"
-      ? process.env.GDRIVE_PROGRAMS_FOLDER_ID
-      : "";
+    gdriveFolderName === "Events" ? process.env.GDRIVE_EVENTS_FOLDER_ID : "";
   const key = process.env.GDRIVE_KEY;
 
   if (!folderId) {
-    console.error("GDRIVE_PROGRAMS_FOLDER_ID is not set");
+    console.error("GDRIVE_EVENTS_FOLDER_ID is not set");
     return null;
   }
   if (!key) {
@@ -43,12 +41,6 @@ export const syncGoogleDriveFolder = async (
       console.error("No files found in Google Drive folder");
       return null;
     }
-
-    console.log(data.files);
-    // data.files.sort(
-    //   (a, b) =>
-    //     new Date(b.modifiedTime).getTime() - new Date(a.modifiedTime).getTime(),
-    // );
 
     await fs.mkdir(localPath, { recursive: true });
 

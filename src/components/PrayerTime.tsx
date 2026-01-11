@@ -1,5 +1,5 @@
 import { getPayerTime } from "@/utils/prayer";
-import infoData from "../../public/data/info.json";
+import infoData from "@public/data/info.json";
 
 type prob = {
   name: string;
@@ -33,7 +33,8 @@ export const PrayerTimes = async () => {
     <div style={styles.prayerTimesContainer}>
       <div style={styles.title}>Prayer Times</div>
       <div style={styles.juma}>
-        Juma Prayer <span style={styles.yellow}>{infoData.jumaPrayerTime}</span>
+        Juma Prayer{" "}
+        <span style={styles.yellow}>{infoData.prayerTime.jumaPrayerTime}</span>
       </div>
       <div style={styles.daily}>
         <PrayerTime
@@ -101,9 +102,6 @@ const styles: { [key: string]: React.CSSProperties } = {
     gap: "0.4rem",
   },
   prayerTime: {
-    // border: "0.3px solid var(--black)",
-    // boxShadow: "2px 2px 3px 1px #000000",
-    // borderRadius: "30px",
     display: "flex",
     flexDirection: "column",
     fontSize: "0.8rem",

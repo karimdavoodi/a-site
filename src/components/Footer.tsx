@@ -1,7 +1,8 @@
-import infoData from "../../public/data/info.json";
+import infoData from "@public/data/info.json";
+import { ContactUs } from "./ContactUs";
 import { SocialMedia } from "./SocialMedia";
 
-const Footer = () => {
+export const Footer = () => {
   const year = new Date().getFullYear();
   const phones = infoData.contact.phones.join(", ");
   return (
@@ -12,6 +13,7 @@ const Footer = () => {
           <p>{infoData.contact.address}</p>
           <p>Tels: {phones}</p>
           <p>Email: {infoData.contact.email}</p>
+          <ContactUs />
           <SocialMedia />
         </div>
 
@@ -34,6 +36,7 @@ const Footer = () => {
           referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
       </div>
+
       <p style={styles.copyright}>
         {`Copyright ${year} ${infoData.masjidName}. All Rights Reserved`}
       </p>
@@ -82,10 +85,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   map: {
     width: "25%",
-    height: "70%",
     marginRight: "2%",
     alignSelf: "center",
   },
 };
-
-export default Footer;

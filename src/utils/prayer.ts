@@ -1,5 +1,4 @@
-import infoData from "../../public/data/info.json";
-
+import infoData from "@public/data/info.json";
 import { PrayerTimes } from "@/types";
 
 export const getPayerTime = async () => {
@@ -11,8 +10,14 @@ export const getPayerTime = async () => {
   const monthName = date.toLocaleString("en-US", { month: "long" });
   const dayOfMonth = date.getDate();
   prayerTimes.day = dayOfMonth;
-  const athanCsvUrl = infoData.prayerAthanCsvUrl.replace("MONTH", monthName);
-  const iqameCsvUrl = infoData.prayerIqamaCsvUrl.replace("MONTH", monthName);
+  const athanCsvUrl = infoData.prayerTime.prayerAthanCsvUrl.replace(
+    "MONTH",
+    monthName,
+  );
+  const iqameCsvUrl = infoData.prayerTime.prayerIqamaCsvUrl.replace(
+    "MONTH",
+    monthName,
+  );
   try {
     const [athanRes, iqamaRes] = await Promise.all([
       fetch(athanCsvUrl),

@@ -2,11 +2,14 @@
   "masjidName": "Al-Salaam Islamic Centre",
   "masjidSlogan": "Serving the Community with Faith and Compassion!",
   "pinMessage": "",
+  "flayer": "/assets/flayer.jpeg",
   "googleMapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5794.302243484642!2d-80.48663552451316!3d43.43655967111322!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882bf56d51e576dd%3A0x404a6e0771647498!2sAl-Salaam%20Islamic%20Centre!5e0!3m2!1sen!2sca!4v1767926687939!5m2!1sen!2sca",
-  "prayerTimeUrl": "https://mawaqit.net/en/m/al-salaam-islamic-centre-kitchener-n2m-3r8-canada",
-  "prayerIqamaCsvUrl": "https://raw.githubusercontent.com/MuhammadElsoukkary/PrayerTimesScraper/main/prayer_times/iqama_times_MONTH.csv",
-  "prayerAthanCsvUrl": "https://raw.githubusercontent.com/MuhammadElsoukkary/PrayerTimesScraper/main/prayer_times/athan_times_MONTH.csv",
-  "jumaPrayerTime": "1:30",
+  "prayerTime": {
+    "jumaPrayerTime": "1:30",
+    "prayerTimeUrl": "https://mawaqit.net/en/m/al-salaam-islamic-centre-kitchener-n2m-3r8-canada",
+    "prayerIqamaCsvUrl": "https://raw.githubusercontent.com/MuhammadElsoukkary/PrayerTimesScraper/main/prayer_times/iqama_times_MONTH.csv",
+    "prayerAthanCsvUrl": "https://raw.githubusercontent.com/MuhammadElsoukkary/PrayerTimesScraper/main/prayer_times/athan_times_MONTH.csv"
+  },
   "contact": {
     "address": "10-300 Mill St, Kitchener, ON N2M 3R8",
     "phones": ["519-496-6585", "519-498-7985"],

@@ -1,6 +1,6 @@
-import infoData from "../../public/data/info.json";
+import infoData from "@public/data/info.json";
 
-const Title = () => {
+export const Title = () => {
   return (
     <div style={styles.titleContainer}>
       <div style={styles.overlay}></div>
@@ -46,5 +46,3 @@ const styles: { [key: string]: React.CSSProperties } = {
     marginTop: "-18px",
   },
 };
-
-export default Title;

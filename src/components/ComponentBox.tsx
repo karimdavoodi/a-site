@@ -24,7 +24,7 @@ export const ComponentBox = ({
           <p style={styles.title}>{title}</p>
           <p style={styles.summary}>{summary}</p>
         </div>
-        <p style={styles.more}>Click to see more...</p>
+        <p style={styles.more}>more...</p>
       </div>
       {showDialog && (
         <ModalDialog

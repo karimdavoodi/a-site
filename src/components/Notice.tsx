@@ -1,6 +1,6 @@
-import infoData from "../../public/data/info.json";
+import infoData from "@public/data/info.json";
 
-const Notice = () => {
+export const Notice = () => {
   if (!infoData.pinMessage || infoData.pinMessage.trim() === "") {
     return null;
   }
@@ -25,5 +25,3 @@ const styles: { [key: string]: React.CSSProperties } = {
     overflowY: "auto",
   },
 };
-
-export default Notice;

@@ -3,6 +3,27 @@ This is a simple website for who those not have time to maintenance Masjid websi
 
 If the whole UI and structure is ok, then you can feed its constants easy by updating text and image files inside public folder without touching the code.
 
+## Components
+### Flayer
+A flayer will show as pop up if we have flayer image in /public/assets and fille `flayer` field in json config with that path
+### Notice
+A permanent pin massage will show on top of page if we fill `pinMessgae` inside json config
+### Header and Title
+Both header and title get their data from json config file. Currently we do not have menu in header. 
+### Services, Programs, and About us
+These are getting their internal components from `/pubic/components/{programs, services, about_us}`. each component should have title.jpg, title.txt, summary.txt, description.md.
+
+The `description.md` is in **Markdown** format. Therefore you can have rich text also you can refer to more images inside it if you save that images in component folder.
+### Events 
+Event serve from images that keep in Google drive share folder. Because we think event will change often. By uploading you events flayer in google folder, you can update events in the page.
+#### Environment variables for access to google drive folder
+- **GDRIVE_KEY** : You key to access to google drive files. you can create it in your google console
+- **GDRIVE_EVENTS_FOLDER_ID**: the id of folder that you share as viewer for everyone
+  
+### News
+News are serve from `/public/data/news.txt`. each line is one news start with date.
+### Footer
+Footer data serve from json config 
 
 
 ## Directory Structure
@@ -36,13 +57,14 @@ Below is public dir structure:
 │   └── news.txt    // news 
 
 ```
-The Services, Programs, AboutUs, and Donation are in format of component. You can add/remove or update all by modifying public data without touching app code!
 
 
 ## How to build
 Run:
 ```bash
 $ npm install
+$ export GDRIVE_KEY={your gdrive key}
+$ export GDRIVE_EVENTS_FOLDER_ID={you folder id}
 $ npm run dev
 ```
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.

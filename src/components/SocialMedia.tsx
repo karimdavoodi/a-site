@@ -1,5 +1,5 @@
 import Image from "next/image";
-import infoData from "../../public/data/info.json";
+import infoData from "@public/data/info.json";
 
 const SOCIAL_ICON_SIZE = 18;
 

@@ -1,10 +1,10 @@
 import Image from "next/image";
-import infoData from "../../public/data/info.json";
+import infoData from "@public/data/info.json";
 import { DonateButton } from "./DonateButton";
 import { SocialMedia } from "./SocialMedia";
 import { getComponent } from "@/utils/components";
 
-const Header = async () => {
+export const Header = async () => {
   const donate = await getComponent("donation");
   return (
     <header style={styles.header}>
@@ -55,5 +55,3 @@ const styles: { [key: string]: React.CSSProperties } = {
     color: "var(--text-color)",
   },
 };
-
-export default Header;

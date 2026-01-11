@@ -1,4 +1,11 @@
-Your generous support enables us to sustain and enhance the services of our mosque for the benefit of the entire community. Contributions are carefully allocated to cover essential operational expenses, educational initiatives, community outreach programs, and the upkeep of this blessed house of worship. Every donation, whether large or small, is a valuable form of sadaqah jariyah (ongoing charity) that brings continuous reward. With your help, we can strengthen the bonds of our community and further serve the deen with sincerity and dedication.
+### Alhamdulilllah!
+
+Al-Salaam Islamic Centre (AIC) has officially secured a conditional agreement on this three-storey building in downtown Kitchener, Ontario, to be established as a
+Masjid!
+With the Region of Waterloo's population projected to reach 1 million residents, having an Islamic Centre in the heart of Kitchener's Heritage District is a major milestone and tremendous blessing for our growing Muslim community.
+This Centre will serve as a spiritual, educational and social hub for generations
+Insha Allah.
+We invite you to take part in making this historic project a reality!
 
 
 We're officially a Registered Canadian Charity. receipts provided for eligible donations
@@ -6,6 +13,7 @@ We're officially a Registered Canadian Charity. receipts provided for eligible d
 Charity number: **743786014RR0001**
 
 ### How to Donate:
+ * Online: [Fundraising](https://www.gofundme.com/f/alsalaam-islamic-centre-fundraiser/donate?source=btn_donate){target="_blank"}
  * E-Transfer: **Alsalaam570@gmail.com**
  * Direct deposit: **Transit 00762, Institution 004, Account 5246015**
   

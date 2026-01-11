@@ -1,7 +1,7 @@
 import { getNews } from "@/utils/news";
 import { ComponentsHeader } from "./ComponentsHeader";
 
-const News = async () => {
+export const News = async () => {
   const newsItems = await getNews();
 
   return (
@@ -35,5 +35,3 @@ const styles: { [key: string]: React.CSSProperties } = {
     borderBottom: "1px solid #048d42ff",
   },
 };
-
-export default News;
