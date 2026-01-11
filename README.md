@@ -81,3 +81,5 @@ Push to repository to release, if using Vercel:
 git commit -m 'your commit message'
 git push
 ```
+Please take a look at Issue section of the repository to see what task we have for current stage.
+Please have a PR for each of your changes or tasks. 
