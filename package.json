@@ -6,13 +6,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint --fix"
+    "lint": "eslint --fix",
+    "gen_prayer_times": "ts-node src/utils/get_yearly_prayer_time.ts"  
   },
   "dependencies": {
+    "csv-writer": "^1.6.0",
     "markdown-it": "^14.1.0",
     "markdown-it-attrs": "^4.3.1",
     "markdown-it-imsize": "^2.0.1",
     "next": "16.1.1",
+    "puppeteer": "^24.35.0",
     "react": "19.2.3",
     "react-dom": "19.2.3"
   },
