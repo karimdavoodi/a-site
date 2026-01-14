@@ -83,7 +83,7 @@ Run:
 $ npm install
 $ export GDRIVE_KEY={your gdrive key}
 $ export GDRIVE_EVENTS_FOLDER_ID={you folder id}
-$ export RESEND_KEY=={you resend.com key }
+$ export RESEND_KEY={you resend.com key }
 $ npm run dev
 ```
 
