@@ -13,19 +13,21 @@ export const ContactUs = () => {
   function sendMail(): React.MouseEventHandler<HTMLButtonElement> {
     return async (e) => {
       e.preventDefault();
-      // console.log({name, email, subject, message});
-
-      const res = await fetch("/api/send_mail", {
+      await fetch("/api/send_mail", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name, email, subject, message }),
           });
-      // console.log(await res.json());
       alert("Thank you for contacting us! Your message has been received.");
+      setName("");
+      setEmail("");
+      setSubject("");
+      setMessage("");
       setShowForm(false);
     };
   }
 
+  const disabledSend = !(name && subject && message);
 
   return (
     <div style={styles.container}>
@@ -82,9 +84,14 @@ export const ContactUs = () => {
           </label>
           <button
             type="submit"
-            style={styles.submitButton}
+            style={{
+              ...styles.submitButton,
+              backgroundColor: disabledSend ? '#ccc' : 'var(--gold)',
+              color: disabledSend ? '#666' : 'var(--backgroud-color)',
+              cursor: disabledSend ? 'not-allowed' : 'pointer',
+            }}
             onClick={sendMail()}
-            disabled={!(name && subject && message)}
+            disabled={disabledSend}
           >
             Submit
           </button>
@@ -102,6 +109,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   topLabel: {
     cursor: "pointer",
     fontWeight: "bold",
+    fontSize: "0.8rem",
   },
   form: {
     display: "flex",
