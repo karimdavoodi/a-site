@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint --fix",
-    "gen_prayer_times": "ts-node src/utils/get_yearly_prayer_time.ts"  
+    "gen_prayer_times": "ts-node src/utils/get_yearly_prayer_time.ts"
   },
   "dependencies": {
     "csv-writer": "^1.6.0",
@@ -17,7 +17,8 @@
     "next": "16.1.1",
     "puppeteer": "^24.35.0",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "resend": "^6.7.0"
   },
   "devDependencies": {
     "@testing-library/react": "^16.3.1",

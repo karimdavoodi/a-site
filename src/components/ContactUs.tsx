@@ -1,32 +1,74 @@
 "use client";
 
-import React from "react";
+import React, {useState} from "react";
 
 export const ContactUs = () => {
   const [showForm, setShowForm] = React.useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+
+
+  function sendMail(): React.MouseEventHandler<HTMLButtonElement> {
+    return async (e) => {
+      e.preventDefault();
+      // console.log({name, email, subject, message});
+
+      const res = await fetch("/api/send_mail", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, email, subject, message }),
+          });
+      // console.log(await res.json());
+      alert("Thank you for contacting us! Your message has been received.");
+      setShowForm(false);
+    };
+  }
+
 
   return (
     <div style={styles.container}>
       <div
         style={styles.topLabel}
-        // TODO: we have to set Database to store users message before enabling this. Alos a simple admin page to see users message
-        // onClick={() => setShowForm(true)}
+        onClick={() => setShowForm(true)}
       >
         Contact Us
       </div>
       {showForm && (
-        <form
-          style={styles.form}
-          action="https://formspree.io/f/your-form-id"
-          method="POST"
-        >
+        <div style={styles.form}>
           <label style={styles.label}>
             Name:
-            <input type="text" name="name" required style={styles.input} />
+            <input
+              type="text"
+              name="name"
+              required
+              style={styles.input}
+              value={name}
+              onChange={e => setName(e.target.value)}
+            />
           </label>
           <label style={styles.label}>
             Email:
-            <input type="email" name="email" required style={styles.input} />
+            <input
+              type="email"
+              name="email"
+              required
+              style={styles.input}
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+            />
+          </label>
+          <label style={styles.label}>
+            Subject:
+            <input
+              type="text"
+              name="subject"
+              required
+              style={styles.input}
+              value={subject}
+              onChange={e => setSubject(e.target.value)}
+            />
           </label>
           <label style={styles.label}>
             Message:
@@ -34,12 +76,19 @@ export const ContactUs = () => {
               name="message"
               required
               style={styles.textarea}
+              value={message}
+              onChange={e => setMessage(e.target.value)}
             ></textarea>
           </label>
-          <button type="submit" style={styles.submitButton}>
+          <button
+            type="submit"
+            style={styles.submitButton}
+            onClick={sendMail()}
+            disabled={!(name && subject && message)}
+          >
             Submit
           </button>
-        </form>
+        </div>
       )}
     </div>
   );
