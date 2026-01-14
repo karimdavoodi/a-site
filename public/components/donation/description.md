@@ -7,14 +7,14 @@ This Centre will serve as a spiritual, educational and social hub for generation
 Insha Allah.
 We invite you to take part in making this historic project a reality!
 
-
 We're officially a Registered Canadian Charity. receipts provided for eligible donations
 
 Charity number: **743786014RR0001**
 
 ### How to Donate:
- * Online: [Fundraising](https://www.gofundme.com/f/alsalaam-islamic-centre-fundraiser/donate?source=btn_donate){target="_blank"}
- * E-Transfer: **Alsalaam570@gmail.com**
- * Direct deposit: **Transit 00762, Institution 004, Account 5246015**
-  
+
+- Online: [Fundraising](https://www.gofundme.com/f/alsalaam-islamic-centre-fundraiser/donate?source=btn_donate){target="\_blank"}
+- E-Transfer: **Alsalaam570@gmail.com**
+- Direct deposit: **Transit 00762, Institution 004, Account 5246015**
+
 Please include your full name and email to receive a tax receipt

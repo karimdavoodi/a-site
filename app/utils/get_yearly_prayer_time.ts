@@ -27,7 +27,7 @@ async function pageExtraxction(page: Page): Promise<(ExtractedDay | null)[]> {
       const currentYear = new Date().getFullYear().toString();
       if (yearName !== currentYear) {
         console.log(
-          `Skipping row for year ${yearName}, current year is ${currentYear}`
+          `Skipping row for year ${yearName}, current year is ${currentYear}`,
         );
         return null;
       }
@@ -87,7 +87,9 @@ async function extractPrayerTimes() {
     await page.waitForSelector(".prayer-timetable", { timeout: 30000 });
     console.log("Prayer timetable found on the page");
 
-    const yearPrayerTimes: { [key: string]: Record<string, { azan: string; iqamah: string }> } = {};
+    const yearPrayerTimes: {
+      [key: string]: Record<string, { azan: string; iqamah: string }>;
+    } = {};
 
     while (true) {
       const extractedData = await pageExtraxction(page);
@@ -103,14 +105,13 @@ async function extractPrayerTimes() {
       }
       await page.click("#prayer-timetable-header-next");
     }
-    
+
     const currentYear = new Date().getFullYear().toString();
     fs.writeFileSync(
       `./public/data/${currentYear}_prayer_times.json`,
-      JSON.stringify(yearPrayerTimes, null, 2)
+      JSON.stringify(yearPrayerTimes, null, 2),
     );
     console.log("Prayer times extraction completed successfully!");
-
   } catch (error) {
     if (error instanceof Error) {
       console.log("Error during extraction", error);

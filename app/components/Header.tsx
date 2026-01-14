@@ -2,7 +2,7 @@ import Image from "next/image";
 import infoData from "@public/data/info.json";
 import { DonateButton } from "./DonateButton";
 import { SocialMedia } from "./SocialMedia";
-import { getComponent } from "@/utils/components";
+import { getComponent } from "../utils/components";
 
 export const Header = async () => {
   const donate = await getComponent("donation");

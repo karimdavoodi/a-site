@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { ModalDialog } from "./ModalDialog";
-import { Component } from "@/types";
+import { Component } from "../types";
 
 export const DonateButton = ({
   title,

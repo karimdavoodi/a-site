@@ -1,7 +1,6 @@
-import { PrayerTimes } from "@/types";
+import { PrayerTimes } from "../types";
 import path from "path";
 import fs from "fs/promises";
-
 
 export const getPayerTime = async () => {
   const prayerTimes: PrayerTimes = {
@@ -9,9 +8,16 @@ export const getPayerTime = async () => {
   };
 
   const currentYear = new Date().getFullYear().toString();
-  const dir = path.join(process.cwd(), "public", "data", `${currentYear}_prayer_times.json`);
+  const dir = path.join(
+    process.cwd(),
+    "public",
+    "data",
+    `${currentYear}_prayer_times.json`,
+  );
 
-  let yearlyData: { [key: string]: Record<string, { azan: string; iqamah: string }> } = {};
+  let yearlyData: {
+    [key: string]: Record<string, { azan: string; iqamah: string }>;
+  } = {};
 
   try {
     const data = await fs.readFile(dir, "utf-8");
@@ -22,7 +28,9 @@ export const getPayerTime = async () => {
   }
 
   const today = new Date();
-  const monthName = today.toLocaleString("default", { month: "long" }).toLowerCase();
+  const monthName = today
+    .toLocaleString("default", { month: "long" })
+    .toLowerCase();
   const day = today.getDate().toString().padStart(2, "0");
   const key = `${currentYear}-${monthName}-${day}`;
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 export const ContactUs = () => {
   const [showForm, setShowForm] = React.useState(false);
@@ -9,15 +9,23 @@ export const ContactUs = () => {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
 
-
   function sendMail(): React.MouseEventHandler<HTMLButtonElement> {
     return async (e) => {
       e.preventDefault();
+      const safeName = name.replace(/[\n\r]/g, " ").substring(0, 100);
+      const safeEmail = email.replace(/[\n\r]/g, " ").substring(0, 100);
+      const safeSubject = subject.replace(/[\n\r]/g, " ").substring(0, 100);
+      const safeMessage = message.substring(0, 2048);
       await fetch("/api/send_mail", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name, email, subject, message }),
-          });
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: safeName,
+          email: safeEmail,
+          subject: safeSubject,
+          message: safeMessage,
+        }),
+      });
       alert("Thank you for contacting us! Your message has been received.");
       setName("");
       setEmail("");
@@ -27,14 +35,11 @@ export const ContactUs = () => {
     };
   }
 
-  const disabledSend = !(name && subject && message);
+  const disabledSend = !(name && subject && message && email);
 
   return (
     <div style={styles.container}>
-      <div
-        style={styles.topLabel}
-        onClick={() => setShowForm(true)}
-      >
+      <div style={styles.topLabel} onClick={() => setShowForm(true)}>
         Contact Us
       </div>
       {showForm && (
@@ -47,7 +52,7 @@ export const ContactUs = () => {
               required
               style={styles.input}
               value={name}
-              onChange={e => setName(e.target.value)}
+              onChange={(e) => setName(e.target.value)}
             />
           </label>
           <label style={styles.label}>
@@ -58,7 +63,7 @@ export const ContactUs = () => {
               required
               style={styles.input}
               value={email}
-              onChange={e => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </label>
           <label style={styles.label}>
@@ -69,7 +74,7 @@ export const ContactUs = () => {
               required
               style={styles.input}
               value={subject}
-              onChange={e => setSubject(e.target.value)}
+              onChange={(e) => setSubject(e.target.value)}
             />
           </label>
           <label style={styles.label}>
@@ -79,16 +84,16 @@ export const ContactUs = () => {
               required
               style={styles.textarea}
               value={message}
-              onChange={e => setMessage(e.target.value)}
+              onChange={(e) => setMessage(e.target.value)}
             ></textarea>
           </label>
           <button
             type="submit"
             style={{
               ...styles.submitButton,
-              backgroundColor: disabledSend ? '#ccc' : 'var(--gold)',
-              color: disabledSend ? '#666' : 'var(--backgroud-color)',
-              cursor: disabledSend ? 'not-allowed' : 'pointer',
+              backgroundColor: disabledSend ? "#ccc" : "var(--gold)",
+              color: disabledSend ? "#666" : "var(--backgroud-color)",
+              cursor: disabledSend ? "not-allowed" : "pointer",
             }}
             onClick={sendMail()}
             disabled={disabledSend}
@@ -103,7 +108,7 @@ export const ContactUs = () => {
 
 const styles: { [key: string]: React.CSSProperties } = {
   container: {
-    width: "150%",
+    width: "140%",
     marginBottom: "1rem",
   },
   topLabel: {

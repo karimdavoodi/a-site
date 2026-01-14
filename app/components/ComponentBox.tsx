@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { ModalDialog } from "./ModalDialog";
-import { Component } from "@/types";
+import { Component } from "../types";
 
 export const ComponentBox = ({
   title,

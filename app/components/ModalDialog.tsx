@@ -1,5 +1,5 @@
 "use client";
-import { Component } from "@/types";
+import { Component } from "../types";
 
 type ModalProps = Component & {
   onClose: () => void;

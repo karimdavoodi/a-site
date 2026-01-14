@@ -1,6 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
-import { Component } from "@/types";
+import { Component } from "../types";
 import { renderMarkdown } from "./markdown";
 
 export const getComponents = async (

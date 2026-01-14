@@ -1,4 +1,4 @@
-import { getNews } from "@/utils/news";
+import { getNews } from "../utils/news";
 import { ComponentsHeader } from "./ComponentsHeader";
 
 export const News = async () => {

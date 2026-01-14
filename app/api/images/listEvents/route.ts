@@ -1,10 +1,9 @@
 import { NextResponse } from "next/server";
-import { getImageListFromFolder } from "@/utils/images";
+import { getImageListFromFolder } from "../../../utils/images";
 
 export const runtime = "nodejs";
 
 export async function GET() {
-
   try {
     const images = await getImageListFromFolder("Events");
 

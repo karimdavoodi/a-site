@@ -1,12 +1,12 @@
-import {Notice} from "@/components/Notice";
-import {Header} from "@/components/Header";
-import {Title} from "@/components/Title";
-import {News} from "@/components/News";
-import {Footer} from "@/components/Footer";
-import {GridSection} from "@/components/GridSection";
-import {PrayerTimes} from "@/components/PrayerTime";
-import {Events} from "@/components/Events";
-import {Flayer} from "@/components/Flayer";
+import { Notice } from "./components/Notice";
+import { Header } from "./components/Header";
+import { Title } from "./components/Title";
+import { News } from "./components/News";
+import { Footer } from "./components/Footer";
+import { GridSection } from "./components/GridSection";
+import { PrayerTimes } from "./components/PrayerTime";
+import { Events } from "./components/Events";
+import { Flayer } from "./components/Flayer";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";

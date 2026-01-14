@@ -1,4 +1,4 @@
-import { getPayerTime } from "@/utils/prayer";
+import { getPayerTime } from "../utils/prayer";
 import infoData from "@public/data/info.json";
 
 type prob = {
@@ -9,14 +9,17 @@ type prob = {
 
 const PrayerTime = ({ name, athan, iqama }: prob) => {
   return (
-    <div style={styles.prayerTime}>
+    <div style={styles.prayerTimeContainer}>
       <div style={styles.name}> {name}</div>
-      <div>
-        <span style={styles.timeLabel}>Athan:</span> {athan}
-      </div>
-      <div>
-        <span style={styles.timeLabel}>Iqame:</span>{" "}
-        <span style={styles.yellow}>{iqama}</span>
+      <div style={styles.prayerTime}>
+        <div style={styles.prayerTimeBox}>
+          <span style={styles.timeLabel}>Athan:</span>
+          <span style={styles.azan}>{athan}</span>
+        </div>
+        <div style={styles.prayerTimeBox}>
+          <span style={styles.timeLabel}>Iqame:</span>
+          <span style={styles.iqama}>{iqama}</span>
+        </div>
       </div>
     </div>
   );
@@ -27,14 +30,13 @@ export const PrayerTimes = async () => {
   if (prayerTimes.day <= 0) {
     return null;
   }
-  // Day,Fajr,Dhuhr,Asr,Maghrib,Isha
 
   return (
     <div style={styles.prayerTimesContainer}>
       <div style={styles.title}>Prayer Times</div>
       <div style={styles.juma}>
         Juma Prayer{" "}
-        <span style={styles.yellow}>{infoData.prayerTime.jumaPrayerTime}</span>
+        <span style={styles.gold}>{infoData.prayerTime.jumaPrayerTime}</span>
       </div>
       <div style={styles.daily}>
         <PrayerTime
@@ -98,17 +100,19 @@ const styles: { [key: string]: React.CSSProperties } = {
     display: "flex",
     flexDirection: "row",
     alignSelf: "center",
+    justifyContent: "space-evenly",
     marginTop: "1rem",
     gap: "0.4rem",
   },
-  prayerTime: {
+  prayerTimeContainer: {
     display: "flex",
     flexDirection: "column",
     fontSize: "0.8rem",
     alignItems: "center",
     fontWeight: "bold",
-    width: "20%",
-    maxWidth: "20%",
+    width: "15.2%",
+    maxWidth: "15.2%",
+    minWidth: "15.2%",
     padding: "5px",
     textAlign: "center",
   },
@@ -116,10 +120,30 @@ const styles: { [key: string]: React.CSSProperties } = {
     fontSize: "1rem",
     marginBottom: "5px",
   },
+  prayerTime: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    width: "80%",
+    maxWidth: "80%",
+  },
+  prayerTimeBox: {
+    display: "flex",
+    flexFlow: "wrap",
+  },
   timeLabel: {
     fontSize: "0.6rem",
+    marginRight: "4px",
+    alignSelf: "anchor-center",
   },
-  yellow: {
+  azan: {
+    fontSize: "0.8rem",
+  },
+  iqama: {
+    color: "var(--gold)",
+    fontSize: "0.8rem",
+  },
+  gold: {
     color: "var(--gold)",
   },
 };

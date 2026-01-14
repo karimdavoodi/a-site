@@ -3,7 +3,7 @@ import path from "path";
 
 export const syncGoogleDriveFolder = async (
   gdriveFolderName: string,
-  localPath: string
+  localPath: string,
 ) => {
   const folderId =
     gdriveFolderName === "Events" ? process.env.GDRIVE_EVENTS_FOLDER_ID : "";
@@ -66,7 +66,7 @@ export const syncGoogleDriveFolder = async (
           const fileRes = await fetch(downloadUrl);
           if (!fileRes.ok) {
             console.error(
-              `Failed to download file ${file.name}: ${fileRes.status}`
+              `Failed to download file ${file.name}: ${fileRes.status}`,
             );
             continue;
           }
@@ -86,7 +86,7 @@ export const syncGoogleDriveFolder = async (
     // Update sync time
     await fs.writeFile(
       path.join(localPath, "sync_time.txt"),
-      new Date().toISOString()
+      new Date().toISOString(),
     );
     return true;
   } catch (err) {
