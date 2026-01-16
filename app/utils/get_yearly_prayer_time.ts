@@ -1,5 +1,7 @@
+// TODO: FIX JUMA PRAYER TIME (waterloo has two iqama for juma dhure prayer)
 // Run this script using: npx ts-node src/utils/get_yearly_prayer_time.ts
 // Run it yearly to prepare prayer times data for the current year.
+
 
 import puppeteer, { Page, type Browser } from "puppeteer";
 import fs from "fs";
