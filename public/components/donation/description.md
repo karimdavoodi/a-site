@@ -13,7 +13,7 @@ Charity number: **743786014RR0001**
 
 ### How to Donate:
 
-- Online: [Fundraising](https://www.gofundme.com/f/alsalaam-islamic-centre-fundraiser/donate?source=btn_donate){target="\_blank"}
+- Online: [**Al-Salaam Islamic Centre Fundraising**](https://www.gofundme.com/f/alsalaam-islamic-centre-fundraiser/donate)
 - E-Transfer: **Alsalaam570@gmail.com**
 - Direct deposit: **Transit 00762, Institution 004, Account 5246015**
 
