@@ -33,7 +33,7 @@ export const Header = async () => {
 
 const styles: { [key: string]: React.CSSProperties } = {
   header: {
-    height: "1.7rem",
+    height: "2rem",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",

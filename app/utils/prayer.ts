@@ -31,7 +31,7 @@ export const getPayerTime = async () => {
   const monthName = today
     .toLocaleString("default", { month: "long" })
     .toLowerCase();
-  const day = today.getDate().toString().padStart(2, "0");
+  const day = today.getDate().toString();
   const key = `${currentYear}-${monthName}-${day}`;
 
   if (yearlyData[key]) {

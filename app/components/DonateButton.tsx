@@ -36,7 +36,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     border: "none",
     padding: "1px 5px",
     borderRadius: "3px",
-    fontSize: "0.9rem",
+    fontSize: "1.2rem",
     fontWeight: "bold",
     cursor: "pointer",
   },

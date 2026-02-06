@@ -46,8 +46,13 @@ async function pageExtraxction(page: Page): Promise<(ExtractedDay | null)[]> {
           cell.querySelector(".time-name")?.textContent?.trim() || "";
         const startTime =
           cell.querySelector(".time-start")?.textContent?.trim() || "";
-        const iqamahTime =
+        let iqamahTime =
           cell.querySelector(".time-iqamah")?.textContent?.trim() || "";
+        
+        // Fix Juma iqame time to 1:30 from 'time, time'
+        if(iqamahTime.split(',').length == 2){
+          iqamahTime = '1:30';
+        }
 
         if (name) {
           prayers[name] = {

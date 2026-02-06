@@ -22,6 +22,7 @@ export default async function Home() {
         <PrayerTimes />
         <GridSection gridTitle="About Us" folder="about_us" />
         <GridSection gridTitle="Services" folder="services" />
+        <GridSection gridTitle="Gallery" folder="gallery" />
         {/* TODO: fill /public/components/programs before enabling the below component */}
         {/* <GridSection gridTitle="Programs" folder="programs" /> */}
         <Events title="Events" />
