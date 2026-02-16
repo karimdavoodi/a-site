@@ -29,7 +29,7 @@ export const getPayerTime = async () => {
 
   const today = new Date();
   const monthName = today
-    .toLocaleString("default", { month: "long" })
+    .toLocaleString("en-US", { month: "long" })
     .toLowerCase();
   const day = today.getDate().toString();
   const key = `${currentYear}-${monthName}-${day}`;
@@ -50,6 +50,8 @@ export const getPayerTime = async () => {
       maghrib: yearlyData[key].Magrib.iqamah,
       isha: yearlyData[key].Isha.iqamah,
     };
+  } else {
+    console.log(`No player time for ${key} in data set lenght ${dir}`);
   }
 
   return prayerTimes;
