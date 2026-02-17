@@ -4,17 +4,22 @@ import { useState } from "react";
 import { ModalDialog } from "./ModalDialog";
 import { Component } from "../types";
 
-export const DonateButton = ({
+type ComponentButtonProbs = Component & {
+  buttonText:string
+};
+
+export const ComponentButton = ({
   title,
   titleImageUrl,
   summary,
   description,
-}: Component) => {
+  buttonText,
+}: ComponentButtonProbs ) => {
   const [showDialog, setShowDialog] = useState(false);
   return (
     <>
       <button style={styles.donateButton} onClick={() => setShowDialog(true)}>
-        Donate
+        {buttonText}
       </button>
       {showDialog && (
         <ModalDialog
@@ -32,11 +37,11 @@ export const DonateButton = ({
 const styles: { [key: string]: React.CSSProperties } = {
   donateButton: {
     backgroundColor: "var(--gold)",
-    color: "var(--backgroud-color)",
+    color: "var(--black)",
     border: "none",
     padding: "1px 5px",
     borderRadius: "3px",
-    fontSize: "1.2rem",
+    fontSize: "1.0rem",
     fontWeight: "bold",
     cursor: "pointer",
   },

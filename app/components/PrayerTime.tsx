@@ -1,5 +1,7 @@
-import { getPayerTime } from "../utils/prayer";
 import infoData from "@public/data/info.json";
+import { getComponent } from "../utils/components";
+import { getPayerTime } from "../utils/prayer";
+import { ComponentButton } from "./ComponentButton";
 
 type prob = {
   name: string;
@@ -30,6 +32,7 @@ export const PrayerTimes = async () => {
   if (prayerTimes.day <= 0) {
     return null;
   }
+  const ramazan = await getComponent("ramazan");
 
   return (
     <div style={styles.prayerTimesContainer}>
@@ -65,6 +68,13 @@ export const PrayerTimes = async () => {
           iqama={prayerTimes.iqama?.isha || ""}
         />
       </div>
+      <ComponentButton
+          title={ramazan.title}
+          summary={ramazan.summary}
+          titleImageUrl={ramazan.titleImageUrl}
+          description={ramazan.description}
+          buttonText="Click to see Ramazan Time table"
+        />
     </div>
   );
 };

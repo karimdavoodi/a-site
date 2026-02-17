@@ -1,6 +1,6 @@
 import Image from "next/image";
 import infoData from "@public/data/info.json";
-import { DonateButton } from "./DonateButton";
+import { ComponentButton } from "./ComponentButton";
 import { SocialMedia } from "./SocialMedia";
 import { getComponent } from "../utils/components";
 
@@ -11,11 +11,12 @@ export const Header = async () => {
       <div style={styles.logo}>
         <Image src="/assets/logo.png" alt="Logo" width={33} height={20} />
       </div>
-      <DonateButton
+      <ComponentButton
         title={donate.title}
         summary={donate.summary}
         titleImageUrl={donate.titleImageUrl}
         description={donate.description}
+        buttonText='Donate'
       />
       <div style={styles.contact}>
         <p>
