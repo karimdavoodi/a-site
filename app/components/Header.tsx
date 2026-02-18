@@ -16,7 +16,7 @@ export const Header = async () => {
         summary={donate.summary}
         titleImageUrl={donate.titleImageUrl}
         description={donate.description}
-        buttonText='Donate'
+        buttonText="Donate"
       />
       <div style={styles.contact}>
         <p>

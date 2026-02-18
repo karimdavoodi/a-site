@@ -1,4 +1,3 @@
-
 <div style="justify-items: center">
 
 ![](/components/gallery/1/10.jpg){style="display: block; width:80%; padding:10px"}

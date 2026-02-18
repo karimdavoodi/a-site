@@ -2,7 +2,6 @@
 // Run this script using: npx ts-node src/utils/get_yearly_prayer_time.ts
 // Run it yearly to prepare prayer times data for the current year.
 
-
 import puppeteer, { Page, type Browser } from "puppeteer";
 import fs from "fs";
 
@@ -48,10 +47,10 @@ async function pageExtraxction(page: Page): Promise<(ExtractedDay | null)[]> {
           cell.querySelector(".time-start")?.textContent?.trim() || "";
         let iqamahTime =
           cell.querySelector(".time-iqamah")?.textContent?.trim() || "";
-        
+
         // Fix Juma iqame time to 1:30 from 'time, time'
-        if(iqamahTime.split(',').length == 2){
-          iqamahTime = '1:30';
+        if (iqamahTime.split(",").length == 2) {
+          iqamahTime = "1:30";
         }
 
         if (name) {

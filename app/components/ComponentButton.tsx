@@ -5,7 +5,7 @@ import { ModalDialog } from "./ModalDialog";
 import { Component } from "../types";
 
 type ComponentButtonProbs = Component & {
-  buttonText:string
+  buttonText: string;
 };
 
 export const ComponentButton = ({
@@ -14,7 +14,7 @@ export const ComponentButton = ({
   summary,
   description,
   buttonText,
-}: ComponentButtonProbs ) => {
+}: ComponentButtonProbs) => {
   const [showDialog, setShowDialog] = useState(false);
   return (
     <>

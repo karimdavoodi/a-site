@@ -32,7 +32,7 @@ export const PrayerTimes = async () => {
   if (prayerTimes.day <= 0) {
     return null;
   }
-  const ramazan = await getComponent("ramazan");
+  const ramadan = await getComponent("ramadan");
 
   return (
     <div style={styles.prayerTimesContainer}>
@@ -69,12 +69,12 @@ export const PrayerTimes = async () => {
         />
       </div>
       <ComponentButton
-          title={ramazan.title}
-          summary={ramazan.summary}
-          titleImageUrl={ramazan.titleImageUrl}
-          description={ramazan.description}
-          buttonText="Click to see Ramazan Time table"
-        />
+        title={ramadan.title}
+        summary={ramadan.summary}
+        titleImageUrl={ramadan.titleImageUrl}
+        description={ramadan.description}
+        buttonText="Click to see Ramadan Time table"
+      />
     </div>
   );
 };
