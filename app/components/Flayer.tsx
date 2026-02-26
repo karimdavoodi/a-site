@@ -2,17 +2,32 @@
 
 import React from "react";
 import infoData from "@public/data/info.json";
+import { useOverlayActivity } from "./OverlayActivityContext";
 
 export const Flayer = () => {
   const [showFlayer, setShowFlayer] = React.useState(false);
+  const { hasActiveOverlay } = useOverlayActivity();
+  const hasActiveOverlayRef = React.useRef(hasActiveOverlay);
+
+  React.useEffect(() => {
+    hasActiveOverlayRef.current = hasActiveOverlay;
+  }, [hasActiveOverlay]);
 
   React.useEffect(() => {
     const timer = setTimeout(() => {
-      setShowFlayer(true);
+      if (!hasActiveOverlayRef.current) {
+        setShowFlayer(true);
+      }
     }, 3000);
 
     return () => clearTimeout(timer);
   }, []);
+
+  React.useEffect(() => {
+    if (hasActiveOverlay) {
+      setShowFlayer(false);
+    }
+  }, [hasActiveOverlay]);
 
   if (!infoData.flayer) {
     return null;

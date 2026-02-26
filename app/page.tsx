@@ -7,6 +7,7 @@ import { GridSection } from "./components/GridSection";
 import { PrayerTimes } from "./components/PrayerTime";
 import { Events } from "./components/Events";
 import { Flayer } from "./components/Flayer";
+import { OverlayActivityProvider } from "./components/OverlayActivityContext";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -15,19 +16,21 @@ export default async function Home() {
   return (
     <div style={styles.appContainer}>
       <div style={styles.contentShield}>
-        <Flayer />
-        <Notice />
-        <Header />
-        <Title />
-        <PrayerTimes />
-        <GridSection gridTitle="About Us" folder="about_us" />
-        <GridSection gridTitle="Services" folder="services" />
-        <GridSection gridTitle="Gallery" folder="gallery" />
-        {/* TODO: fill /public/components/programs before enabling the below component */}
-        {/* <GridSection gridTitle="Programs" folder="programs" /> */}
-        <Events title="Events" />
-        <News />
-        <Footer />
+        <OverlayActivityProvider>
+          <Flayer />
+          <Notice />
+          <Header />
+          <Title />
+          <PrayerTimes />
+          <GridSection gridTitle="About Us" folder="about_us" />
+          <GridSection gridTitle="Services" folder="services" />
+          <GridSection gridTitle="Gallery" folder="gallery" />
+          {/* TODO: fill /public/components/programs before enabling the below component */}
+          {/* <GridSection gridTitle="Programs" folder="programs" /> */}
+          <Events title="Events" />
+          <News />
+          <Footer />
+        </OverlayActivityProvider>
       </div>
     </div>
   );

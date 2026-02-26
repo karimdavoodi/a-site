@@ -1,5 +1,7 @@
 "use client";
+import { useEffect } from "react";
 import { Component } from "../types";
+import { useOverlayActivity } from "./OverlayActivityContext";
 
 type ModalProps = Component & {
   onClose: () => void;
@@ -12,6 +14,13 @@ export const ModalDialog = ({
   description,
   onClose,
 }: ModalProps) => {
+  const { registerOverlay } = useOverlayActivity();
+
+  useEffect(() => {
+    const unregister = registerOverlay();
+    return unregister;
+  }, [registerOverlay]);
+
   return (
     <div style={styles.overlay} onClick={onClose}>
       <div

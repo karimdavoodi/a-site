@@ -1,7 +1,7 @@
 :root {
-  --backgroud-color: #064e3b;
+  --backgroud-color: rgb(17, 69, 9);
   --footer-color: #03221a;
-  --box-color: #05634a;
+  --box-color: rgb(39, 113, 27);
   --text-color: #ffffff;
   --gold: #facf42;
   --black: #000000;
