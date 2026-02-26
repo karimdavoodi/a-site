@@ -110,12 +110,12 @@ const styles: { [key: string]: React.CSSProperties } = {
   closeButton: {
     padding: "3px 12px",
     backgroundColor: "var(--gold)",
-    color: "var(--backgroud-color)",
+    color: "var(--black)",
     fontWeight: "bold",
     border: "none",
     borderRadius: "3px",
     cursor: "pointer",
     alignSelf: "baseline",
-    fontSize: "0.7rem",
+    fontSize: "0.9rem",
   },
 };
