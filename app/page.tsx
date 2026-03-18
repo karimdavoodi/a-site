@@ -8,27 +8,39 @@ import { PrayerTimes } from "./components/PrayerTime";
 import { Events } from "./components/Events";
 import { Flayer } from "./components/Flayer";
 import { OverlayActivityProvider } from "./components/OverlayActivityContext";
+import { Fundraising } from "./components/Fundraising";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
-export default async function Home() {
+export default async function Home(props: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const searchParams = await props.searchParams;
+  const isFundraisingMode = searchParams.mode === "fundraising";
+
   return (
     <div style={styles.appContainer}>
       <div style={styles.contentShield}>
         <OverlayActivityProvider>
           <Flayer />
           <Notice />
-          <Header />
-          <Title />
-          <PrayerTimes />
-          <GridSection gridTitle="About Us" folder="about_us" />
-          <GridSection gridTitle="Services" folder="services" />
-          <GridSection gridTitle="Gallery" folder="gallery" />
-          {/* TODO: fill /public/components/programs before enabling the below component */}
-          {/* <GridSection gridTitle="Programs" folder="programs" /> */}
-          <Events title="Events" />
-          <News />
+          {isFundraisingMode ? (
+            <Fundraising />
+          ) : (
+            <>
+              <Header />
+              <Title />
+              <PrayerTimes />
+              <GridSection gridTitle="About Us" folder="about_us" />
+              <GridSection gridTitle="Services" folder="services" />
+              <GridSection gridTitle="Gallery" folder="gallery" />
+              {/* TODO: fill /public/components/programs before enabling the below component */}
+              {/* <GridSection gridTitle="Programs" folder="programs" /> */}
+              <Events title="Events" />
+              <News />
+            </>
+          )}
           <Footer />
         </OverlayActivityProvider>
       </div>
