@@ -68,13 +68,13 @@ export const PrayerTimes = async () => {
           iqama={prayerTimes.iqama?.isha || ""}
         />
       </div>
-      <ComponentButton
+      {/* <ComponentButton
         title={ramadan.title}
         summary={ramadan.summary}
         titleImageUrl={ramadan.titleImageUrl}
         description={ramadan.description}
         buttonText="Click to see Ramadan Time table"
-      />
+      /> */}
     </div>
   );
 };
