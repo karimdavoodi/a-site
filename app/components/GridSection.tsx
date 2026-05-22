@@ -16,7 +16,7 @@ export const GridSection = async ({
 
   let componentSize = 100;
   if (components.length == 1) componentSize = 86;
-  else componentSize = 41.3;
+  else componentSize = 40;
 
   const styles: { [key: string]: React.CSSProperties } = {
     parent: {
