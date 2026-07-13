@@ -132,24 +132,12 @@ export default async function WeeklyPrayerTimes() {
                   return (
                     <div key={prayer} style={styles.prayerBox}>
                       <span style={styles.prayerName}>{prayer}</span>
-
-                      {/* azan row — skip label for Sunrise */}
-                      <span style={styles.timeRow}>
-                        {!isSunrise && (
-                          <span style={styles.timeLabel}>Azan</span>
-                        )}
-                        <span style={isSunrise ? styles.sunriseTime : styles.azan}>
-                          {azan}
-                        </span>
+                      <span style={isSunrise ? styles.sunriseTime : styles.azan}>
+                        {azan}
                       </span>
-
-                      {/* iqamah row */}
                       {iqamah ? (
-                        <span style={styles.timeRow}>
-                          <span style={styles.timeLabel}>Iqamah</span>
-                          <span style={fridayDhuhr ? styles.iqamahRed : styles.iqamah}>
-                            {iqamah}
-                          </span>
+                        <span style={fridayDhuhr ? styles.iqamahRed : styles.iqamah}>
+                          {iqamah}
                         </span>
                       ) : (
                         <span style={styles.iqamahPlaceholder}>&nbsp;</span>
@@ -192,10 +180,10 @@ const styles: Record<string, React.CSSProperties> = {
   },
 
   title: {
-    fontSize: "0.9rem",
+    fontSize: "1.15rem",
     fontWeight: 700,
     color: "var(--text-color)",
-    margin: "0.4rem 0 0.2rem",
+    margin: "0.5rem 0 0.3rem",
     textAlign: "center",
   },
 
@@ -218,37 +206,37 @@ const styles: Record<string, React.CSSProperties> = {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    minWidth: 52,
-    maxWidth: 52,
-    padding: "0.15rem 0.15rem",
+    minWidth: 58,
+    maxWidth: 58,
+    padding: "0.2rem 0.2rem",
     borderRight: "1px solid var(--gold)",
     flexShrink: 0,
     gap: 0,
   },
 
   dayName: {
-    fontSize: "0.6rem",
+    fontSize: "1rem",
     fontWeight: 700,
     color: "var(--text-color)",
     lineHeight: 1.15,
   },
 
   dayNameRed: {
-    fontSize: "0.7rem",
+    fontSize: "1rem",
     fontWeight: 700,
     color: "#e53e3e",
     lineHeight: 1.15,
   },
 
   monthLabel: {
-    fontSize: "0.5rem",
+    fontSize: "0.7rem",
     color: "var(--gold)",
     lineHeight: 1.15,
     whiteSpace: "nowrap",
   },
 
   yearLabel: {
-    fontSize: "0.45rem",
+    fontSize: "0.6rem",
     color: "rgba(255,255,255,0.4)",
     lineHeight: 1.15,
   },
@@ -272,64 +260,52 @@ const styles: Record<string, React.CSSProperties> = {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    padding: "0.15rem 0.25rem",
+    padding: "0.25rem 0.3rem",
     borderRadius: 4,
     backgroundColor: "rgba(255,255,255,0.06)",
-    lineHeight: 1.15,
-    gap: 0,
+    lineHeight: 1.2,
+    gap: 1,
   },
 
   prayerName: {
-    fontSize: "0.5rem",
+    fontSize: "0.72rem",
     fontWeight: 600,
     color: "var(--gold)",
     textTransform: "uppercase",
     letterSpacing: "0.02em",
-    lineHeight: 1.1,
-  },
-
-  timeRow: {
-    display: "flex",
-    alignItems: "baseline",
-    gap: 2,
-  },
-
-  timeLabel: {
-    fontSize: "0.35rem",
-    color: "rgba(255,255,255,0.35)",
     lineHeight: 1.15,
   },
 
   azan: {
-    fontSize: "0.55rem",
-    color: "rgba(255,255,255,0.5)",
+    fontSize: "0.8rem",
+    color: "rgba(255,255,255,0.65)",
     lineHeight: 1.15,
   },
 
   sunriseTime: {
-    fontSize: "0.68rem",
+    fontSize: "0.9rem",
     fontWeight: 700,
     color: "var(--text-color)",
     lineHeight: 1.15,
   },
 
   iqamah: {
-    fontSize: "0.68rem",
+    fontSize: "1rem",
     fontWeight: 700,
     color: "var(--text-color)",
-    lineHeight: 1.1,
+    lineHeight: 1.15,
   },
 
   iqamahRed: {
-    fontSize: "0.68rem",
+    fontSize: "1rem",
     fontWeight: 700,
     color: "#e53e3e",
-    lineHeight: 1.1,
+    lineHeight: 1.15,
   },
 
   iqamahPlaceholder: {
-    fontSize: "0.55rem",
-    lineHeight: 1.1,
+    fontSize: "0.8rem",
+    lineHeight: 1.15,
   },
 
   /* ---- error ---- */
