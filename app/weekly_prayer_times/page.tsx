@@ -1,5 +1,6 @@
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
+import { OverlayActivityProvider } from "../components/OverlayActivityContext";
 import fs from "fs/promises";
 import path from "path";
 
@@ -89,69 +90,73 @@ export default async function WeeklyPrayerTimes() {
     yearlyData = JSON.parse(raw);
   } catch {
     return (
-      <div style={styles.page}>
-        <Header />
-        <div style={styles.content}>
-          <p style={styles.error}>
-            Unable to load prayer times. Please try again later.
-          </p>
+      <OverlayActivityProvider>
+        <div style={styles.page}>
+          <Header />
+          <div style={styles.content}>
+            <p style={styles.error}>
+              Unable to load prayer times. Please try again later.
+            </p>
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
+      </OverlayActivityProvider>
     );
   }
 
   const week = buildWeek();
 
   return (
-    <div style={styles.page}>
-      <Header />
-      <div style={styles.content}>
-        <h2 style={styles.title}>Weekly Prayer Times</h2>
+    <OverlayActivityProvider>
+      <div style={styles.page}>
+        <Header />
+        <div style={styles.content}>
+          <h2 style={styles.title}>Weekly Prayer Times</h2>
 
-        {week.map(({ key, dayName, monthLabel, yearLabel }) => {
-          const p = yearlyData[key];
-          const isFriday = dayName === "Fri";
-          return (
-            <div key={key} style={styles.dayRow}>
-              {/* day label — left side, 3 lines */}
-              <div style={styles.dayLabel}>
-                <span style={isFriday ? styles.dayNameRed : styles.dayName}>{dayName}</span>
-                <span style={styles.monthLabel}>{monthLabel}</span>
-                <span style={styles.yearLabel}>{yearLabel}</span>
-              </div>
+          {week.map(({ key, dayName, monthLabel, yearLabel }) => {
+            const p = yearlyData[key];
+            const isFriday = dayName === "Fri";
+            return (
+              <div key={key} style={styles.dayRow}>
+                {/* day label — left side, 3 lines */}
+                <div style={styles.dayLabel}>
+                  <span style={isFriday ? styles.dayNameRed : styles.dayName}>{dayName}</span>
+                  <span style={styles.monthLabel}>{monthLabel}</span>
+                  <span style={styles.yearLabel}>{yearLabel}</span>
+                </div>
 
-              {/* prayer boxes — flex-wrap beside the label */}
-              <div style={styles.prayerRow}>
-                {PRAYERS.map((prayer) => {
-                  const azan = p?.[prayer]?.azan || "—";
-                  const iqamah = p?.[prayer]?.iqamah || "";
-                  const isSunrise = prayer === "Sunrise";
-                  const fridayDhuhr = isFriday && prayer === "Dhuhr";
+                {/* prayer boxes — flex-wrap beside the label */}
+                <div style={styles.prayerRow}>
+                  {PRAYERS.map((prayer) => {
+                    const azan = p?.[prayer]?.azan || "—";
+                    const iqamah = p?.[prayer]?.iqamah || "";
+                    const isSunrise = prayer === "Sunrise";
+                    const fridayDhuhr = isFriday && prayer === "Dhuhr";
 
-                  return (
-                    <div key={prayer} style={styles.prayerBox}>
-                      <span style={styles.prayerName}>{prayer}</span>
-                      <span style={isSunrise ? styles.sunriseTime : styles.azan}>
-                        {azan}
-                      </span>
-                      {iqamah ? (
-                        <span style={fridayDhuhr ? styles.iqamahRed : styles.iqamah}>
-                          {iqamah}
+                    return (
+                      <div key={prayer} style={styles.prayerBox}>
+                        <span style={styles.prayerName}>{prayer}</span>
+                        <span style={isSunrise ? styles.sunriseTime : styles.azan}>
+                          {azan}
                         </span>
-                      ) : (
-                        <span style={styles.iqamahPlaceholder}>&nbsp;</span>
-                      )}
-                    </div>
-                  );
-                })}
+                        {iqamah ? (
+                          <span style={fridayDhuhr ? styles.iqamahRed : styles.iqamah}>
+                            {iqamah}
+                          </span>
+                        ) : (
+                          <span style={styles.iqamahPlaceholder}>&nbsp;</span>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </OverlayActivityProvider>
   );
 }
 
