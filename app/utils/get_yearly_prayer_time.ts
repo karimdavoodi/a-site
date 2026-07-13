@@ -1,6 +1,7 @@
 // TODO: FIX JUMA PRAYER TIME (waterloo has two iqama for juma dhure prayer)
-// Run this script using: npx ts-node src/utils/get_yearly_prayer_time.ts
+// Run this script using: npx ts-node app/utils/get_yearly_prayer_time.ts
 // Run it yearly to prepare prayer times data for the current year.
+// CHROME_PATH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" npx ts-node app/utils/get_yearly_prayer_time.ts
 
 import puppeteer, { Page, type Browser } from "puppeteer";
 import fs from "fs";
@@ -80,7 +81,13 @@ async function extractPrayerTimes() {
   try {
     browser = await puppeteer.launch({
       headless: true,
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+      args: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--remote-debugging-port=0",
+      ],
+      executablePath: process.env.CHROME_PATH || undefined,
+      userDataDir: `/tmp/puppeteer_profile_${Date.now()}`,
     });
 
     const page = await browser.newPage();

@@ -1,7 +1,6 @@
+import Link from "next/link";
 import infoData from "@public/data/info.json";
-import { getComponent } from "../utils/components";
 import { getPayerTime } from "../utils/prayer";
-import { ComponentButton } from "./ComponentButton";
 
 type prob = {
   name: string;
@@ -32,7 +31,6 @@ export const PrayerTimes = async () => {
   if (prayerTimes.day <= 0) {
     return null;
   }
-  const ramadan = await getComponent("ramadan");
 
   return (
     <div style={styles.prayerTimesContainer}>
@@ -68,13 +66,9 @@ export const PrayerTimes = async () => {
           iqama={prayerTimes.iqama?.isha || ""}
         />
       </div>
-      {/* <ComponentButton
-        title={ramadan.title}
-        summary={ramadan.summary}
-        titleImageUrl={ramadan.titleImageUrl}
-        description={ramadan.description}
-        buttonText="Click to see Ramadan Time table"
-      /> */}
+      <Link href="/weekly_prayer_times" style={styles.weeklyLink}>
+        View Weekly Prayer Times →
+      </Link>
     </div>
   );
 };
@@ -155,6 +149,13 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   gold: {
     color: "var(--gold)",
+  },
+  weeklyLink: {
+    marginTop: "0.6rem",
+    fontSize: "0.75rem",
+    color: "var(--gold)",
+    textDecoration: "none",
+    borderBottom: "1px solid transparent",
   },
 };
 export default PrayerTimes;

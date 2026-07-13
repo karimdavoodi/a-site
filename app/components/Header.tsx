@@ -1,11 +1,9 @@
 import Image from "next/image";
 import infoData from "@public/data/info.json";
 import { SocialMedia } from "./SocialMedia";
-import { getComponent } from "../utils/components";
 import { Donation } from "./Donation";
 
 export const Header = async () => {
-  const donate = await getComponent("donation");
   return (
     <header style={styles.header}>
       <div style={styles.logo}>
