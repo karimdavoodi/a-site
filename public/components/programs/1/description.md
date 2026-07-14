@@ -1,1 +1,0 @@
-Our program bridges the gap between individual faith and family harmony. We pair New Muslims and families with experienced mentors to navigate the spiritual, social, and practical aspects of living an Islamic life. Whether you are learning your first prayer or seeking to build a more God-conscious home, we provide the community and guidance you need to thrive.
