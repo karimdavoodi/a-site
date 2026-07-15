@@ -1,0 +1,9 @@
+{
+  "id": "1",
+  "subject": "Implement Task 0: Set up Jest + React Testing Library",
+  "description": "Configure Jest with TypeScript, JSX transform, module path aliases, and Next.js-specific mocks. Create a smoke test to verify the setup works.",
+  "activeForm": "Setting up Jest + React Testing Library",
+  "status": "in_progress",
+  "blocks": [],
+  "blockedBy": []
+}
