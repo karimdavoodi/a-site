@@ -101,7 +101,6 @@ const styles: Record<string, CSSProperties> = {
   iframe: {
     width: "100%",
     flex: 1,
-    frameborder: 0,
   },
   donationInfo: {
     width: "100%",
