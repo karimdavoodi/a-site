@@ -23,7 +23,7 @@ const DonationPage = ({ onClose }: DonationPageProps) => {
         </button>
         <iframe
           title="Donation form"
-          src="https://www.zeffy.com/en-CA/donation-form/support-al-salaam-islamic-centre"
+          src="https://donorchoice.ca/embedded/alsalaam/6031"
           style={styles.iframe}
         />
         <div style={styles.donationInfo}>
@@ -101,13 +101,7 @@ const styles: Record<string, CSSProperties> = {
   iframe: {
     width: "100%",
     flex: 1,
-    // border: "none",
-    // scrollbarWidth: "none",
-    // overflowY: "auto",
-    // overscrollBehavior: "contain",
-    // borderRadius: "8px",
-    // border: "4px solid var(--input-border-color)",
-
+    frameborder: 0,
   },
   donationInfo: {
     width: "100%",

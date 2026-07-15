@@ -284,7 +284,7 @@ const styles: Record<string, React.CSSProperties> = {
   azan: {
     fontSize: "1.05rem",
     fontWeight: 500,
-    color: "#ffffff",
+    color: "#f0f0f0",
     lineHeight: 1.15,
   },
 
