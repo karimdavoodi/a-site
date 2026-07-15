@@ -61,7 +61,6 @@ function buildWeek(): {
     const year = d.getFullYear().toString();
     const month = d.toLocaleString("en-US", { month: "long" }).toLowerCase();
     const day = d.getDate().toString();
-    console.log(`${year}-${month}-${day}`)
     days.push({
       key: `${year}-${month}-${day}`,
       dayName: DAY_ABBR[d.getDay()],
@@ -185,7 +184,7 @@ const styles: Record<string, React.CSSProperties> = {
   },
 
   title: {
-    fontSize: "1.15rem",
+    fontSize: "1.4rem",
     fontWeight: 700,
     color: "var(--text-color)",
     margin: "0.5rem 0 0.3rem",
@@ -198,7 +197,7 @@ const styles: Record<string, React.CSSProperties> = {
     display: "flex",
     flexDirection: "row",
     alignItems: "stretch",
-    backgroundColor: "var(--box-color)",
+    backgroundColor: "rgb(22, 85, 14)",
     borderRadius: "var(--border-radius)",
     boxShadow: "var(--border-shadow)",
     overflow: "hidden",
@@ -211,8 +210,8 @@ const styles: Record<string, React.CSSProperties> = {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    minWidth: 58,
-    maxWidth: 58,
+    minWidth: 70,
+    maxWidth: 70,
     padding: "0.2rem 0.2rem",
     borderRight: "1px solid var(--gold)",
     flexShrink: 0,
@@ -220,29 +219,30 @@ const styles: Record<string, React.CSSProperties> = {
   },
 
   dayName: {
-    fontSize: "1rem",
+    fontSize: "1.3rem",
     fontWeight: 700,
     color: "var(--text-color)",
     lineHeight: 1.15,
   },
 
   dayNameRed: {
-    fontSize: "1rem",
+    fontSize: "1.3rem",
     fontWeight: 700,
     color: "#e53e3e",
     lineHeight: 1.15,
   },
 
   monthLabel: {
-    fontSize: "0.7rem",
-    color: "var(--gold)",
+    fontSize: "0.85rem",
+    fontWeight: 600,
+    color: "#ffe566",
     lineHeight: 1.15,
     whiteSpace: "nowrap",
   },
 
   yearLabel: {
-    fontSize: "0.6rem",
-    color: "rgba(255,255,255,0.4)",
+    fontSize: "0.75rem",
+    color: "#d0d0d0",
     lineHeight: 1.15,
   },
 
@@ -260,56 +260,57 @@ const styles: Record<string, React.CSSProperties> = {
 
   prayerBox: {
     flex: "1 1 auto",
-    minWidth: "4.8rem",
+    minWidth: "5.5rem",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    padding: "0.25rem 0.3rem",
+    padding: "0.3rem 0.35rem",
     borderRadius: 4,
-    backgroundColor: "rgba(255,255,255,0.06)",
+    backgroundColor: "rgba(255,255,255,0.16)",
     lineHeight: 1.2,
     gap: 1,
   },
 
   prayerName: {
-    fontSize: "0.72rem",
-    fontWeight: 600,
-    color: "var(--gold)",
+    fontSize: "0.95rem",
+    fontWeight: 700,
+    color: "#ffe566",
     textTransform: "uppercase",
     letterSpacing: "0.02em",
     lineHeight: 1.15,
   },
 
   azan: {
-    fontSize: "0.8rem",
-    color: "rgba(255,255,255,0.65)",
+    fontSize: "1.05rem",
+    fontWeight: 500,
+    color: "#ffffff",
     lineHeight: 1.15,
   },
 
   sunriseTime: {
-    fontSize: "0.9rem",
+    fontSize: "1.15rem",
     fontWeight: 700,
     color: "var(--text-color)",
     lineHeight: 1.15,
   },
 
   iqamah: {
-    fontSize: "1rem",
+    fontSize: "1.3rem",
     fontWeight: 700,
     color: "var(--text-color)",
     lineHeight: 1.15,
   },
 
   iqamahRed: {
-    fontSize: "1rem",
+    fontSize: "1.3rem",
     fontWeight: 700,
     color: "#e53e3e",
     lineHeight: 1.15,
   },
 
   iqamahPlaceholder: {
-    fontSize: "0.8rem",
+    fontSize: "1.05rem",
     lineHeight: 1.15,
   },
 
