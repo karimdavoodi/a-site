@@ -23,7 +23,7 @@ export default async function Home() {
         <Flayer />
         <AlertBanner />
         <Header />
-        <main>
+        <main id="main-content">
           <Hero />
           <PrayerTimes />
           <AboutUs />

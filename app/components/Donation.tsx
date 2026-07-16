@@ -92,11 +92,11 @@ const styles: Record<string, CSSProperties> = {
     border: "none",
     backgroundColor: "rgba(0, 0, 0, 0.55)",
     color: "#fff",
-    width: "30px",
-    height: "30px",
+    width: "44px",
+    height: "44px",
     borderRadius: "999px",
     cursor: "pointer",
-    fontSize: "20px",
+    fontSize: "24px",
     lineHeight: "1",
     zIndex: 1
   },
@@ -107,7 +107,7 @@ const styles: Record<string, CSSProperties> = {
   donationInfo: {
     width: "100%",
     fontSize: "0.8rem",
-    color: "var(--white)",
+    color: "var(--color-text-secondary)",
     paddingLeft: "5%",
     padding: "2%",
   },

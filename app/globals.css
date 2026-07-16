@@ -71,6 +71,43 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Ensure all interactive elements meet minimum touch target size */
+button,
+a,
+input,
+select,
+textarea {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Let inline links and small buttons stay natural */
+a:not([class]),
+button:not([class]) {
+  min-height: auto;
+  min-width: auto;
+}
+
+/* Skip to content — hidden until focused */
+.skipToContent {
+  position: absolute;
+  top: -100%;
+  left: var(--space-md);
+  background: var(--color-accent);
+  color: #0d3b2e;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  z-index: 200;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+.skipToContent:focus {
+  top: var(--space-sm);
 }
 
 /* ==========================================================================
