@@ -72,15 +72,15 @@ export function NextPrayerCountdown({ prayers, day }: NextPrayerCountdownProps) 
   }
 
   const nextPrayer = prayers[nextIndex];
-  const nextAthanMinutes = parsePrayerTimeToMinutes(nextPrayer.athan, nextPrayer.name);
+  const nextIqamaMinutes = parsePrayerTimeToMinutes(nextPrayer.iqama, nextPrayer.name);
   const nowMinutes = now.getHours() * 60 + now.getMinutes();
   const nowSeconds = now.getSeconds();
-  const remainingSeconds = (nextAthanMinutes - nowMinutes) * 60 - nowSeconds;
+  const remainingSeconds = (nextIqamaMinutes - nowMinutes) * 60 - nowSeconds;
 
   return (
     <div className={styles.countdown}>
       <span className={styles.countdownLabel}>
-        Next Azan: {nextPrayer.name} in
+        Next Iqama: {nextPrayer.name} in
       </span>
       <span className={styles.countdownTimer}>
         {formatCountdown(Math.max(0, remainingSeconds))}

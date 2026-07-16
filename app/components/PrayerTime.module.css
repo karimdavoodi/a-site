@@ -25,13 +25,14 @@
 .jumaTime {
   color: var(--color-accent);
   font-weight: 700;
+  font-size:large;
 }
 
 /* ── Daily strip ────────────────────────────────────────────────────── */
 .daily {
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
+  gap: var(--space-sm);
   width: 100%;
   max-width: 100%;
 }
@@ -55,7 +56,7 @@
 }
 
 .name {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-xl);
   font-weight: 700;
   color: var(--color-text);
   min-width: 5rem;
@@ -103,6 +104,7 @@
 .countdownLabel {
   font-size: var(--font-size-lg);
   color: var(--color-text-secondary);
+  font-family: var(--font-geist-mono), monospace;
   margin-bottom: 4px;
 }
 

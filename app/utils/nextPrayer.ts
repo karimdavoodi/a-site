@@ -36,7 +36,7 @@ export function parsePrayerTimeToMinutes(
     // Hours 1-7 could be AM or PM depending on the prayer
     const isFajr = prayerName.toLowerCase() === "fajr";
 
-    if (!isFajr && hours <= 7) {
+    if (!isFajr && hours < 12) {
       // Dhuhr, Asr, Maghrib, Isha — these are always PM
       hours += 12;
     }

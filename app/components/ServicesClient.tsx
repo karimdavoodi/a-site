@@ -15,6 +15,8 @@ interface ServiceItem {
 
 function ServiceCard({ item }: { item: ServiceItem }) {
   const [expanded, setExpanded] = useState(false);
+  const plainDescription = item.descriptionHtml.replace(/<[^>]*>/g, "").trim();
+  const hasMore = plainDescription !== item.summary;
 
   return (
     <div className={styles.card}>
@@ -30,18 +32,22 @@ function ServiceCard({ item }: { item: ServiceItem }) {
       <div className={styles.textContent}>
         <h3 className={styles.cardTitle}>{item.title}</h3>
         <p className={styles.summary}>{item.summary}</p>
-        <button
-          className={styles.toggle}
-          onClick={() => setExpanded(!expanded)}
-          aria-expanded={expanded}
-        >
-          {expanded ? "Show Less ▲" : "Read More ▼"}
-        </button>
-        {expanded && (
-          <div
-            className={styles.description}
-            dangerouslySetInnerHTML={{ __html: item.descriptionHtml }}
-          />
+        {hasMore && (
+          <>
+            <button
+              className={styles.toggle}
+              onClick={() => setExpanded(!expanded)}
+              aria-expanded={expanded}
+            >
+              {expanded ? "Show Less ▲" : "Read More ▼"}
+            </button>
+            {expanded && (
+              <div
+                className={styles.description}
+                dangerouslySetInnerHTML={{ __html: item.descriptionHtml }}
+              />
+            )}
+          </>
         )}
       </div>
     </div>
