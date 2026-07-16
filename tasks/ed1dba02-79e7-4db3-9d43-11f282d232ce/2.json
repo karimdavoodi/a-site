@@ -2,7 +2,7 @@
   "id": "2",
   "subject": "Replace CSS Custom Properties & Add Responsive Breakpoints (Task 1)",
   "description": "Replace old CSS variables with full design token system and add responsive breakpoints. CSS-only change.",
-  "status": "in_progress",
+  "status": "completed",
   "blocks": [],
   "blockedBy": []
 }
