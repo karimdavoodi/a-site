@@ -1,5 +1,6 @@
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
+import { MobileNav } from "../components/MobileNav";
 import fs from "fs/promises";
 import path from "path";
 
@@ -96,6 +97,7 @@ export default async function WeeklyPrayerTimes() {
           </p>
         </div>
         <Footer />
+        <MobileNav />
       </div>
     );
   }
@@ -150,6 +152,7 @@ export default async function WeeklyPrayerTimes() {
           })}
         </div>
         <Footer />
+        <MobileNav />
       </div>
   );
 }
