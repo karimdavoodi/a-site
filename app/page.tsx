@@ -10,6 +10,7 @@ import { Services } from "./components/Services";
 import { Gallery } from "./components/Gallery";
 import { MobileNav } from "./components/MobileNav";
 import { NextPrayerCountdown } from "./components/PrayerTimeClient";
+import { DonationCard } from "./components/DonationCard";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -28,6 +29,7 @@ export default async function Home() {
           )}
         </Hero>
         {prayerData && <PrayerTimes data={prayerData} />}
+        <DonationCard />
         <AboutUs />
         <Services />
         <Gallery />

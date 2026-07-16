@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 50vh;
+  min-height: 22vh;
   background-image: url("/assets/title_background.jpg");
   background-size: cover;
   background-position: center;
@@ -20,7 +20,7 @@
   position: relative;
   z-index: 1;
   text-align: center;
-  padding: var(--space-xl);
+  padding: var(--space-lg);
 }
 
 .title {
@@ -38,19 +38,19 @@
 }
 
 .countdownSlot {
-  margin-top: var(--space-xl);
+  margin-top: var(--space-md);
   display: flex;
   justify-content: center;
 }
 
 @media (min-width: 640px) {
   .hero {
-    min-height: 55vh;
+    min-height: 26vh;
   }
 }
 
 @media (min-width: 1024px) {
   .hero {
-    min-height: 60vh;
+    min-height: 30vh;
   }
 }

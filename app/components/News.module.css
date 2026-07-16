@@ -1,6 +1,6 @@
 .container {
   width: 100%;
-  padding: var(--space-2xl) var(--content-padding);
+  padding: var(--space-xl) var(--content-padding);
 }
 
 .title {

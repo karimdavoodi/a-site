@@ -80,7 +80,7 @@ export function NextPrayerCountdown({ prayers, day }: NextPrayerCountdownProps) 
   return (
     <div className={styles.countdown}>
       <span className={styles.countdownLabel}>
-        Next: {nextPrayer.name} in
+        Next Azan: {nextPrayer.name} in
       </span>
       <span className={styles.countdownTimer}>
         {formatCountdown(Math.max(0, remainingSeconds))}
@@ -129,3 +129,4 @@ export function PrayerTimesClient({ prayers, day }: PrayerTimesClientProps) {
     </section>
   );
 }
+
