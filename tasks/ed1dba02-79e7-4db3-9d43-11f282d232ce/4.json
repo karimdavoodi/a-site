@@ -1,8 +1,0 @@
-{
-  "id": "4",
-  "subject": "Redesign Header as Sticky Navbar (Task 3)",
-  "description": "Rewrite Header with CSS Modules, sticky positioning, backdrop blur, improved Donate button, responsive phone visibility.",
-  "status": "completed",
-  "blocks": [],
-  "blockedBy": []
-}

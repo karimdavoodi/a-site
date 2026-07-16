@@ -19,6 +19,15 @@
 .DS_Store
 *.pem
 
+# stray Claude Code session artifacts (from a misconfigured CLAUDE_CONFIG_DIR)
+/.claude.json
+/.last-cleanup
+/backups/
+/projects/
+/tasks/
+/telemetry/
+/session-env/
+
 # debug
 npm-debug.log*
 yarn-debug.log*

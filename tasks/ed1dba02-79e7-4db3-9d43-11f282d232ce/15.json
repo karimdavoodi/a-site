@@ -1,8 +1,0 @@
-{
-  "id": "15",
-  "subject": "Update Page Assembly (Task 16)",
-  "description": "Update page.tsx with full new component tree, remove contentShield, add MobileNav.",
-  "status": "completed",
-  "blocks": [],
-  "blockedBy": []
-}

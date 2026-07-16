@@ -1,8 +1,0 @@
-{
-  "id": "17",
-  "subject": "Accessibility Audit & Fix (Task 18)",
-  "description": "WCAG AA compliance: reduced motion, focus outlines, ARIA labels, semantic landmarks.",
-  "status": "completed",
-  "blocks": [],
-  "blockedBy": []
-}

@@ -1,8 +1,0 @@
-{
-  "id": "10",
-  "subject": "Remove Legacy Content-Card Components (Task 11)",
-  "description": "Delete GridSection, ComponentBox, ComponentButton, ModalDialog, and getComponents utility. Update page.tsx to use new components.",
-  "status": "completed",
-  "blocks": [],
-  "blockedBy": []
-}

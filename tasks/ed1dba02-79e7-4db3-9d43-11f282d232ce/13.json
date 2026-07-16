@@ -1,8 +1,0 @@
-{
-  "id": "13",
-  "subject": "Redesign Footer with CSS Grid (Task 14)",
-  "description": "Rewrite Footer with CSS Modules and CSS Grid. Three columns on desktop, stacked on mobile.",
-  "status": "completed",
-  "blocks": [],
-  "blockedBy": []
-}

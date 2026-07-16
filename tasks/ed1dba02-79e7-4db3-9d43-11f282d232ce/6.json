@@ -1,8 +1,0 @@
-{
-  "id": "6",
-  "subject": "Redesign Notice as AlertBanner (Task 6)",
-  "description": "Replace Notice with AlertBanner component using CSS Modules, with dismiss button and info icon.",
-  "status": "completed",
-  "blocks": [],
-  "blockedBy": []
-}
