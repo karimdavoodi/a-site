@@ -48,7 +48,7 @@ export const Events = ({ title }: { title: string }) => {
             onClick={() => setLightboxIndex(index)}
             aria-label={`View ${image.name}`}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
+            { }
             <img
               src={image.url}
               alt={image.name}
