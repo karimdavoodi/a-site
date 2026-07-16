@@ -54,14 +54,16 @@ export const Donation = () => {
 
 const styles: Record<string, CSSProperties> = {
   donateButton: {
-    backgroundColor: "var(--gold)",
-    color: "var(--black)",
+    backgroundColor: "var(--color-accent)",
+    color: "#0d3b2e",
     border: "none",
-    padding: "1px 5px",
-    borderRadius: "3px",
-    fontSize: "1.0rem",
-    fontWeight: "bold",
+    padding: "6px 18px",
+    borderRadius: "var(--radius-full)",
+    fontSize: "0.95rem",
+    fontWeight: 700,
     cursor: "pointer",
+    whiteSpace: "nowrap",
+    transition: "background-color 0.2s ease",
   },
   overlay: {
     position: "fixed",
@@ -77,7 +79,7 @@ const styles: Record<string, CSSProperties> = {
     position: "relative",
     width: "90%",
     height: "90%",
-    backgroundColor: "var(--box-color)",
+    backgroundColor: "var(--color-surface)",
     borderRadius: "8px",
     overflow: "hidden",
     display: "flex",
