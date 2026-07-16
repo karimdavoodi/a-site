@@ -1,0 +1,8 @@
+{
+  "id": "11",
+  "subject": "Redesign Events with CSS Modules and Lightbox (Task 12)",
+  "description": "Rewrite Events with CSS Modules and reuse the shared Lightbox component for image viewing.",
+  "status": "in_progress",
+  "blocks": [],
+  "blockedBy": []
+}

@@ -1,18 +1,26 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { ComponentsHeader } from "./ComponentsHeader";
+import { useEffect, useState } from "react";
+import { Section } from "./Section";
+import { Lightbox } from "./Lightbox";
+import styles from "./Events.module.css";
+
+interface EventImage {
+  url: string;
+  name: string;
+}
 
 export const Events = ({ title }: { title: string }) => {
-  const [images, setImages] = useState<{ url: string; name: string }[]>([]);
+  const [images, setImages] = useState<EventImage[]>([]);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   useEffect(() => {
     async function fetchImages() {
       try {
-        const imagesRes = await fetch(`/api/images/listEvents`, {
+        const imagesRes = await fetch("/api/images/listEvents", {
           cache: "no-store",
         });
-        const imagesData = await imagesRes.json();
+        const imagesData: EventImage[] = await imagesRes.json();
         setImages(imagesData);
       } catch (error) {
         console.error("Error fetching images:", error);
@@ -25,41 +33,57 @@ export const Events = ({ title }: { title: string }) => {
     return null;
   }
 
+  const lightboxImages = images.map((img) => ({
+    src: img.url,
+    alt: img.name,
+  }));
+
   return (
-    <div style={styles.parent}>
-      <ComponentsHeader title={title} />
-      <div style={styles.images}>
+    <Section title={title}>
+      <div className={styles.grid}>
         {images.map((image, index) => (
-          <img
-            src={image.url}
-            alt={image.name}
-            key={index}
-            style={styles.image}
-          />
+          <button
+            key={`${image.name}-${index}`}
+            className={styles.thumbnail}
+            onClick={() => setLightboxIndex(index)}
+            aria-label={`View ${image.name}`}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={image.url}
+              alt={image.name}
+              className={styles.image}
+              loading="lazy"
+            />
+          </button>
         ))}
       </div>
-    </div>
-  );
-};
 
-const styles: { [key: string]: React.CSSProperties } = {
-  parent: {
-    display: "flex",
-    flexDirection: "column",
-    paddingTop: "2%",
-  },
-  images: {
-    width: "95%",
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "left",
-    marginLeft: "5%",
-  },
-  image: {
-    width: `38%`,
-    margin: "4%",
-    border: "1px solid var(--border-color)",
-    borderRadius: "5px",
-    boxShadow: "var(--border-shadow)",
-  },
+      {lightboxIndex !== null && (
+        <Lightbox
+          images={lightboxImages}
+          currentIndex={lightboxIndex}
+          onClose={() => setLightboxIndex(null)}
+          onPrev={() =>
+            setLightboxIndex((prev) =>
+              prev !== null
+                ? prev === 0
+                  ? lightboxImages.length - 1
+                  : prev - 1
+                : null
+            )
+          }
+          onNext={() =>
+            setLightboxIndex((prev) =>
+              prev !== null
+                ? prev === lightboxImages.length - 1
+                  ? 0
+                  : prev + 1
+                : null
+            )
+          }
+        />
+      )}
+    </Section>
+  );
 };
