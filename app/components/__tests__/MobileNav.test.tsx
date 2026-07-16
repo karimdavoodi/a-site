@@ -17,7 +17,7 @@ describe("MobileNav", () => {
     expect(screen.getByText("Prayer")).toBeInTheDocument();
     expect(screen.getByText("Donate")).toBeInTheDocument();
     expect(screen.getByText("Events")).toBeInTheDocument();
-    expect(screen.getByText("More")).toBeInTheDocument();
+    expect(screen.getByText("Services")).toBeInTheDocument();
   });
 
   it("renders with navigation landmark", () => {

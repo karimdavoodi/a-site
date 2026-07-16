@@ -97,6 +97,32 @@
   color: var(--color-accent);
 }
 
+/* ── Countdown ──────────────────────────────────────────────────────────── */
+.countdown {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: var(--space-lg);
+  padding: var(--space-md) var(--space-lg);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-md);
+}
+
+.countdownLabel {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: 4px;
+}
+
+.countdownTimer {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-accent);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.05em;
+}
+
 /* ── Weekly link ────────────────────────────────────────────────────── */
 .weeklyLink {
   margin-top: var(--space-xl);

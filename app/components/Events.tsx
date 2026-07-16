@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { Section } from "./Section";
-import { Lightbox } from "./Lightbox";
 import styles from "./Events.module.css";
 
 interface EventImage {
@@ -12,7 +11,6 @@ interface EventImage {
 
 export const Events = ({ title }: { title: string }) => {
   const [images, setImages] = useState<EventImage[]>([]);
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   useEffect(() => {
     async function fetchImages() {
@@ -33,57 +31,19 @@ export const Events = ({ title }: { title: string }) => {
     return null;
   }
 
-  const lightboxImages = images.map((img) => ({
-    src: img.url,
-    alt: img.name,
-  }));
-
   return (
     <Section title={title}>
       <div className={styles.grid}>
         {images.map((image, index) => (
-          <button
+          <img
             key={`${image.name}-${index}`}
-            className={styles.thumbnail}
-            onClick={() => setLightboxIndex(index)}
-            aria-label={`View ${image.name}`}
-          >
-            { }
-            <img
-              src={image.url}
-              alt={image.name}
-              className={styles.image}
-              loading="lazy"
-            />
-          </button>
+            src={image.url}
+            alt={image.name}
+            className={styles.image}
+            loading="lazy"
+          />
         ))}
       </div>
-
-      {lightboxIndex !== null && (
-        <Lightbox
-          images={lightboxImages}
-          currentIndex={lightboxIndex}
-          onClose={() => setLightboxIndex(null)}
-          onPrev={() =>
-            setLightboxIndex((prev) =>
-              prev !== null
-                ? prev === 0
-                  ? lightboxImages.length - 1
-                  : prev - 1
-                : null
-            )
-          }
-          onNext={() =>
-            setLightboxIndex((prev) =>
-              prev !== null
-                ? prev === lightboxImages.length - 1
-                  ? 0
-                  : prev + 1
-                : null
-            )
-          }
-        />
-      )}
     </Section>
   );
 };

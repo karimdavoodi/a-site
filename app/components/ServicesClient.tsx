@@ -50,7 +50,7 @@ function ServiceCard({ item }: { item: ServiceItem }) {
 
 export function ServicesClient({ items }: { items: ServiceItem[] }) {
   return (
-    <Section title="Services">
+    <Section title="Services" id="services">
       <div className={styles.grid}>
         {items.map((item) => (
           <ServiceCard key={item.id} item={item} />

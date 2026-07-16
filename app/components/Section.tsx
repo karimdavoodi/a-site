@@ -6,11 +6,12 @@ interface SectionProps {
   subtitle?: string;
   children: ReactNode;
   className?: string;
+  id?: string;
 }
 
-export function Section({ title, subtitle, children, className }: SectionProps) {
+export function Section({ title, subtitle, children, className, id }: SectionProps) {
   return (
-    <section className={`${styles.section} ${className ?? ""}`}>
+    <section id={id} className={`${styles.section} ${className ?? ""}`}>
       <div className={styles.inner}>
         <h2 className={styles.title}>{title}</h2>
         {subtitle && <p className={styles.subtitle}>{subtitle}</p>}

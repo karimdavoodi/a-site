@@ -1,6 +1,5 @@
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
-import { OverlayActivityProvider } from "../components/OverlayActivityContext";
 import fs from "fs/promises";
 import path from "path";
 
@@ -89,25 +88,22 @@ export default async function WeeklyPrayerTimes() {
     yearlyData = JSON.parse(raw);
   } catch {
     return (
-      <OverlayActivityProvider>
-        <div style={styles.page}>
-          <Header />
-          <div style={styles.content}>
-            <p style={styles.error}>
-              Unable to load prayer times. Please try again later.
-            </p>
-          </div>
-          <Footer />
+      <div style={styles.page}>
+        <Header />
+        <div style={styles.content}>
+          <p style={styles.error}>
+            Unable to load prayer times. Please try again later.
+          </p>
         </div>
-      </OverlayActivityProvider>
+        <Footer />
+      </div>
     );
   }
 
   const week = buildWeek();
 
   return (
-    <OverlayActivityProvider>
-      <div style={styles.page}>
+    <div style={styles.page}>
         <Header />
         <div style={styles.content}>
           <h2 style={styles.title}>Weekly Prayer Times</h2>
@@ -155,7 +151,6 @@ export default async function WeeklyPrayerTimes() {
         </div>
         <Footer />
       </div>
-    </OverlayActivityProvider>
   );
 }
 

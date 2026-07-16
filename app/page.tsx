@@ -3,39 +3,39 @@ import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
 import { News } from "./components/News";
 import { Footer } from "./components/Footer";
-import { PrayerTimes } from "./components/PrayerTime";
+import { PrayerTimes, getPrayerTimesData } from "./components/PrayerTime";
 import { Events } from "./components/Events";
 import { AboutUs } from "./components/AboutUs";
 import { Services } from "./components/Services";
 import { Gallery } from "./components/Gallery";
-import { Programs } from "./components/Programs";
 import { MobileNav } from "./components/MobileNav";
-import { Flayer } from "./components/Flayer";
-import { OverlayActivityProvider } from "./components/OverlayActivityContext";
+import { NextPrayerCountdown } from "./components/PrayerTimeClient";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
 export default async function Home() {
+  const prayerData = await getPrayerTimesData();
+
   return (
     <>
-      <OverlayActivityProvider>
-        <Flayer />
-        <AlertBanner />
-        <Header />
-        <main id="main-content">
-          <Hero />
-          <PrayerTimes />
-          <AboutUs />
-          <Services />
-          <Gallery />
-          <Programs />
-          <Events title="Events" />
-          <News />
-        </main>
-        <Footer />
-        <MobileNav />
-      </OverlayActivityProvider>
+      <AlertBanner />
+      <Header />
+      <main id="main-content">
+        <Hero>
+          {prayerData && (
+            <NextPrayerCountdown prayers={prayerData.prayers} day={prayerData.day} />
+          )}
+        </Hero>
+        {prayerData && <PrayerTimes data={prayerData} />}
+        <AboutUs />
+        <Services />
+        <Gallery />
+        <Events title="Events" />
+        <News />
+      </main>
+      <Footer />
+      <MobileNav />
     </>
   );
 }

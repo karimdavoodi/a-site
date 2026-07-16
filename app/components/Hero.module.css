@@ -37,6 +37,12 @@
   line-height: 1.5;
 }
 
+.countdownSlot {
+  margin-top: var(--space-xl);
+  display: flex;
+  justify-content: center;
+}
+
 @media (min-width: 640px) {
   .hero {
     min-height: 55vh;

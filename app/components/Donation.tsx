@@ -1,20 +1,12 @@
 "use client";
 
-import { useEffect, useState, type CSSProperties } from "react";
-import { useOverlayActivity } from "./OverlayActivityContext";
+import { useState, type CSSProperties } from "react";
 
 type DonationPageProps = {
   onClose: () => void;
 };
 
 const DonationPage = ({ onClose }: DonationPageProps) => {
-  const { registerOverlay } = useOverlayActivity();
-
-  useEffect(() => {
-    const unregister = registerOverlay();
-    return unregister;
-  }, [registerOverlay]);
-
   return (
     <div style={styles.overlay}>
       <div style={styles.dialogAll}>

@@ -25,6 +25,10 @@
   padding: var(--space-xs) 0;
   transition: color 0.15s ease;
   -webkit-tap-highlight-color: transparent;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
 }
 
 .item:hover {
@@ -46,6 +50,58 @@
   font-size: 11px;
   font-weight: 500;
   line-height: 1;
+}
+
+/* ── Donation overlay ──────────────────────────────────────────────────── */
+.donationOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  background-color: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.donationDialog {
+  position: relative;
+  width: 90%;
+  height: 90%;
+  background-color: var(--color-surface);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.donationClose {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 24px;
+  line-height: 1;
+  z-index: 1;
+}
+
+.donationIframe {
+  width: 100%;
+  flex: 1;
+  border: none;
+}
+
+.donationInfo {
+  width: 100%;
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  padding: 2%;
 }
 
 /* Show only on mobile screens */
