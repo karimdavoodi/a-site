@@ -1,6 +1,6 @@
-import { Notice } from "./components/Notice";
+import { AlertBanner } from "./components/AlertBanner";
 import { Header } from "./components/Header";
-import { Title } from "./components/Title";
+import { Hero } from "./components/Hero";
 import { News } from "./components/News";
 import { Footer } from "./components/Footer";
 import { PrayerTimes } from "./components/PrayerTime";
@@ -9,6 +9,7 @@ import { AboutUs } from "./components/AboutUs";
 import { Services } from "./components/Services";
 import { Gallery } from "./components/Gallery";
 import { Programs } from "./components/Programs";
+import { MobileNav } from "./components/MobileNav";
 import { Flayer } from "./components/Flayer";
 import { OverlayActivityProvider } from "./components/OverlayActivityContext";
 
@@ -16,43 +17,25 @@ export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
 export default async function Home() {
-
   return (
-    <div style={styles.appContainer}>
-      <div style={styles.contentShield}>
-        <OverlayActivityProvider>
-          <Flayer />
-          <Notice />
-              <Header />
-              <Title />
-              <PrayerTimes />
-              <AboutUs />
-              <Services />
-              <Gallery />
-              <Programs />
-              <Events title="Events" />
-              <News />
-          <Footer />
-        </OverlayActivityProvider>
-      </div>
-    </div>
+    <>
+      <OverlayActivityProvider>
+        <Flayer />
+        <AlertBanner />
+        <Header />
+        <main>
+          <Hero />
+          <PrayerTimes />
+          <AboutUs />
+          <Services />
+          <Gallery />
+          <Programs />
+          <Events title="Events" />
+          <News />
+        </main>
+        <Footer />
+        <MobileNav />
+      </OverlayActivityProvider>
+    </>
   );
 }
-
-const styles: { [key: string]: React.CSSProperties } = {
-  appContainer: {
-    display: "flex",
-    flexDirection: "column",
-    height: "100vh",
-    width: "100%",
-  },
-  contentShield: {
-    width: "100%",
-    maxWidth: "1080px",
-    margin: "0 auto",
-    display: "flex",
-    flexDirection: "column",
-    background: "var(--backgroud-color)",
-    flexGrow: 1,
-  },
-};

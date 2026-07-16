@@ -171,7 +171,7 @@ const styles: Record<string, React.CSSProperties> = {
     width: "100%",
     maxWidth: 1080,
     margin: "0 auto",
-    backgroundColor: "var(--backgroud-color)",
+    backgroundColor: "var(--color-bg)",
   },
 
   content: {
@@ -186,7 +186,7 @@ const styles: Record<string, React.CSSProperties> = {
   title: {
     fontSize: "1.4rem",
     fontWeight: 700,
-    color: "var(--text-color)",
+    color: "var(--color-text)",
     margin: "0.5rem 0 0.3rem",
     textAlign: "center",
   },
@@ -198,8 +198,8 @@ const styles: Record<string, React.CSSProperties> = {
     flexDirection: "row",
     alignItems: "stretch",
     backgroundColor: "rgb(22, 85, 14)",
-    borderRadius: "var(--border-radius)",
-    boxShadow: "var(--border-shadow)",
+    borderRadius: "var(--radius-md)",
+    boxShadow: "var(--shadow-card)",
     overflow: "hidden",
   },
 
@@ -213,7 +213,7 @@ const styles: Record<string, React.CSSProperties> = {
     minWidth: 70,
     maxWidth: 70,
     padding: "0.2rem 0.2rem",
-    borderRight: "1px solid var(--gold)",
+    borderRight: "1px solid var(--color-accent)",
     flexShrink: 0,
     gap: 0,
   },
@@ -221,7 +221,7 @@ const styles: Record<string, React.CSSProperties> = {
   dayName: {
     fontSize: "1.3rem",
     fontWeight: 700,
-    color: "var(--text-color)",
+    color: "var(--color-text)",
     lineHeight: 1.15,
   },
 
@@ -291,14 +291,14 @@ const styles: Record<string, React.CSSProperties> = {
   sunriseTime: {
     fontSize: "1.15rem",
     fontWeight: 700,
-    color: "var(--text-color)",
+    color: "var(--color-text)",
     lineHeight: 1.15,
   },
 
   iqamah: {
     fontSize: "1.3rem",
     fontWeight: 700,
-    color: "var(--text-color)",
+    color: "var(--color-text)",
     lineHeight: 1.15,
   },
 
@@ -317,7 +317,7 @@ const styles: Record<string, React.CSSProperties> = {
   /* ---- error ---- */
 
   error: {
-    color: "var(--text-color)",
+    color: "var(--color-text)",
     fontSize: "0.9rem",
     marginTop: "2rem",
     textAlign: "center",

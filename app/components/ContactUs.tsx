@@ -91,8 +91,8 @@ export const ContactUs = () => {
             type="submit"
             style={{
               ...styles.submitButton,
-              backgroundColor: disabledSend ? "#ccc" : "var(--gold)",
-              color: disabledSend ? "#666" : "var(--backgroud-color)",
+              backgroundColor: disabledSend ? "#ccc" : "var(--color-accent)",
+              color: disabledSend ? "#666" : "var(--color-bg)",
               cursor: disabledSend ? "not-allowed" : "pointer",
             }}
             onClick={sendMail()}
@@ -141,8 +141,8 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   submitButton: {
     padding: "3px 15px",
-    backgroundColor: "var(--gold)",
-    color: "var(--backgroud-color)",
+    backgroundColor: "var(--color-accent)",
+    color: "var(--color-bg)",
     border: "none",
     borderRadius: "5px",
     cursor: "pointer",

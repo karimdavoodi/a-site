@@ -71,7 +71,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     maxHeight: "80%",
     maxWidth: "80%",
     borderRadius: "10px",
-    boxShadow: "var(--border-shadow)",
+    boxShadow: "var(--shadow-modal)",
   },
   dialog: {
     display: "flex",
@@ -83,7 +83,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   close: {
     background: "rgba(0,0,0,0.6)",
-    color: "var(--text-color)",
+    color: "var(--color-text)",
     border: "none",
     height: "3rem",
     cursor: "pointer",
