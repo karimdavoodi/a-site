@@ -6,14 +6,23 @@ export const runtime = "nodejs";
 export async function GET() {
   try {
     const images = await getImageListFromFolder("Events");
+    if (!images) {
+      return NextResponse.json(
+        { error: "Failed to load events — sync error" },
+        { status: 500 },
+      );
+    }
 
-    return new NextResponse(JSON.stringify(images), {
+    return NextResponse.json(images, {
       headers: {
-        "Content-Type": "application/json",
         "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
       },
     });
-  } catch {
-    return new NextResponse("Not found", { status: 404 });
+  } catch (err) {
+    console.error("Error in /api/images/listEvents:", err);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 },
+    );
   }
 }

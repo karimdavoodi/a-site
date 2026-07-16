@@ -1,12 +1,25 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { type CSSProperties } from "react";
 
 export const Donation = () => {
+  const router = useRouter();
+
   const scrollToDonation = () => {
-    const el = document.getElementById("donation");
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
+    if (window.location.pathname === "/") {
+      const el = document.getElementById("donation");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      router.push("/#donation");
+      setTimeout(() => {
+        const el = document.getElementById("donation");
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 300);
     }
   };
 

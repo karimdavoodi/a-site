@@ -8,6 +8,7 @@ export const syncGoogleDriveFolder = async (
   const folderId =
     gdriveFolderName === "Events" ? process.env.GDRIVE_EVENTS_FOLDER_ID : "";
   const key = process.env.GDRIVE_KEY;
+  console.log("GDRIVE_KEY is ",{key, folderId} );
 
   if (!folderId) {
     console.error("GDRIVE_EVENTS_FOLDER_ID is not set");
@@ -29,14 +30,19 @@ export const syncGoogleDriveFolder = async (
   try {
     const res = await fetch(url);
     const data = (await res.json()) as {
-      files: {
+      files?: {
         id: string;
         name: string;
         mimeType: string;
         size: number;
         modifiedTime: string;
       }[];
+      error?: { code: number; message: string };
     };
+    if (data.error) {
+      console.error("Google Drive API error:", data.error);
+      return null;
+    }
     if (!data.files) {
       console.error("No files found in Google Drive folder");
       return null;
