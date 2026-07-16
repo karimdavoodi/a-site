@@ -1,20 +1,15 @@
-"use client";
-
-import { useState } from "react";
-import Image from "next/image";
-import { Section } from "./Section";
+import { AboutUsClient } from "./AboutUsClient";
 import { renderMarkdown } from "../utils/markdown";
-import styles from "./AboutUs.module.css";
 
 interface AboutItem {
   id: string;
   title: string;
   image: string;
   summary: string;
-  descriptionMarkdown: string;
+  descriptionHtml: string;
 }
 
-const ABOUT_ITEMS: AboutItem[] = [
+const ABOUT_ITEMS_DATA = [
   {
     id: "1",
     title: "About Us",
@@ -69,51 +64,11 @@ We are committed to upholding the principles and teachings of Islam in all our a
   },
 ];
 
-function AboutCard({ item }: { item: AboutItem }) {
-  const [expanded, setExpanded] = useState(false);
-
-  return (
-    <div className={styles.card}>
-      <div className={styles.imageWrapper}>
-        <Image
-          src={item.image}
-          alt={item.title}
-          width={400}
-          height={300}
-          className={styles.image}
-        />
-      </div>
-      <div className={styles.textContent}>
-        <h3 className={styles.cardTitle}>{item.title}</h3>
-        <p className={styles.summary}>{item.summary}</p>
-        <button
-          className={styles.toggle}
-          onClick={() => setExpanded(!expanded)}
-          aria-expanded={expanded}
-        >
-          {expanded ? "Show Less ▲" : "Read More ▼"}
-        </button>
-        {expanded && (
-          <div
-            className={styles.description}
-            dangerouslySetInnerHTML={{
-              __html: renderMarkdown(item.descriptionMarkdown),
-            }}
-          />
-        )}
-      </div>
-    </div>
-  );
-}
+const ABOUT_ITEMS: AboutItem[] = ABOUT_ITEMS_DATA.map((item) => ({
+  ...item,
+  descriptionHtml: renderMarkdown(item.descriptionMarkdown),
+}));
 
 export function AboutUs() {
-  return (
-    <Section title="About Us">
-      <div className={styles.grid}>
-        {ABOUT_ITEMS.map((item) => (
-          <AboutCard key={item.id} item={item} />
-        ))}
-      </div>
-    </Section>
-  );
+  return <AboutUsClient items={ABOUT_ITEMS} />;
 }

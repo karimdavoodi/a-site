@@ -3,9 +3,12 @@ import { Header } from "./components/Header";
 import { Title } from "./components/Title";
 import { News } from "./components/News";
 import { Footer } from "./components/Footer";
-import { GridSection } from "./components/GridSection";
 import { PrayerTimes } from "./components/PrayerTime";
 import { Events } from "./components/Events";
+import { AboutUs } from "./components/AboutUs";
+import { Services } from "./components/Services";
+import { Gallery } from "./components/Gallery";
+import { Programs } from "./components/Programs";
 import { Flayer } from "./components/Flayer";
 import { OverlayActivityProvider } from "./components/OverlayActivityContext";
 
@@ -23,9 +26,10 @@ export default async function Home() {
               <Header />
               <Title />
               <PrayerTimes />
-              <GridSection gridTitle="About Us" folder="about_us" />
-              <GridSection gridTitle="Services" folder="services" />
-              <GridSection gridTitle="Gallery" folder="gallery" />
+              <AboutUs />
+              <Services />
+              <Gallery />
+              <Programs />
               <Events title="Events" />
               <News />
           <Footer />
