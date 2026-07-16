@@ -1,25 +1,32 @@
 import Link from "next/link";
 import infoData from "@public/data/info.json";
 import { getPayerTime } from "../utils/prayer";
+import { getNextPrayerIndex } from "../utils/nextPrayer";
+import styles from "./PrayerTime.module.css";
 
-type prob = {
+type PrayerCardProps = {
   name: string;
   athan: string;
   iqama: string;
+  isNext: boolean;
 };
 
-const PrayerTime = ({ name, athan, iqama }: prob) => {
+const PRAYER_NAMES = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"] as const;
+
+const PrayerCard = ({ name, athan, iqama, isNext }: PrayerCardProps) => {
   return (
-    <div style={styles.prayerTimeContainer}>
-      <div style={styles.name}> {name}</div>
-      <div style={styles.prayerTime}>
-        <div style={styles.prayerTimeBox}>
-          <span style={styles.timeLabel}>Athan:</span>
-          <span style={styles.azan}>{athan}</span>
+    <div className={`${styles.card} ${isNext ? styles.cardNext : ""}`}>
+      <div className={styles.name}>{name}</div>
+      <div className={styles.times}>
+        <div className={styles.timeBlock}>
+          <span className={styles.timeLabel}>Athan</span>
+          <span className={styles.timeValue}>{athan}</span>
         </div>
-        <div style={styles.prayerTimeBox}>
-          <span style={styles.timeLabel}>Iqame:</span>
-          <span style={styles.iqama}>{iqama}</span>
+        <div className={styles.timeBlock}>
+          <span className={styles.timeLabel}>Iqama</span>
+          <span className={`${styles.timeValue} ${styles.iqamaValue}`}>
+            {iqama}
+          </span>
         </div>
       </div>
     </div>
@@ -32,130 +39,45 @@ export const PrayerTimes = async () => {
     return null;
   }
 
+  const prayers = PRAYER_NAMES.map((name) => {
+    const key = name.toLowerCase() as keyof typeof prayerTimes.azan;
+    return {
+      name,
+      athan: prayerTimes.azan?.[key] ?? "",
+      iqama: prayerTimes.iqama?.[key] ?? "",
+    };
+  });
+
+  const nextIndex = getNextPrayerIndex(
+    prayers.map((p) => p.athan),
+    prayerTimes.day
+  );
+
   return (
-    <div style={styles.prayerTimesContainer}>
-      <div style={styles.title}>Prayer Times</div>
-      <div style={styles.juma}>
+    <section className={styles.container}>
+      <h2 className={styles.title}>Prayer Times</h2>
+      <p className={styles.juma}>
         Juma Prayer{" "}
-        <span style={styles.gold}>{infoData.prayerTime.jumaPrayerTime}</span>
+        <span className={styles.jumaTime}>
+          {infoData.prayerTime.jumaPrayerTime}
+        </span>
+      </p>
+      <div className={styles.daily}>
+        {prayers.map((prayer, i) => (
+          <PrayerCard
+            key={prayer.name}
+            name={prayer.name}
+            athan={prayer.athan}
+            iqama={prayer.iqama}
+            isNext={i === nextIndex}
+          />
+        ))}
       </div>
-      <div style={styles.daily}>
-        <PrayerTime
-          name={"Fajr"}
-          athan={prayerTimes.azan?.fajr || ""}
-          iqama={prayerTimes.iqama?.fajr || ""}
-        />
-        <PrayerTime
-          name={"Dhuhr"}
-          athan={prayerTimes.azan?.dhuhr || ""}
-          iqama={prayerTimes.iqama?.dhuhr || ""}
-        />
-        <PrayerTime
-          name={"Asr"}
-          athan={prayerTimes.azan?.asr || ""}
-          iqama={prayerTimes.iqama?.asr || ""}
-        />
-        <PrayerTime
-          name={"Maghrib"}
-          athan={prayerTimes.azan?.maghrib || ""}
-          iqama={prayerTimes.iqama?.maghrib || ""}
-        />
-        <PrayerTime
-          name={"Isha"}
-          athan={prayerTimes.azan?.isha || ""}
-          iqama={prayerTimes.iqama?.isha || ""}
-        />
-      </div>
-      <Link href="/weekly_prayer_times" style={styles.weeklyLink}>
+      <Link href="/weekly_prayer_times" className={styles.weeklyLink}>
         View Weekly Prayer Times →
       </Link>
-    </div>
+    </section>
   );
 };
 
-const styles: { [key: string]: React.CSSProperties } = {
-  prayerTimesContainer: {
-    marginTop: "2rem",
-    padding: "0.5rem",
-    width: "85%",
-    boxShadow: "var(--border-shadow)",
-    borderRadius: "var(--border-radius)",
-    backgroundColor: "var(--box-color)",
-    margin: "0.3rem",
-    fontSize: "1.2rem",
-    color: "var(--text-color)",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    alignSelf: "center",
-  },
-  title: {
-    fontSize: "1.3rem",
-    fontWeight: "bold",
-  },
-  juma: {
-    fontSize: "1rem",
-    marginTop: "5px",
-    fontWeight: "bold",
-  },
-  daily: {
-    width: "100%",
-    maxWidth: "100%",
-    display: "flex",
-    flexDirection: "row",
-    alignSelf: "center",
-    justifyContent: "space-evenly",
-    marginTop: "1rem",
-    gap: "0.4rem",
-  },
-  prayerTimeContainer: {
-    display: "flex",
-    flexDirection: "column",
-    fontSize: "0.8rem",
-    alignItems: "center",
-    fontWeight: "bold",
-    width: "15.2%",
-    maxWidth: "15.2%",
-    minWidth: "15.2%",
-    padding: "5px",
-    textAlign: "center",
-  },
-  name: {
-    fontSize: "1rem",
-    marginBottom: "5px",
-  },
-  prayerTime: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    width: "80%",
-    maxWidth: "80%",
-  },
-  prayerTimeBox: {
-    display: "flex",
-    flexFlow: "wrap",
-  },
-  timeLabel: {
-    fontSize: "0.6rem",
-    marginRight: "4px",
-    alignSelf: "anchor-center",
-  },
-  azan: {
-    fontSize: "0.8rem",
-  },
-  iqama: {
-    color: "var(--gold)",
-    fontSize: "0.8rem",
-  },
-  gold: {
-    color: "var(--gold)",
-  },
-  weeklyLink: {
-    marginTop: "0.6rem",
-    fontSize: "0.75rem",
-    color: "var(--gold)",
-    textDecoration: "none",
-    borderBottom: "1px solid transparent",
-  },
-};
 export default PrayerTimes;
