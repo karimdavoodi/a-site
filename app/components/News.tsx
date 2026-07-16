@@ -1,37 +1,24 @@
 import { getNews } from "../utils/news";
-import { ComponentsHeader } from "./ComponentsHeader";
+import styles from "./News.module.css";
 
 export const News = async () => {
   const newsItems = await getNews();
 
+  if (!newsItems || newsItems.length === 0) {
+    return null;
+  }
+
   return (
-    <div style={styles.newsContainer}>
-      <ComponentsHeader title={"News"} />
-      <div style={styles.scrollBox}>
+    <section className={styles.container}>
+      <h2 className={styles.title}>News</h2>
+      <div className={styles.list}>
         {newsItems.map((item, index) => (
-          <div key={index} style={styles.newsItem}>
-            {item}
-          </div>
+          <article key={index} className={styles.item}>
+            {index === 0 && <span className={styles.badge}>New</span>}
+            <p className={styles.text}>{item}</p>
+          </article>
         ))}
       </div>
-    </div>
+    </section>
   );
-};
-
-const styles: { [key: string]: React.CSSProperties } = {
-  newsContainer: {
-    display: "flex",
-    flexDirection: "column",
-  },
-
-  scrollBox: {
-    width: "80%",
-    overflowY: "auto",
-    marginLeft: "7%",
-  },
-  newsItem: {
-    paddingTop: "5px",
-    fontSize: "0.9rem",
-    borderBottom: "1px solid #048d42ff",
-  },
 };

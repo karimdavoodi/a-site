@@ -1,0 +1,8 @@
+{
+  "id": "12",
+  "subject": "Redesign News Feed (Task 13)",
+  "description": "Rewrite News feed with CSS Modules, styled cards, better typography.",
+  "status": "in_progress",
+  "blocks": [],
+  "blockedBy": []
+}
