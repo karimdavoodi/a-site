@@ -1,4 +1,6 @@
-import type { CSSProperties } from "react";
+"use client";
+
+import { useState, useEffect, type CSSProperties } from "react";
 
 const styles: Record<string, CSSProperties> = {
   container: {
@@ -25,11 +27,6 @@ const styles: Record<string, CSSProperties> = {
     display: "flex",
     flexDirection: "column",
   },
-  iframe: {
-    width: "100%",
-    height: "1100px",
-    border: "none",
-  },
   info: {
     padding: "var(--space-md) var(--space-lg)",
     fontSize: "0.85rem",
@@ -38,7 +35,23 @@ const styles: Record<string, CSSProperties> = {
   },
 };
 
+const MOBILE_IFRAME_HEIGHT = 1100;
+const DESKTOP_IFRAME_HEIGHT = 1000;
+
 export const DonationCard = () => {
+  const [iframeHeight, setIframeHeight] = useState(MOBILE_IFRAME_HEIGHT);
+
+  useEffect(() => {
+    const updateHeight = () => {
+      setIframeHeight(
+        window.innerWidth >= 768 ? DESKTOP_IFRAME_HEIGHT : MOBILE_IFRAME_HEIGHT
+      );
+    };
+    updateHeight();
+    window.addEventListener("resize", updateHeight);
+    return () => window.removeEventListener("resize", updateHeight);
+  }, []);
+
   return (
     <section id="donation" style={styles.container}>
       <h2 style={styles.title}>Support Us</h2>
@@ -46,7 +59,7 @@ export const DonationCard = () => {
         <iframe
           title="Donation form"
           src="https://donorchoice.ca/embedded/alsalaam/6031"
-          style={styles.iframe}
+          style={{ width: "100%", height: iframeHeight, border: "none" }}
         />
         <div style={styles.info}>
           <strong>Other ways to donate:</strong>
