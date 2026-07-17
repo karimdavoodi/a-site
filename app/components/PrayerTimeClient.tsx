@@ -66,7 +66,7 @@ export function NextPrayerCountdown({ prayers, day }: NextPrayerCountdownProps) 
   if (nextIndex < 0) {
     return (
       <div className={styles.countdown}>
-        <span className={styles.countdownLabel}>All prayers for today have passed</span>
+        <span className={styles.countdownLabel}></span>
       </div>
     );
   }
