@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import Image from "next/image";
 import { Section } from "./Section";
 import { Lightbox } from "./Lightbox";
@@ -18,7 +18,8 @@ const GALLERY_IMAGES: GalleryImage[] = Array.from({ length: 13 }, (_, i) => ({
 
 export function Gallery() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-  const [scrollLeft, setScrollLeft] = useState(0);
+  const [{ left: canScrollLeft, right: canScrollRight }, setCanScroll] =
+    useState({ left: false, right: true });
   const trackRef = useRef<HTMLDivElement>(null);
 
   const scrollBy = useCallback((direction: "prev" | "next") => {
@@ -33,16 +34,18 @@ export function Gallery() {
   }, []);
 
   const handleScroll = useCallback(() => {
-    if (trackRef.current) {
-      setScrollLeft(trackRef.current.scrollLeft);
-    }
+    const track = trackRef.current;
+    if (!track) return;
+    setCanScroll({
+      left: track.scrollLeft > 0,
+      right: track.scrollLeft < track.scrollWidth - track.clientWidth - 1,
+    });
   }, []);
 
-  const canScrollLeft = scrollLeft > 0;
-  const canScrollRight =
-    trackRef.current
-      ? scrollLeft < trackRef.current.scrollWidth - trackRef.current.clientWidth - 1
-      : true;
+  // Initialize arrow visibility once the track is mounted
+  useEffect(() => {
+    handleScroll();
+  }, [handleScroll]);
 
   return (
     <Section title="Gallery">

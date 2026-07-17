@@ -11,7 +11,8 @@ interface EventImage {
 
 export const Events = ({ title }: { title: string }) => {
   const [images, setImages] = useState<EventImage[]>([]);
-  const [scrollLeft, setScrollLeft] = useState(0);
+  const [{ left: canScrollLeft, right: canScrollRight }, setCanScroll] =
+    useState({ left: false, right: true });
   const trackRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -41,19 +42,22 @@ export const Events = ({ title }: { title: string }) => {
   }, []);
 
   const handleScroll = useCallback(() => {
-    if (trackRef.current) {
-      setScrollLeft(trackRef.current.scrollLeft);
-    }
+    const track = trackRef.current;
+    if (!track) return;
+    setCanScroll({
+      left: track.scrollLeft > 0,
+      right: track.scrollLeft < track.scrollWidth - track.clientWidth - 1,
+    });
   }, []);
+
+  // Initialize arrow visibility once images render into the track
+  useEffect(() => {
+    handleScroll();
+  }, [images, handleScroll]);
 
   if (!images || !images.length) {
     return null;
   }
-
-  const canScrollLeft = scrollLeft > 0;
-  const canScrollRight = trackRef.current
-    ? scrollLeft < trackRef.current.scrollWidth - trackRef.current.clientWidth - 1
-    : true;
 
   return (
     <Section title={title} id="events">

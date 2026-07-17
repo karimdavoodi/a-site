@@ -10,6 +10,11 @@ jest.mock("next/link", () => ({
   ),
 }));
 
+// Mock next/navigation router (not mounted in jsdom tests)
+jest.mock("next/navigation", () => ({
+  useRouter: () => ({ push: jest.fn() }),
+}));
+
 describe("MobileNav", () => {
   it("renders all 5 navigation items", () => {
     render(<MobileNav />);

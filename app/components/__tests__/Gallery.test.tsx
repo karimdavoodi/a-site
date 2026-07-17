@@ -27,14 +27,14 @@ describe("Gallery", () => {
     expect(screen.getByRole("heading", { name: "Gallery" })).toBeInTheDocument();
   });
 
-  it("renders all 14 gallery images", () => {
+  it("renders all 13 gallery images", () => {
     render(<Gallery />);
     const buttons = screen.getAllByRole("button");
-    // 14 thumbnail buttons total (Gallery images only, not Lightbox nav)
+    // 13 thumbnail buttons total (Gallery images only, not Lightbox nav)
     const thumbnails = buttons.filter((b) =>
       b.getAttribute("aria-label")?.startsWith("View Gallery")
     );
-    expect(thumbnails).toHaveLength(14);
+    expect(thumbnails).toHaveLength(13);
   });
 
   it("opens lightbox when an image is clicked", () => {
