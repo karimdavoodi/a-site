@@ -24,8 +24,8 @@ export function MobileNav() {
     { label: "Home", href: "/", icon: "🏠" },
     { label: "Prayer", href: "/#prayer", icon: "🕌" },
     { label: "Donate", href: "/#donation", icon: "💛" },
-    { label: "Events", href: "/#events", icon: "📅" },
     { label: "Services", href: "/#services", icon: "🤝" },
+    { label: "Events", href: "/#events", icon: "📅" },
   ];
 
   const handleClick = (href: string, e: React.MouseEvent) => {

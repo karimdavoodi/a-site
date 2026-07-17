@@ -12,8 +12,8 @@ const navItems: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "Prayer", href: "/#prayer" },
   { label: "Donate", href: "/#donation" },
-  { label: "Events", href: "/#events" },
   { label: "Services", href: "/#services" },
+  { label: "Events", href: "/#events" },
 ];
 
 function scrollToHash(hash: string) {

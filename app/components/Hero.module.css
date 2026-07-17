@@ -6,7 +6,7 @@
   min-height: 22vh;
   background-image: url("/assets/title_background.jpg");
   background-size: cover;
-  background-position: center;
+  background-position: top center;
   overflow: hidden;
 }
 
