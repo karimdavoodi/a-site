@@ -1,0 +1,100 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background-color: var(--color-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+}
+
+/* ── Close button ────────────────────────────────────────────────────── */
+.close {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.5);
+  color: var(--color-text);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  font-size: 28px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: background-color 0.2s ease;
+}
+
+.close:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+/* ── Nav buttons ─────────────────────────────────────────────────────── */
+.nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.5);
+  color: var(--color-text);
+  border: none;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  font-size: 32px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: background-color 0.2s ease;
+}
+
+.nav:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.navPrev {
+  left: var(--space-md);
+}
+
+.navNext {
+  right: var(--space-md);
+}
+
+/* ── Content ─────────────────────────────────────────────────────────── */
+.content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image {
+  max-width: 100%;
+  max-height: 80vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+}
+
+.counter {
+  margin-top: var(--space-sm);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* ── Focus styles ────────────────────────────────────────────────────── */
+.close:focus-visible,
+.nav:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}

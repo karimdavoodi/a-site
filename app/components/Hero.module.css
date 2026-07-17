@@ -1,0 +1,56 @@
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 22vh;
+  background-image: url("/assets/title_background.jpg");
+  background-size: cover;
+  background-position: top center;
+  overflow: hidden;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), var(--color-bg));
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: var(--space-lg);
+}
+
+.title {
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 var(--space-sm);
+}
+
+.slogan {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.countdownSlot {
+  margin-top: var(--space-md);
+  display: flex;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .hero {
+    min-height: 26vh;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    min-height: 30vh;
+  }
+}

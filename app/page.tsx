@@ -1,54 +1,43 @@
-import { Notice } from "./components/Notice";
+import { AlertBanner } from "./components/AlertBanner";
 import { Header } from "./components/Header";
-import { Title } from "./components/Title";
+import { Hero } from "./components/Hero";
 import { News } from "./components/News";
 import { Footer } from "./components/Footer";
-import { GridSection } from "./components/GridSection";
-import { PrayerTimes } from "./components/PrayerTime";
+import { PrayerTimes, getPrayerTimesData } from "./components/PrayerTime";
 import { Events } from "./components/Events";
-import { Flayer } from "./components/Flayer";
-import { OverlayActivityProvider } from "./components/OverlayActivityContext";
+import { AboutUs } from "./components/AboutUs";
+import { Services } from "./components/Services";
+import { Gallery } from "./components/Gallery";
+import { MobileNav } from "./components/MobileNav";
+import { NextPrayerCountdown } from "./components/PrayerTimeClient";
+import { DonationCard } from "./components/DonationCard";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
 export default async function Home() {
+  const prayerData = await getPrayerTimesData();
 
   return (
-    <div style={styles.appContainer}>
-      <div style={styles.contentShield}>
-        <OverlayActivityProvider>
-          <Flayer />
-          <Notice />
-              <Header />
-              <Title />
-              <PrayerTimes />
-              <GridSection gridTitle="About Us" folder="about_us" />
-              <GridSection gridTitle="Services" folder="services" />
-              <GridSection gridTitle="Gallery" folder="gallery" />
-              <Events title="Events" />
-              <News />
-          <Footer />
-        </OverlayActivityProvider>
-      </div>
-    </div>
+    <>
+      <AlertBanner />
+      <Header />
+      <main id="main-content">
+        <Hero>
+          {prayerData && (
+            <NextPrayerCountdown prayers={prayerData.prayers} day={prayerData.day} />
+          )}
+        </Hero>
+        {prayerData && <PrayerTimes data={prayerData} />}
+        <DonationCard />
+        <AboutUs />
+        <Services />
+        <Gallery />
+        <Events title="Events" />
+        <News />
+      </main>
+      <Footer />
+      <MobileNav />
+    </>
   );
 }
-
-const styles: { [key: string]: React.CSSProperties } = {
-  appContainer: {
-    display: "flex",
-    flexDirection: "column",
-    height: "100vh",
-    width: "100%",
-  },
-  contentShield: {
-    width: "100%",
-    maxWidth: "1080px",
-    margin: "0 auto",
-    display: "flex",
-    flexDirection: "column",
-    background: "var(--backgroud-color)",
-    flexGrow: 1,
-  },
-};

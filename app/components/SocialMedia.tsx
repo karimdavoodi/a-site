@@ -1,7 +1,7 @@
 import Image from "next/image";
 import infoData from "@public/data/info.json";
 
-const SOCIAL_ICON_SIZE = 18;
+const SOCIAL_ICON_SIZE = 24;
 
 export const SocialMedia = () => {
   return (
@@ -58,11 +58,10 @@ export const SocialMedia = () => {
 const styles: { [key: string]: React.CSSProperties } = {
   socialIcons: {
     display: "flex",
-    marginLeft: "5px",
+    gap: "6px",
     alignItems: "center",
   },
   icon: {
-    marginLeft: "5px",
     borderRadius: "2px",
   },
 };

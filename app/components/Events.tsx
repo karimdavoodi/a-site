@@ -1,18 +1,27 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { ComponentsHeader } from "./ComponentsHeader";
+import { useEffect, useState, useRef, useCallback } from "react";
+import { Section } from "./Section";
+import styles from "./Events.module.css";
+
+interface EventImage {
+  url: string;
+  name: string;
+}
 
 export const Events = ({ title }: { title: string }) => {
-  const [images, setImages] = useState<{ url: string; name: string }[]>([]);
+  const [images, setImages] = useState<EventImage[]>([]);
+  const [{ left: canScrollLeft, right: canScrollRight }, setCanScroll] =
+    useState({ left: false, right: true });
+  const trackRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     async function fetchImages() {
       try {
-        const imagesRes = await fetch(`/api/images/listEvents`, {
+        const imagesRes = await fetch("/api/images/listEvents", {
           cache: "no-store",
         });
-        const imagesData = await imagesRes.json();
+        const imagesData: EventImage[] = await imagesRes.json();
         setImages(imagesData);
       } catch (error) {
         console.error("Error fetching images:", error);
@@ -21,45 +30,78 @@ export const Events = ({ title }: { title: string }) => {
     fetchImages();
   }, []);
 
+  const scrollBy = useCallback((direction: "prev" | "next") => {
+    const track = trackRef.current;
+    if (!track) return;
+    const scrollAmount = track.clientWidth * 0.8;
+    const target =
+      direction === "next"
+        ? track.scrollLeft + scrollAmount
+        : track.scrollLeft - scrollAmount;
+    track.scrollTo({ left: target, behavior: "smooth" });
+  }, []);
+
+  const handleScroll = useCallback(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    setCanScroll({
+      left: track.scrollLeft > 0,
+      right: track.scrollLeft < track.scrollWidth - track.clientWidth - 1,
+    });
+  }, []);
+
+  // Initialize arrow visibility once images render into the track
+  useEffect(() => {
+    handleScroll();
+  }, [images, handleScroll]);
+
   if (!images || !images.length) {
     return null;
   }
 
   return (
-    <div style={styles.parent}>
-      <ComponentsHeader title={title} />
-      <div style={styles.images}>
-        {images.map((image, index) => (
-          <img
-            src={image.url}
-            alt={image.name}
-            key={index}
-            style={styles.image}
-          />
-        ))}
-      </div>
-    </div>
-  );
-};
+    <Section title={title} id="events">
+      <div className={styles.slideshow}>
+        {canScrollLeft && (
+          <button
+            className={`${styles.arrow} ${styles.arrowLeft}`}
+            onClick={() => scrollBy("prev")}
+            aria-label="Previous events"
+          >
+            ‹
+          </button>
+        )}
 
-const styles: { [key: string]: React.CSSProperties } = {
-  parent: {
-    display: "flex",
-    flexDirection: "column",
-    paddingTop: "2%",
-  },
-  images: {
-    width: "95%",
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "left",
-    marginLeft: "5%",
-  },
-  image: {
-    width: `38%`,
-    margin: "4%",
-    border: "1px solid var(--border-color)",
-    borderRadius: "5px",
-    boxShadow: "var(--border-shadow)",
-  },
+        <div
+          className={styles.track}
+          ref={trackRef}
+          onScroll={handleScroll}
+        >
+          {images.map((image, index) => (
+            <div
+              key={`${image.name}-${index}`}
+              className={styles.slide}
+            >
+              <img
+                src={image.url}
+                alt={image.name}
+                className={styles.image}
+                loading="lazy"
+              />
+            </div>
+          ))}
+        </div>
+
+        {canScrollRight && (
+          <button
+            className={`${styles.arrow} ${styles.arrowRight}`}
+            onClick={() => scrollBy("next")}
+            aria-label="Next events"
+          >
+            ›
+          </button>
+        )}
+      </div>
+    </Section>
+  );
 };

@@ -8,10 +8,10 @@
     "start": "next start",
     "lint": "eslint --fix",
     "format": "prettier --write .",
-    "gen_prayer_times": "ts-node app/utils/get_yearly_prayer_time.ts"
+    "gen_prayer_times": "ts-node app/utils/get_yearly_prayer_time.ts",
+    "test": "jest --passWithNoTests"
   },
   "dependencies": {
-    "csv-writer": "^1.6.0",
     "markdown-it": "^14.1.0",
     "markdown-it-attrs": "^4.3.1",
     "markdown-it-imsize": "^2.0.1",
@@ -22,15 +22,21 @@
     "resend": "^6.7.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.1",
     "@testing-library/user-event": "^14.6.1",
+    "@types/jest": "^30.0.0",
     "@types/markdown-it": "^14.1.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.1.1",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^30.4.2",
+    "jest-environment-jsdom": "^30.4.1",
     "prettier": "^3.7.4",
+    "ts-jest": "^29.4.11",
     "ts-node": "^10.9.2",
     "typescript": "^5"
   }

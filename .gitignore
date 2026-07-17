@@ -1,5 +1,5 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
+/docs
 # dependencies
 /node_modules
 /.pnp
@@ -18,6 +18,15 @@
 # misc
 .DS_Store
 *.pem
+
+# stray Claude Code session artifacts (from a misconfigured CLAUDE_CONFIG_DIR)
+/.claude.json
+/.last-cleanup
+/backups/
+/projects/
+/tasks/
+/telemetry/
+/session-env/
 
 # debug
 npm-debug.log*
