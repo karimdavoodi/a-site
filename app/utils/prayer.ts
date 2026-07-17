@@ -1,13 +1,16 @@
 import { PrayerTimes } from "../types";
 import path from "path";
 import fs from "fs/promises";
+import { getZonedNow } from "./timezone";
 
 export const getPayerTime = async () => {
   const prayerTimes: PrayerTimes = {
     day: -1,
   };
 
-  const currentYear = new Date().getFullYear().toString();
+  // Use the mosque's timezone, not the server's (deployed servers run in UTC)
+  const now = getZonedNow();
+  const currentYear = now.year.toString();
   const dir = path.join(
     process.cwd(),
     "public",
@@ -27,15 +30,10 @@ export const getPayerTime = async () => {
     return prayerTimes;
   }
 
-  const today = new Date();
-  const monthName = today
-    .toLocaleString("en-US", { month: "long" })
-    .toLowerCase();
-  const day = today.getDate().toString();
-  const key = `${currentYear}-${monthName}-${day}`;
+  const key = `${currentYear}-${now.monthName}-${now.day}`;
 
   if (yearlyData[key]) {
-    prayerTimes.day = today.getDate();
+    prayerTimes.day = now.day;
     prayerTimes.azan = {
       fajr: yearlyData[key].Fajr.azan,
       dhuhr: yearlyData[key].Dhuhr.azan,

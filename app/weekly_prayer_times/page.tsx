@@ -3,6 +3,7 @@ import { Footer } from "../components/Footer";
 import { MobileNav } from "../components/MobileNav";
 import fs from "fs/promises";
 import path from "path";
+import { getZonedNow, MONTH_NAMES } from "../utils/timezone";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -46,7 +47,10 @@ function buildWeek(): {
   monthLabel: string;
   yearLabel: string;
 }[] {
-  const today = new Date();
+  // Anchor "today" to the mosque's timezone (deployed servers run in UTC),
+  // then do day arithmetic in UTC so DST can't shift a date.
+  const now = getZonedNow();
+  const anchor = new Date(Date.UTC(now.year, now.monthIndex, now.day));
   const days: {
     key: string;
     dayName: string;
@@ -55,16 +59,16 @@ function buildWeek(): {
   }[] = [];
 
   for (let i = 0; i < 7; i++) {
-    const d = new Date(today);
-    d.setDate(today.getDate() + i);
+    const d = new Date(anchor);
+    d.setUTCDate(anchor.getUTCDate() + i);
 
-    const year = d.getFullYear().toString();
-    const month = d.toLocaleString("en-US", { month: "long" }).toLowerCase();
-    const day = d.getDate().toString();
+    const year = d.getUTCFullYear().toString();
+    const month = MONTH_NAMES[d.getUTCMonth()];
+    const day = d.getUTCDate().toString();
     days.push({
       key: `${year}-${month}-${day}`,
-      dayName: DAY_ABBR[d.getDay()],
-      monthLabel: `${MONTH_ABBR[d.getMonth()]} ${ordinal(d.getDate())}`,
+      dayName: DAY_ABBR[d.getUTCDay()],
+      monthLabel: `${MONTH_ABBR[d.getUTCMonth()]} ${ordinal(d.getUTCDate())}`,
       yearLabel: year,
     });
   }
@@ -75,7 +79,7 @@ function buildWeek(): {
 // ---- page ----
 
 export default async function WeeklyPrayerTimes() {
-  const currentYear = new Date().getFullYear().toString();
+  const currentYear = getZonedNow().year.toString();
   const filePath = path.join(
     process.cwd(),
     "public",

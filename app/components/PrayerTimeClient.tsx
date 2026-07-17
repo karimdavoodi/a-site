@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import infoData from "@public/data/info.json";
 import { getNextPrayerIndex, parsePrayerTimeToMinutes } from "../utils/nextPrayer";
+import { getZonedNow } from "../utils/timezone";
 import styles from "./PrayerTime.module.css";
 
 type PrayerData = {
@@ -51,10 +52,11 @@ type NextPrayerCountdownProps = {
 };
 
 export function NextPrayerCountdown({ prayers, day }: NextPrayerCountdownProps) {
-  const [now, setNow] = useState(new Date());
+  // Tick on the mosque's clock so the countdown is correct for every visitor
+  const [now, setNow] = useState(() => getZonedNow());
 
   useEffect(() => {
-    const timer = setInterval(() => setNow(new Date()), 1000);
+    const timer = setInterval(() => setNow(getZonedNow()), 1000);
     return () => clearInterval(timer);
   }, []);
 
@@ -73,8 +75,8 @@ export function NextPrayerCountdown({ prayers, day }: NextPrayerCountdownProps) 
 
   const nextPrayer = prayers[nextIndex];
   const nextIqamaMinutes = parsePrayerTimeToMinutes(nextPrayer.iqama, nextPrayer.name);
-  const nowMinutes = now.getHours() * 60 + now.getMinutes();
-  const nowSeconds = now.getSeconds();
+  const nowMinutes = now.hours * 60 + now.minutes;
+  const nowSeconds = now.seconds;
   const remainingSeconds = (nextIqamaMinutes - nowMinutes) * 60 - nowSeconds;
 
   return (

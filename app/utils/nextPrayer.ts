@@ -1,3 +1,5 @@
+import { getZonedNow } from "./timezone";
+
 const PRAYER_NAMES = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"] as const;
 
 /**
@@ -93,14 +95,16 @@ export function getNextPrayerIndex(
   athanTimes: string[],
   day: number,
 ): number {
-  const today = new Date().getDate();
+  // Compare in the mosque's timezone so a UTC server and visitors in other
+  // timezones agree on what "today" and "now" mean.
+  const now = getZonedNow();
 
   // Only compute next prayer if the loaded data is for today
-  if (day !== today) {
+  if (day !== now.day) {
     return -1;
   }
 
-  const nowMinutes = new Date().getHours() * 60 + new Date().getMinutes();
+  const nowMinutes = now.hours * 60 + now.minutes;
 
   for (let i = 0; i < athanTimes.length; i++) {
     const minutes = parsePrayerTimeToMinutes(athanTimes[i], PRAYER_NAMES[i]);

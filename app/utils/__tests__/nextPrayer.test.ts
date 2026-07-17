@@ -3,6 +3,7 @@ import {
   parseTimeToMinutes,
   getNextPrayerIndex,
 } from "../nextPrayer";
+import { getZonedNow } from "../timezone";
 
 describe("parsePrayerTimeToMinutes", () => {
   describe("12-hour format with AM/PM", () => {
@@ -144,12 +145,12 @@ describe("getNextPrayerIndex", () => {
   });
 
   it("returns the correct index for a day matching today", () => {
-    const today = new Date().getDate();
-    const nowHour = new Date().getHours();
-    const nowMinute = new Date().getMinutes();
-    const nowTotal = nowHour * 60 + nowMinute;
+    // getNextPrayerIndex works on the mosque's timezone, so compare
+    // against the same clock rather than the test machine's local time
+    const now = getZonedNow();
+    const nowTotal = now.hours * 60 + now.minutes;
 
-    const result = getNextPrayerIndex(sampleAthanTimes, today);
+    const result = getNextPrayerIndex(sampleAthanTimes, now.day);
 
     if (result === -1) {
       // All prayers have passed for today — verify this is actually the case
@@ -166,7 +167,7 @@ describe("getNextPrayerIndex", () => {
   });
 
   it("returns -1 when all prayers have passed", () => {
-    const today = new Date().getDate();
+    const today = getZonedNow().day;
     // All prayers are at very early times — they should all be in the past
     const earlyTimes = ["1:00 AM", "2:00 AM", "3:00 AM", "4:00 AM", "5:00 AM"];
     const result = getNextPrayerIndex(earlyTimes, today);
