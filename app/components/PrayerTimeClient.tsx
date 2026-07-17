@@ -103,7 +103,7 @@ export function PrayerTimesClient({ prayers, day }: PrayerTimesClientProps) {
   );
 
   return (
-    <section className={styles.container}>
+    <section id="prayer" className={styles.container}>
       <h2 className={styles.title}>Prayer Times</h2>
       <p className={styles.juma}>
         Juma Prayer{" "}

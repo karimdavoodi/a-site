@@ -2,6 +2,7 @@ import Image from "next/image";
 import infoData from "@public/data/info.json";
 import { SocialMedia } from "./SocialMedia";
 import { Donation } from "./Donation";
+import { DesktopNav } from "./DesktopNav";
 import styles from "./Header.module.css";
 
 export const Header = async () => {
@@ -12,6 +13,8 @@ export const Header = async () => {
       <div className={styles.logo}>
         <Image src="/assets/logo.png" alt="Al-Salaam Islamic Centre" width={36} height={24} />
       </div>
+
+      <DesktopNav />
 
       <div className={styles.actions}>
         <Donation />

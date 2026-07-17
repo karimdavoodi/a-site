@@ -21,6 +21,11 @@ jest.mock("../Donation", () => ({
   Donation: () => <button>Donate</button>,
 }));
 
+// Mock DesktopNav (uses useRouter which needs App Router context)
+jest.mock("../DesktopNav", () => ({
+  DesktopNav: () => <nav data-testid="desktop-nav">Desktop Nav</nav>,
+}));
+
 // Mock the info.json import
 jest.mock("@public/data/info.json", () => ({
   contact: {

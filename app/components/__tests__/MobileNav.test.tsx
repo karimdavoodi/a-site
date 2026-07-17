@@ -37,7 +37,7 @@ describe("MobileNav", () => {
     expect(screen.getByText("Home").closest("a")).toHaveAttribute("href", "/");
     expect(screen.getByText("Prayer").closest("a")).toHaveAttribute(
       "href",
-      "/weekly_prayer_times"
+      "/#prayer"
     );
   });
 });

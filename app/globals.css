@@ -62,23 +62,25 @@
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+}
+
 html,
 body {
   width: 100%;
   max-width: 100vw;
-  height: 100%;
   margin: 0;
   padding: 0;
-  overflow: visible;
 }
 
 body {
+  min-height: 100%;
   background-color: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
 }
 
 /* Ensure all interactive elements meet minimum touch target size */
