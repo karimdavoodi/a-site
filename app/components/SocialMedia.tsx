@@ -58,7 +58,6 @@ export const SocialMedia = () => {
 const styles: { [key: string]: React.CSSProperties } = {
   socialIcons: {
     display: "flex",
-    marginLeft: "8px",
     gap: "6px",
     alignItems: "center",
   },

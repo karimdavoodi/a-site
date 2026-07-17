@@ -98,10 +98,14 @@
 
 /* ── Responsive ──────────────────────────────────────────────────────── */
 
-/* Tablet: 2 columns */
+/* Tablet: 2 columns, map spans full width on second row */
 @media (min-width: 640px) {
   .grid {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .column:last-child {
+    grid-column: 1 / -1;
   }
 }
 
@@ -109,5 +113,9 @@
 @media (min-width: 1024px) {
   .grid {
     grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .column:last-child {
+    grid-column: auto;
   }
 }
