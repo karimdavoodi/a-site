@@ -41,7 +41,7 @@ export const getPayerTime = async () => {
       maghrib: yearlyData[key].Magrib.azan,
       isha: yearlyData[key].Isha.azan,
     };
-    prayerTimes.iqama = {
+    prayerTimes.iqamah = {
       fajr: yearlyData[key].Fajr.iqamah,
       dhuhr: yearlyData[key].Dhuhr.iqamah,
       asr: yearlyData[key].Asr.iqamah,

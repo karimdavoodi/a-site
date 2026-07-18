@@ -26,11 +26,11 @@ jest.mock("../../utils/nextPrayer", () => ({
 const mockData = {
   day: 15,
   prayers: [
-    { name: "Fajr", athan: "5:30 AM", iqama: "6:00 AM" },
-    { name: "Dhuhr", athan: "1:15 PM", iqama: "1:30 PM" },
-    { name: "Asr", athan: "5:45 PM", iqama: "6:00 PM" },
-    { name: "Maghrib", athan: "8:30 PM", iqama: "8:35 PM" },
-    { name: "Isha", athan: "10:00 PM", iqama: "10:15 PM" },
+    { name: "Fajr", athan: "5:30 AM", iqamah: "6:00 AM" },
+    { name: "Dhuhr", athan: "1:15 PM", iqamah: "1:30 PM" },
+    { name: "Asr", athan: "5:45 PM", iqamah: "6:00 PM" },
+    { name: "Maghrib", athan: "8:30 PM", iqamah: "8:35 PM" },
+    { name: "Isha", athan: "10:00 PM", iqamah: "10:15 PM" },
   ],
 };
 
@@ -45,7 +45,7 @@ describe("PrayerTimes", () => {
     expect(screen.getByText("Isha")).toBeInTheDocument();
   });
 
-  it("renders athan and iqama times", () => {
+  it("renders athan and iqamah times", () => {
     render(<PrayerTimes data={mockData} />);
 
     expect(screen.getByText("5:30 AM")).toBeInTheDocument();

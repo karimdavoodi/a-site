@@ -41,7 +41,7 @@ A single JSON file controls the entire site: mosque name, slogan, contact info, 
 | `pinMessage` | Persistent banner shown at the top of the page (hidden when empty) |
 | `flayer` | Path to an image shown as a popup modal (hidden when empty) |
 | `googleMapsUrl` | Embed URL for the contact-us map |
-| `prayerTime.*` | Juma time, prayer schedule URLs, and iqama/athan CSV sources |
+| `prayerTime.*` | Juma time, prayer schedule URLs, and iqamah/athan CSV sources |
 | `contact.*` | Address, phone numbers, email, and social media links |
 | `usefulLinks` | List of external links (e.g., Quran, Hadith) displayed in the footer |
 

@@ -1,4 +1,4 @@
-// TODO: FIX JUMA PRAYER TIME (waterloo has two iqama for juma dhure prayer)
+// TODO: FIX JUMA PRAYER TIME (waterloo has two iqamah for juma dhure prayer)
 // Run this script using: npx ts-node app/utils/get_yearly_prayer_time.ts
 // Run it yearly to prepare prayer times data for the current year.
 // CHROME_PATH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" npx ts-node app/utils/get_yearly_prayer_time.ts

@@ -11,7 +11,7 @@ interface GalleryImage {
   alt: string;
 }
 
-const GALLERY_IMAGES: GalleryImage[] = Array.from({ length: 13 }, (_, i) => ({
+const GALLERY_IMAGES: GalleryImage[] = Array.from({ length: 12 }, (_, i) => ({
   src: `/components/gallery/1/${i + 1}.jpg`,
   alt: `Gallery image ${i + 1}`,
 }));

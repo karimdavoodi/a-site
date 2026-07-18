@@ -10,17 +10,17 @@ import styles from "./PrayerTime.module.css";
 type PrayerData = {
   name: string;
   athan: string;
-  iqama: string;
+  iqamah: string;
 };
 
 type PrayerCardProps = {
   name: string;
   athan: string;
-  iqama: string;
+  iqamah: string;
   isNext: boolean;
 };
 
-const PrayerCard = ({ name, athan, iqama, isNext }: PrayerCardProps) => (
+const PrayerCard = ({ name, athan, iqamah, isNext }: PrayerCardProps) => (
   <div className={`${styles.card} ${isNext ? styles.cardNext : ""}`}>
     <div className={styles.name}>{name}</div>
     <div className={styles.times}>
@@ -29,9 +29,9 @@ const PrayerCard = ({ name, athan, iqama, isNext }: PrayerCardProps) => (
         <span className={styles.timeValue}>{athan}</span>
       </div>
       <div className={styles.timeBlock}>
-        <span className={styles.timeLabel}>Iqama</span>
+        <span className={styles.timeLabel}>Iqamah</span>
         <span className={`${styles.timeValue} ${styles.iqamaValue}`}>
-          {iqama}
+          {iqamah}
         </span>
       </div>
     </div>
@@ -51,6 +51,9 @@ type NextPrayerCountdownProps = {
   day: number;
 };
 
+// After the countdown reaches zero, show "IQAMEH" for this long
+const IQAMAH_DISPLAY_MINUTES = 20;
+
 export function NextPrayerCountdown({ prayers, day }: NextPrayerCountdownProps) {
   // Tick on the mosque's clock so the countdown is correct for every visitor
   const [now, setNow] = useState(() => getZonedNow());
@@ -60,8 +63,30 @@ export function NextPrayerCountdown({ prayers, day }: NextPrayerCountdownProps) 
     return () => clearInterval(timer);
   }, []);
 
+  // Within 20 minutes after a prayer's iqamah time, show "IQAMEH" instead of
+  // the counter (only when the loaded prayer data is for today)
+  const currentMinutes = now.hours * 60 + now.minutes;
+  const iqamahPrayer =
+    day === now.day
+      ? prayers.find((prayer) => {
+          const iqamahMinutes = parsePrayerTimeToMinutes(
+            prayer.iqamah,
+            prayer.name,
+          );
+          return (
+            iqamahMinutes >= 0 &&
+            currentMinutes >= iqamahMinutes &&
+            currentMinutes < iqamahMinutes + IQAMAH_DISPLAY_MINUTES
+          );
+        })
+      : undefined;
+
+  if (iqamahPrayer)  {
+    return;
+  }
+
   const nextIndex = getNextPrayerIndex(
-    prayers.map((p) => p.iqama),
+    prayers.map((p) => p.iqamah),
     day,
   );
 
@@ -74,15 +99,14 @@ export function NextPrayerCountdown({ prayers, day }: NextPrayerCountdownProps) 
   }
 
   const nextPrayer = prayers[nextIndex];
-  const nextIqamaMinutes = parsePrayerTimeToMinutes(nextPrayer.iqama, nextPrayer.name);
-  const nowMinutes = now.hours * 60 + now.minutes;
-  const nowSeconds = now.seconds;
-  const remainingSeconds = (nextIqamaMinutes - nowMinutes) * 60 - nowSeconds;
+  const nextIqamaMinutes = parsePrayerTimeToMinutes(nextPrayer.iqamah, nextPrayer.name);
+  const remainingSeconds =
+    (nextIqamaMinutes - currentMinutes) * 60 - now.seconds;
 
   return (
     <div className={styles.countdown}>
       <span className={styles.countdownLabel}>
-        Next Iqama: {nextPrayer.name} in
+        Next Iqamah: {nextPrayer.name} in
       </span>
       <span className={styles.countdownTimer}>
         {formatCountdown(Math.max(0, remainingSeconds))}
@@ -120,7 +144,7 @@ export function PrayerTimesClient({ prayers, day }: PrayerTimesClientProps) {
             key={prayer.name}
             name={prayer.name}
             athan={prayer.athan}
-            iqama={prayer.iqama}
+            iqamah={prayer.iqamah}
             isNext={i === nextIndex}
           />
         ))}

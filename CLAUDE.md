@@ -61,7 +61,7 @@ Event images are pulled from Google Drive:
 
 ### Weekly Prayer Times Page
 
-`/weekly_prayer_times` is a standalone server-rendered page that reads the same yearly JSON and renders a 7-day table starting from today, with day labels, azan/iqama times, and special Friday highlighting.
+`/weekly_prayer_times` is a standalone server-rendered page that reads the same yearly JSON and renders a 7-day table starting from today, with day labels, azan/iqamah times, and special Friday highlighting.
 
 ### Prayer Times Scraper
 

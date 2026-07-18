@@ -34,7 +34,7 @@ describe("Gallery", () => {
     const thumbnails = buttons.filter((b) =>
       b.getAttribute("aria-label")?.startsWith("View Gallery")
     );
-    expect(thumbnails).toHaveLength(13);
+    expect(thumbnails).toHaveLength(12);
   });
 
   it("opens lightbox when an image is clicked", () => {

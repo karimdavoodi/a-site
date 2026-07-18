@@ -9,5 +9,5 @@ export type PrayerTime = {
 export type PrayerTimes = {
   day: number;
   azan?: PrayerTime;
-  iqama?: PrayerTime;
+  iqamah?: PrayerTime;
 };

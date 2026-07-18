@@ -6,7 +6,7 @@ const PRAYER_NAMES = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"] as const;
 export type PrayerData = {
   name: string;
   athan: string;
-  iqama: string;
+  iqamah: string;
 };
 
 export type PrayerTimesData = {
@@ -29,7 +29,7 @@ export async function getPrayerTimesData(): Promise<PrayerTimesData | null> {
     return {
       name,
       athan: prayerTimes.azan?.[key] ?? "",
-      iqama: prayerTimes.iqama?.[key] ?? "",
+      iqamah: prayerTimes.iqamah?.[key] ?? "",
     };
   });
 
