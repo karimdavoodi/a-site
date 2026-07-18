@@ -1,108 +1,136 @@
-# Simple Masjid website
+# Al-Salaam Islamic Centre — Website
 
-This is a simple website for who those not have time to maintenance Masjid website!
+A content-driven mosque website built with **Next.js 16 (App Router)**. Most content lives in `/public/` as static files (JSON config, Markdown, images) — editable by non-developers without touching application code.
 
-If the whole UI and structure is ok, then you can feed its constants easy by updating text and image files inside public folder without touching the code.
-
-## Components
-
-### Flayer
-
-A flayer will show as pop up if we have flayer image in /public/assets and fille `flayer` field in json config with that path
-
-### Notice
-
-A permanent pin massage will show on top of page if we fill `pinMessgae` inside json config
-
-### Header and Title
-
-Both header and title get their data from json config file. Currently we do not have menu in header.
-
-### Services, Programs, and About us
-
-These are getting their internal components from `/pubic/components/{programs, services, about_us}`. each component should have title.jpg, title.txt, summary.txt, description.md.
-
-The `description.md` is in **Markdown** format. Therefore you can have rich text also you can refer to more images inside it if you save that images in component folder.
-
-### Events
-
-Event serve from images that keep in Google drive share folder. Because we think event will change often. By uploading you events flayer in google folder, you can update events in the page.
-
-#### Environment variables for access to google drive folder
-
-- **GDRIVE_KEY** : You key to access to google drive files. you can create it in your google console
-- **GDRIVE_EVENTS_FOLDER_ID**: the id of folder that you share as viewer for everyone
-
-### News
-
-News are serve from `/public/data/news.txt`. each line is one news start with date.
-
-### Footer
-
-Footer data serve from json config
-
-## Directory Structure
-
-- /app : contains the main page and global definitions
-  - global.css : this contain theme and colors that you can change for whole component
-- /src : contains all page components
-- /public: contains all data that app use to build components
-  Below is public dir structure:
-
-```
-├── assets
-│   ├── icons
-│   │   ├── facebook.svg
-│   │   ├── instagram.svg
-│   │   ├── tiktok.svg
-│   │   ├── whatsapp.svg
-│   │   ├── x.svg
-│   │   └── youtube.svg
-│   ├── logo.png             // top site logo
-│   └── title_background.jpg // background of site title
-├── components
-│   ├── about_us
-│   │   └── 1
-│   │       ├── description.md
-│   │       ├── summary.txt
-│   │       ├── title.jpg
-│   │       ├── title.txt
-│   │       ├── *.jpg     // extra image if we need to refer in description.md
-│     
-├── data
-│   ├── info.json   // main config of site
-│   └── news.txt    // news
-
-```
-
-## How to build
-
-Run:
+## Getting Started
 
 ```bash
-$ npm install
-$ export GDRIVE_KEY={your gdrive key}
-$ export GDRIVE_EVENTS_FOLDER_ID={you folder id}
-$ export RESEND_KEY={you resend.com key }
-$ npm run dev
+# Install dependencies
+npm install
+
+# Set required environment variables
+export GDRIVE_KEY="your-google-drive-api-key"
+export GDRIVE_EVENTS_FOLDER_ID="your-shared-folder-id"
+export RESEND_KEY="your-resend-api-key"
+
+# Start the dev server
+npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to see the site.
 
-Build to see if it ok:
+### Production build
 
 ```bash
-$ npm run lint
-$ npm run build
-$ npm run start
+npm run lint
+npm run build
+npm run start
 ```
 
-Push to repository to release, if using Vercel:
+## Content Management
+
+All site content is driven by files in `/public/`. No database required.
+
+### Site configuration — `public/data/info.json`
+
+A single JSON file controls the entire site: mosque name, slogan, contact info, social media links, Google Maps embed, prayer time sources, pinned message, and popup flayer image.
+
+| Field | Purpose |
+|---|---|
+| `masjidName` | Site title and header text |
+| `pinMessage` | Persistent banner shown at the top of the page (hidden when empty) |
+| `flayer` | Path to an image shown as a popup modal (hidden when empty) |
+| `googleMapsUrl` | Embed URL for the contact-us map |
+| `prayerTime.*` | Juma time, prayer schedule URLs, and iqama/athan CSV sources |
+| `contact.*` | Address, phone numbers, email, and social media links |
+| `usefulLinks` | List of external links (e.g., Quran, Hadith) displayed in the footer |
+
+### Components — `public/components/{category}/{id}/`
+
+Each component folder follows this convention:
+
+| File | Purpose |
+|---|---|
+| `title.txt` | Component title |
+| `summary.txt` | Short summary |
+| `description.md` | Body content in Markdown (supports images via `imsize` and `attrs` plugins) |
+| `title.jpg` or `title.png` | Thumbnail image |
+| `*.jpg` / `*.png` | Extra images referenced inside the Markdown |
+
+**Categories:** `about_us`, `donation`, `gallery`, `programs`, `ramadan`, `services`
+
+### News — `public/data/news.txt`
+
+One news item per line. Each line starts with a date.
+
+### Prayer times — `public/data/{year}_prayer_times.json`
+
+Pre-generated yearly prayer times keyed by `"YYYY-M-D"`. Generated via the scraper:
 
 ```bash
-git commit -m 'your commit message'
-git push
+npm run gen_prayer_times
 ```
 
-Please take a look at Issue section of the repository to see what task we have for current stage.
-Please have a PR for each of your changes or tasks.
+This uses Puppeteer to scrape [waterloomasjid.com](https://waterloomasjid.com/main/index.php/prayers). Requires Chrome installed; set `CHROME_PATH` if not at the default path.
+
+### Events (Google Drive)
+
+Event flyers are pulled from a shared Google Drive folder. A client-side component calls `/api/images/listEvents`, which syncs images from Google Drive (cached for 5 minutes in `/tmp/Events`). Images are named `{modifiedTime}_{name}.{ext}`.
+
+## Features
+
+- **Alert banner** — conditionally shown when `pinMessage` is set in `info.json`
+- **Popup flayer** — auto-displays 3 seconds after page load if `flayer` is set; suppresses itself when another overlay is open
+- **Prayer times** — server-rendered daily prayer times with a `/weekly_prayer_times` page showing a 7-day table with Friday highlighting
+- **Events gallery** — auto-syncs event flyers from Google Drive
+- **Donation** — iframe overlay for donation forms; images managed via `/api/donation-images/[folder]`
+- **Contact form** — sends email via Resend (`/api/send_mail`)
+- **Gallery** — image lightbox with keyboard navigation
+- **Responsive design** — mobile and desktop navigation with CSS modules
+
+## Environment Variables
+
+| Variable | Purpose |
+|---|---|
+| `GDRIVE_KEY` | Google Drive API key for fetching event flyers |
+| `GDRIVE_EVENTS_FOLDER_ID` | Shared Google Drive folder ID containing event images |
+| `RESEND_KEY` | Resend.com API key for the contact form |
+| `CHROME_PATH` | (Optional) Path to Chrome binary for the prayer times scraper |
+
+## API Routes
+
+| Route | Method | Purpose |
+|---|---|---|
+| `/api/images/listEvents` | GET | List synced event images from Google Drive |
+| `/api/images/[parent]/[image]` | GET | Serve cached images from `/tmp/` |
+| `/api/send_mail` | POST | Send contact form email via Resend |
+| `/api/donation-images/[folder]` | GET | List donation-related images from the public folder |
+
+## Project Structure
+
+```
+├── app/
+│   ├── api/                    # API routes (images, send_mail)
+│   ├── components/             # React components (server + client)
+│   ├── types/                  # TypeScript type definitions
+│   ├── utils/                  # Utilities (prayer time scraper, Google Drive sync)
+│   ├── weekly_prayer_times/    # 7-day prayer table page
+│   ├── globals.css             # Theme variables and global styles
+│   ├── layout.tsx              # Root layout
+│   └── page.tsx                # Main page
+├── public/
+│   ├── assets/                 # Logo, title background, social media icons
+│   ├── components/             # Content component files (see above)
+│   └── data/                   # info.json, news.txt, yearly prayer times
+└── package.json
+```
+
+## Tech Stack
+
+- **Framework:** Next.js 16 (App Router)
+- **Language:** TypeScript
+- **Styling:** CSS modules + CSS custom properties (theme variables in `globals.css`)
+- **Markdown:** `markdown-it` with `imsize` and `attrs` plugins
+- **Email:** Resend
+- **Testing:** Jest + React Testing Library
+- **Scraping:** Puppeteer
