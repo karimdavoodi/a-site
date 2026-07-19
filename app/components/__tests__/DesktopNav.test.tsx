@@ -26,7 +26,7 @@ describe("DesktopNav", () => {
   it("renders with navigation landmark", () => {
     render(<DesktopNav />);
     expect(
-      screen.getByRole("navigation", { name: "Desktop navigation" })
+      screen.getByRole("navigation", { name: "Desktop navigation" }),
     ).toBeInTheDocument();
   });
 
@@ -35,7 +35,7 @@ describe("DesktopNav", () => {
     expect(screen.getByText("Home").closest("a")).toHaveAttribute("href", "/");
     expect(screen.getByText("Prayer").closest("a")).toHaveAttribute(
       "href",
-      "/#prayer"
+      "/#prayer",
     );
   });
 
@@ -43,15 +43,15 @@ describe("DesktopNav", () => {
     render(<DesktopNav />);
     expect(screen.getByText("Donate").closest("a")).toHaveAttribute(
       "href",
-      "/#donation"
+      "/#donation",
     );
     expect(screen.getByText("Events").closest("a")).toHaveAttribute(
       "href",
-      "/#events"
+      "/#events",
     );
     expect(screen.getByText("Services").closest("a")).toHaveAttribute(
       "href",
-      "/#services"
+      "/#services",
     );
   });
 

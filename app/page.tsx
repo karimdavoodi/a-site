@@ -25,7 +25,10 @@ export default async function Home() {
       <main id="main-content">
         <Hero>
           {prayerData && (
-            <NextPrayerCountdown prayers={prayerData.prayers} day={prayerData.day} />
+            <NextPrayerCountdown
+              prayers={prayerData.prayers}
+              day={prayerData.day}
+            />
           )}
         </Hero>
         {prayerData && <PrayerTimes data={prayerData} />}

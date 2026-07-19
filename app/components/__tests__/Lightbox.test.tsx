@@ -6,7 +6,6 @@ import { Lightbox } from "../Lightbox";
 jest.mock("next/image", () => ({
   __esModule: true,
   default: (props: React.ImgHTMLAttributes<HTMLImageElement>) => {
-     
     return <img alt={props.alt ?? ""} src={props.src as string} {...props} />;
   },
 }));
@@ -26,7 +25,7 @@ describe("Lightbox", () => {
         onClose={jest.fn()}
         onPrev={jest.fn()}
         onNext={jest.fn()}
-      />
+      />,
     );
     expect(screen.getByAltText("Image 1")).toBeInTheDocument();
   });
@@ -39,7 +38,7 @@ describe("Lightbox", () => {
         onClose={jest.fn()}
         onPrev={jest.fn()}
         onNext={jest.fn()}
-      />
+      />,
     );
     expect(screen.getByText("2 / 3")).toBeInTheDocument();
   });
@@ -53,7 +52,7 @@ describe("Lightbox", () => {
         onClose={onClose}
         onPrev={jest.fn()}
         onNext={jest.fn()}
-      />
+      />,
     );
     fireEvent.click(screen.getByLabelText("Close lightbox"));
     expect(onClose).toHaveBeenCalledTimes(1);
@@ -68,7 +67,7 @@ describe("Lightbox", () => {
         onClose={onClose}
         onPrev={jest.fn()}
         onNext={jest.fn()}
-      />
+      />,
     );
     fireEvent.keyDown(document, { key: "Escape" });
     expect(onClose).toHaveBeenCalledTimes(1);
@@ -83,7 +82,7 @@ describe("Lightbox", () => {
         onClose={jest.fn()}
         onPrev={jest.fn()}
         onNext={onNext}
-      />
+      />,
     );
     fireEvent.click(screen.getByLabelText("Next image"));
     expect(onNext).toHaveBeenCalledTimes(1);
@@ -98,7 +97,7 @@ describe("Lightbox", () => {
         onClose={jest.fn()}
         onPrev={onPrev}
         onNext={jest.fn()}
-      />
+      />,
     );
     fireEvent.click(screen.getByLabelText("Previous image"));
     expect(onPrev).toHaveBeenCalledTimes(1);
@@ -112,7 +111,7 @@ describe("Lightbox", () => {
         onClose={jest.fn()}
         onPrev={jest.fn()}
         onNext={jest.fn()}
-      />
+      />,
     );
     expect(screen.queryByLabelText("Previous image")).toBeNull();
   });
@@ -125,7 +124,7 @@ describe("Lightbox", () => {
         onClose={jest.fn()}
         onPrev={jest.fn()}
         onNext={jest.fn()}
-      />
+      />,
     );
     expect(screen.queryByLabelText("Next image")).toBeNull();
   });

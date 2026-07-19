@@ -44,7 +44,7 @@ export const DonationCard = () => {
   useEffect(() => {
     const updateHeight = () => {
       setIframeHeight(
-        window.innerWidth >= 768 ? DESKTOP_IFRAME_HEIGHT : MOBILE_IFRAME_HEIGHT
+        window.innerWidth >= 768 ? DESKTOP_IFRAME_HEIGHT : MOBILE_IFRAME_HEIGHT,
       );
     };
     updateHeight();

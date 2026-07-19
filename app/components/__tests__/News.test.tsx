@@ -30,13 +30,13 @@ describe("News", () => {
     getNews.mockResolvedValue(mockNewsItems);
     render(await News());
     expect(
-      screen.getByText("Eid al-Adha prayer will be at 8:00 AM")
+      screen.getByText("Eid al-Adha prayer will be at 8:00 AM"),
     ).toBeInTheDocument();
     expect(
-      screen.getByText("Community iftar every Saturday")
+      screen.getByText("Community iftar every Saturday"),
     ).toBeInTheDocument();
     expect(
-      screen.getByText("New Quran classes starting next month")
+      screen.getByText("New Quran classes starting next month"),
     ).toBeInTheDocument();
   });
 

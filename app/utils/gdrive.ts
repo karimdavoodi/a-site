@@ -8,7 +8,7 @@ export const syncGoogleDriveFolder = async (
   const folderId =
     gdriveFolderName === "Events" ? process.env.GDRIVE_EVENTS_FOLDER_ID : "";
   const key = process.env.GDRIVE_KEY;
-  console.log("GDRIVE_KEY is ",{key, folderId} );
+  console.log("GDRIVE_KEY is ", { key, folderId });
 
   if (!folderId) {
     console.error("GDRIVE_EVENTS_FOLDER_ID is not set");

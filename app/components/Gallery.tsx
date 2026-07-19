@@ -60,11 +60,7 @@ export function Gallery() {
           </button>
         )}
 
-        <div
-          className={styles.track}
-          ref={trackRef}
-          onScroll={handleScroll}
-        >
+        <div className={styles.track} ref={trackRef} onScroll={handleScroll}>
           {GALLERY_IMAGES.map((img, i) => (
             <button
               key={img.src}
@@ -105,7 +101,7 @@ export function Gallery() {
                 ? prev === 0
                   ? GALLERY_IMAGES.length - 1
                   : prev - 1
-                : null
+                : null,
             )
           }
           onNext={() =>
@@ -114,7 +110,7 @@ export function Gallery() {
                 ? prev === GALLERY_IMAGES.length - 1
                   ? 0
                   : prev + 1
-                : null
+                : null,
             )
           }
         />

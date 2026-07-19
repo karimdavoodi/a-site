@@ -15,7 +15,7 @@ describe("AlertBanner", () => {
   it("renders the message text", () => {
     render(<AlertBanner />);
     expect(
-      screen.getByText("Eid prayer will be at 9:00 AM")
+      screen.getByText("Eid prayer will be at 9:00 AM"),
     ).toBeInTheDocument();
   });
 
@@ -27,7 +27,7 @@ describe("AlertBanner", () => {
   it("renders a dismiss button", () => {
     render(<AlertBanner />);
     expect(
-      screen.getByRole("button", { name: "Dismiss alert" })
+      screen.getByRole("button", { name: "Dismiss alert" }),
     ).toBeInTheDocument();
   });
 

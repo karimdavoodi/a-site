@@ -11,7 +11,12 @@ export const Header = async () => {
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
-        <Image src="/assets/logo.png" alt="Al-Salaam Islamic Centre" width={36} height={24} />
+        <Image
+          src="/assets/logo.png"
+          alt="Al-Salaam Islamic Centre"
+          width={36}
+          height={24}
+        />
       </div>
 
       <DesktopNav />

@@ -7,11 +7,7 @@ import styles from "./AlertBanner.module.css";
 export const AlertBanner = () => {
   const [dismissed, setDismissed] = useState(false);
 
-  if (
-    !infoData.pinMessage ||
-    infoData.pinMessage.trim() === "" ||
-    dismissed
-  ) {
+  if (!infoData.pinMessage || infoData.pinMessage.trim() === "" || dismissed) {
     return null;
   }
 

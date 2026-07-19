@@ -3,7 +3,10 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import infoData from "@public/data/info.json";
-import { getNextPrayerIndex, parsePrayerTimeToMinutes } from "../utils/nextPrayer";
+import {
+  getNextPrayerIndex,
+  parsePrayerTimeToMinutes,
+} from "../utils/nextPrayer";
 import { getZonedNow } from "../utils/timezone";
 import styles from "./PrayerTime.module.css";
 
@@ -54,7 +57,10 @@ type NextPrayerCountdownProps = {
 // After the countdown reaches zero, show "IQAMEH" for this long
 const IQAMAH_DISPLAY_MINUTES = 20;
 
-export function NextPrayerCountdown({ prayers, day }: NextPrayerCountdownProps) {
+export function NextPrayerCountdown({
+  prayers,
+  day,
+}: NextPrayerCountdownProps) {
   // Tick on the mosque's clock so the countdown is correct for every visitor
   const [now, setNow] = useState(() => getZonedNow());
 
@@ -81,7 +87,7 @@ export function NextPrayerCountdown({ prayers, day }: NextPrayerCountdownProps) 
         })
       : undefined;
 
-  if (iqamahPrayer)  {
+  if (iqamahPrayer) {
     return;
   }
 
@@ -99,7 +105,10 @@ export function NextPrayerCountdown({ prayers, day }: NextPrayerCountdownProps) 
   }
 
   const nextPrayer = prayers[nextIndex];
-  const nextIqamaMinutes = parsePrayerTimeToMinutes(nextPrayer.iqamah, nextPrayer.name);
+  const nextIqamaMinutes = parsePrayerTimeToMinutes(
+    nextPrayer.iqamah,
+    nextPrayer.name,
+  );
   const remainingSeconds =
     (nextIqamaMinutes - currentMinutes) * 60 - now.seconds;
 
@@ -155,4 +164,3 @@ export function PrayerTimesClient({ prayers, day }: PrayerTimesClientProps) {
     </section>
   );
 }
-

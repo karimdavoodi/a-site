@@ -66,7 +66,9 @@
   padding: var(--space-xs) var(--space-md);
   border-radius: var(--radius-full);
   align-self: flex-start;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .toggle:hover {

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import ServiceWorkerRegistration from "./ServiceWorkerRegistration";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -13,8 +14,21 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Al-salaam Inslamic centre",
-  description: "The Masjid website",
+  title: "Al-Salaam Islamic Centre",
+  description: "Serving the Community with Faith and Compassion!",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Al-Salaam",
+  },
+  icons: {
+    apple: "/icons/icon-192x192.png",
+  },
+  other: {
+    "mobile-web-app-capable": "yes",
+    "theme-color": "#1a6634",
+  },
 };
 
 export default function RootLayout({
@@ -28,6 +42,7 @@ export default function RootLayout({
         <a href="#main-content" className="skipToContent">
           Skip to main content
         </a>
+        <ServiceWorkerRegistration />
         {children}
         <div id="modal-root"></div>
       </body>

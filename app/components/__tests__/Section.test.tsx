@@ -7,16 +7,18 @@ describe("Section", () => {
     render(
       <Section title="Test Title">
         <p>content</p>
-      </Section>
+      </Section>,
     );
-    expect(screen.getByRole("heading", { name: "Test Title" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "Test Title" }),
+    ).toBeInTheDocument();
   });
 
   it("renders children content", () => {
     render(
       <Section title="Title">
         <p data-testid="child">child content</p>
-      </Section>
+      </Section>,
     );
     expect(screen.getByTestId("child")).toBeInTheDocument();
   });
@@ -25,7 +27,7 @@ describe("Section", () => {
     render(
       <Section title="Title" subtitle="A description">
         <p>content</p>
-      </Section>
+      </Section>,
     );
     expect(screen.getByText("A description")).toBeInTheDocument();
   });
@@ -34,7 +36,7 @@ describe("Section", () => {
     const { container } = render(
       <Section title="Title">
         <span data-testid="child">content</span>
-      </Section>
+      </Section>,
     );
     // The only <p> elements should be from children; there should be no subtitle paragraph
     expect(screen.getByTestId("child")).toBeInTheDocument();
@@ -47,7 +49,7 @@ describe("Section", () => {
     const { container } = render(
       <Section title="Title" className="custom-class">
         <p>content</p>
-      </Section>
+      </Section>,
     );
     const section = container.firstElementChild;
     expect(section?.className).toContain("custom-class");
@@ -57,7 +59,7 @@ describe("Section", () => {
     const { container } = render(
       <Section title="Title">
         <p>content</p>
-      </Section>
+      </Section>,
     );
     expect(container.firstElementChild?.tagName).toBe("SECTION");
   });

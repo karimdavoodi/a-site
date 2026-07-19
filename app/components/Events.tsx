@@ -72,16 +72,9 @@ export const Events = ({ title }: { title: string }) => {
           </button>
         )}
 
-        <div
-          className={styles.track}
-          ref={trackRef}
-          onScroll={handleScroll}
-        >
+        <div className={styles.track} ref={trackRef} onScroll={handleScroll}>
           {images.map((image, index) => (
-            <div
-              key={`${image.name}-${index}`}
-              className={styles.slide}
-            >
+            <div key={`${image.name}-${index}`} className={styles.slide}>
               <img
                 src={image.url}
                 alt={image.name}

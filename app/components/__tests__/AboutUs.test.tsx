@@ -6,7 +6,6 @@ import { AboutUsClient } from "../AboutUsClient";
 jest.mock("next/image", () => ({
   __esModule: true,
   default: (props: React.ImgHTMLAttributes<HTMLImageElement>) => {
-     
     return <img alt={props.alt ?? ""} src={props.src as string} {...props} />;
   },
 }));
@@ -31,7 +30,7 @@ describe("AboutUs", () => {
   it("renders the summary text", () => {
     render(<AboutUsClient items={mockItems} />);
     expect(
-      screen.getByText("A welcoming and inclusive community.")
+      screen.getByText("A welcoming and inclusive community."),
     ).toBeInTheDocument();
   });
 

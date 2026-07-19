@@ -6,7 +6,6 @@ import { Header } from "../Header";
 jest.mock("next/image", () => ({
   __esModule: true,
   default: (props: React.ImgHTMLAttributes<HTMLImageElement>) => {
-     
     return <img alt={props.alt ?? ""} src={props.src as string} {...props} />;
   },
 }));
@@ -27,17 +26,21 @@ jest.mock("../DesktopNav", () => ({
 }));
 
 // Mock the info.json import
-jest.mock("@public/data/info.json", () => ({
-  contact: {
-    phones: ["519-555-1234", "519-555-5678"],
-    socialMedia: {
-      x: "https://x.com/test",
-      instagram: "https://instagram.com/test",
-      youtube: null,
-      facebook: "https://facebook.com/test",
+jest.mock(
+  "@public/data/info.json",
+  () => ({
+    contact: {
+      phones: ["519-555-1234", "519-555-5678"],
+      socialMedia: {
+        x: "https://x.com/test",
+        instagram: "https://instagram.com/test",
+        youtube: null,
+        facebook: "https://facebook.com/test",
+      },
     },
-  },
-}), { virtual: true });
+  }),
+  { virtual: true },
+);
 
 describe("Header", () => {
   it("renders the logo", async () => {

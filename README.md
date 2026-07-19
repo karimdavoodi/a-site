@@ -35,27 +35,27 @@ All site content is driven by files in `/public/`. No database required.
 
 A single JSON file controls the entire site: mosque name, slogan, contact info, social media links, Google Maps embed, prayer time sources, pinned message, and popup flayer image.
 
-| Field | Purpose |
-|---|---|
-| `masjidName` | Site title and header text |
-| `pinMessage` | Persistent banner shown at the top of the page (hidden when empty) |
-| `flayer` | Path to an image shown as a popup modal (hidden when empty) |
-| `googleMapsUrl` | Embed URL for the contact-us map |
-| `prayerTime.*` | Juma time, prayer schedule URLs, and iqamah/athan CSV sources |
-| `contact.*` | Address, phone numbers, email, and social media links |
-| `usefulLinks` | List of external links (e.g., Quran, Hadith) displayed in the footer |
+| Field           | Purpose                                                              |
+| --------------- | -------------------------------------------------------------------- |
+| `masjidName`    | Site title and header text                                           |
+| `pinMessage`    | Persistent banner shown at the top of the page (hidden when empty)   |
+| `flayer`        | Path to an image shown as a popup modal (hidden when empty)          |
+| `googleMapsUrl` | Embed URL for the contact-us map                                     |
+| `prayerTime.*`  | Juma time, prayer schedule URLs, and iqamah/athan CSV sources        |
+| `contact.*`     | Address, phone numbers, email, and social media links                |
+| `usefulLinks`   | List of external links (e.g., Quran, Hadith) displayed in the footer |
 
 ### Components — `public/components/{category}/{id}/`
 
 Each component folder follows this convention:
 
-| File | Purpose |
-|---|---|
-| `title.txt` | Component title |
-| `summary.txt` | Short summary |
-| `description.md` | Body content in Markdown (supports images via `imsize` and `attrs` plugins) |
-| `title.jpg` or `title.png` | Thumbnail image |
-| `*.jpg` / `*.png` | Extra images referenced inside the Markdown |
+| File                       | Purpose                                                                     |
+| -------------------------- | --------------------------------------------------------------------------- |
+| `title.txt`                | Component title                                                             |
+| `summary.txt`              | Short summary                                                               |
+| `description.md`           | Body content in Markdown (supports images via `imsize` and `attrs` plugins) |
+| `title.jpg` or `title.png` | Thumbnail image                                                             |
+| `*.jpg` / `*.png`          | Extra images referenced inside the Markdown                                 |
 
 **Categories:** `about_us`, `donation`, `gallery`, `programs`, `ramadan`, `services`
 
@@ -90,21 +90,21 @@ Event flyers are pulled from a shared Google Drive folder. A client-side compone
 
 ## Environment Variables
 
-| Variable | Purpose |
-|---|---|
-| `GDRIVE_KEY` | Google Drive API key for fetching event flyers |
-| `GDRIVE_EVENTS_FOLDER_ID` | Shared Google Drive folder ID containing event images |
-| `RESEND_KEY` | Resend.com API key for the contact form |
-| `CHROME_PATH` | (Optional) Path to Chrome binary for the prayer times scraper |
+| Variable                  | Purpose                                                       |
+| ------------------------- | ------------------------------------------------------------- |
+| `GDRIVE_KEY`              | Google Drive API key for fetching event flyers                |
+| `GDRIVE_EVENTS_FOLDER_ID` | Shared Google Drive folder ID containing event images         |
+| `RESEND_KEY`              | Resend.com API key for the contact form                       |
+| `CHROME_PATH`             | (Optional) Path to Chrome binary for the prayer times scraper |
 
 ## API Routes
 
-| Route | Method | Purpose |
-|---|---|---|
-| `/api/images/listEvents` | GET | List synced event images from Google Drive |
-| `/api/images/[parent]/[image]` | GET | Serve cached images from `/tmp/` |
-| `/api/send_mail` | POST | Send contact form email via Resend |
-| `/api/donation-images/[folder]` | GET | List donation-related images from the public folder |
+| Route                           | Method | Purpose                                             |
+| ------------------------------- | ------ | --------------------------------------------------- |
+| `/api/images/listEvents`        | GET    | List synced event images from Google Drive          |
+| `/api/images/[parent]/[image]`  | GET    | Serve cached images from `/tmp/`                    |
+| `/api/send_mail`                | POST   | Send contact form email via Resend                  |
+| `/api/donation-images/[folder]` | GET    | List donation-related images from the public folder |
 
 ## Project Structure
 

@@ -38,7 +38,7 @@ export function Lightbox({
           break;
       }
     },
-    [onClose, onPrev, onNext, currentIndex, images.length]
+    [onClose, onPrev, onNext, currentIndex, images.length],
   );
 
   useEffect(() => {
@@ -101,10 +101,7 @@ export function Lightbox({
         </button>
       )}
 
-      <div
-        className={styles.content}
-        onClick={(e) => e.stopPropagation()}
-      >
+      <div className={styles.content} onClick={(e) => e.stopPropagation()}>
         <Image
           src={image.src}
           alt={image.alt}

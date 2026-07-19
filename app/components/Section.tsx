@@ -9,7 +9,13 @@ interface SectionProps {
   id?: string;
 }
 
-export function Section({ title, subtitle, children, className, id }: SectionProps) {
+export function Section({
+  title,
+  subtitle,
+  children,
+  className,
+  id,
+}: SectionProps) {
   return (
     <section id={id} className={`${styles.section} ${className ?? ""}`}>
       <div className={styles.inner}>

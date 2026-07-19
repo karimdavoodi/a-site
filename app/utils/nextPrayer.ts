@@ -91,10 +91,7 @@ export function parseTimeToMinutes(timeStr: string): number {
  * @param athanTimes - Array of 5 athan time strings (Fajr through Isha)
  * @param day - Current day of the month (to verify prayers are for today)
  */
-export function getNextPrayerIndex(
-  athanTimes: string[],
-  day: number,
-): number {
+export function getNextPrayerIndex(athanTimes: string[], day: number): number {
   // Compare in the mosque's timezone so a UTC server and visitors in other
   // timezones agree on what "today" and "now" mean.
   const now = getZonedNow();

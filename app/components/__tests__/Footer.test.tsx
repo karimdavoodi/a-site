@@ -39,22 +39,14 @@ jest.mock("../SocialMedia", () => ({
 describe("Footer", () => {
   it("renders the masjid name", () => {
     render(<Footer />);
-    expect(
-      screen.getByText("Al-Salaam Islamic Centre")
-    ).toBeInTheDocument();
+    expect(screen.getByText("Al-Salaam Islamic Centre")).toBeInTheDocument();
   });
 
   it("renders address and contact info", () => {
     render(<Footer />);
-    expect(
-      screen.getByText(/585 Queen St S/)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(/519-496-6585, 519-498-7985/)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(/alsalaam570@gmail.com/)
-    ).toBeInTheDocument();
+    expect(screen.getByText(/585 Queen St S/)).toBeInTheDocument();
+    expect(screen.getByText(/519-496-6585, 519-498-7985/)).toBeInTheDocument();
+    expect(screen.getByText(/alsalaam570@gmail.com/)).toBeInTheDocument();
   });
 
   it("renders useful links", () => {
@@ -69,17 +61,15 @@ describe("Footer", () => {
     expect(iframe).toBeInTheDocument();
     expect(iframe).toHaveAttribute(
       "src",
-      "https://maps.google.com/embed?pb=test"
+      "https://maps.google.com/embed?pb=test",
     );
   });
 
   it("renders copyright text", () => {
     render(<Footer />);
+    expect(screen.getByText(/Copyright/)).toBeInTheDocument();
     expect(
-      screen.getByText(/Copyright/)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(/Al-Salaam Islamic Centre. All Rights Reserved./)
+      screen.getByText(/Al-Salaam Islamic Centre. All Rights Reserved./),
     ).toBeInTheDocument();
   });
 

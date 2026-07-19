@@ -5,9 +5,13 @@ import { MobileNav } from "../MobileNav";
 // Mock next/link
 jest.mock("next/link", () => ({
   __esModule: true,
-  default: ({ href, children }: { href: string; children: React.ReactNode }) => (
-    <a href={href}>{children}</a>
-  ),
+  default: ({
+    href,
+    children,
+  }: {
+    href: string;
+    children: React.ReactNode;
+  }) => <a href={href}>{children}</a>,
 }));
 
 // Mock next/navigation router (not mounted in jsdom tests)
@@ -28,7 +32,7 @@ describe("MobileNav", () => {
   it("renders with navigation landmark", () => {
     render(<MobileNav />);
     expect(
-      screen.getByRole("navigation", { name: "Mobile navigation" })
+      screen.getByRole("navigation", { name: "Mobile navigation" }),
     ).toBeInTheDocument();
   });
 
@@ -37,7 +41,7 @@ describe("MobileNav", () => {
     expect(screen.getByText("Home").closest("a")).toHaveAttribute("href", "/");
     expect(screen.getByText("Prayer").closest("a")).toHaveAttribute(
       "href",
-      "/#prayer"
+      "/#prayer",
     );
   });
 });

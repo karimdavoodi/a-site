@@ -23,7 +23,9 @@ describe("Events", () => {
     });
     render(<Events title="Events" />);
     await waitFor(() => {
-      expect(screen.getByRole("heading", { name: "Events" })).toBeInTheDocument();
+      expect(
+        screen.getByRole("heading", { name: "Events" }),
+      ).toBeInTheDocument();
     });
   });
 

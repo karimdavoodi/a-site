@@ -6,7 +6,6 @@ import { ServicesClient } from "../ServicesClient";
 jest.mock("next/image", () => ({
   __esModule: true,
   default: (props: React.ImgHTMLAttributes<HTMLImageElement>) => {
-     
     return <img alt={props.alt ?? ""} src={props.src as string} {...props} />;
   },
 }));
@@ -60,13 +59,15 @@ describe("Services", () => {
   it("renders the section title", () => {
     render(<ServicesClient items={mockItems} />);
     expect(
-      screen.getByRole("heading", { name: "Services" })
+      screen.getByRole("heading", { name: "Services" }),
     ).toBeInTheDocument();
   });
 
   it("renders all 6 service cards", () => {
     render(<ServicesClient items={mockItems} />);
-    expect(screen.getByText("Daily prayers and weekly Halaqa")).toBeInTheDocument();
+    expect(
+      screen.getByText("Daily prayers and weekly Halaqa"),
+    ).toBeInTheDocument();
     expect(screen.getByText("Qur'an Classes For All Ages")).toBeInTheDocument();
     expect(screen.getByText("Islamic Studies")).toBeInTheDocument();
     expect(screen.getByText("Family Counselling")).toBeInTheDocument();

@@ -3,18 +3,26 @@ import { render, screen } from "@testing-library/react";
 import { PrayerTimes } from "../PrayerTime";
 
 // Mock info.json
-jest.mock("@public/data/info.json", () => ({
-  prayerTime: {
-    jumaPrayerTime: "1:30 PM",
-  },
-}), { virtual: true });
+jest.mock(
+  "@public/data/info.json",
+  () => ({
+    prayerTime: {
+      jumaPrayerTime: "1:30 PM",
+    },
+  }),
+  { virtual: true },
+);
 
 // Mock next/link
 jest.mock("next/link", () => ({
   __esModule: true,
-  default: ({ href, children }: { href: string; children: React.ReactNode }) => (
-    <a href={href}>{children}</a>
-  ),
+  default: ({
+    href,
+    children,
+  }: {
+    href: string;
+    children: React.ReactNode;
+  }) => <a href={href}>{children}</a>,
 }));
 
 // Mock nextPrayer utility
@@ -69,7 +77,7 @@ describe("PrayerTimes", () => {
 
   it("returns null when data day is invalid", () => {
     const { container } = render(
-      <PrayerTimes data={{ day: -1, prayers: [] }} />
+      <PrayerTimes data={{ day: -1, prayers: [] }} />,
     );
     expect(container.firstChild).toBeNull();
   });

@@ -19,11 +19,11 @@ npm run gen_prayer_times     # Scrape yearly prayer times via Puppeteer
 
 ### Environment Variables
 
-| Variable | Purpose |
-|---|---|
-| `GDRIVE_KEY` | Google Drive API key for fetching event images |
+| Variable                  | Purpose                                        |
+| ------------------------- | ---------------------------------------------- |
+| `GDRIVE_KEY`              | Google Drive API key for fetching event images |
 | `GDRIVE_EVENTS_FOLDER_ID` | Google Drive folder ID containing event flyers |
-| `RESEND_KEY` | Resend.com API key for the contact form email |
+| `RESEND_KEY`              | Resend.com API key for the contact form email  |
 
 ## Architecture
 
@@ -51,6 +51,7 @@ Content is driven by the filesystem under `/public/`:
 ### Google Drive Integration
 
 Event images are pulled from Google Drive:
+
 1. Client (`Events.tsx`) calls `/api/images/listEvents` → triggers `getImageListFromFolder("Events")`.
 2. If the local cache in `/tmp/Events` is older than 5 minutes, it syncs from Google Drive via `syncGoogleDriveFolder()`.
 3. Downloaded images are named `{modifiedTime}_{sanitized}.{ext}` and served from `/tmp/` via `/api/images/[parent]/[image]`.
@@ -69,12 +70,12 @@ Event images are pulled from Google Drive:
 
 ### API Routes
 
-| Route | Method | Purpose |
-|---|---|---|
-| `/api/images/listEvents` | GET | List synced event images from Google Drive |
-| `/api/images/[parent]/[image]` | GET | Serve cached images from `/tmp/` |
-| `/api/send_mail` | POST | Send contact form email via Resend |
-| `/api/donation-images/[folder]` | GET | List donation-related images from public folder |
+| Route                           | Method | Purpose                                         |
+| ------------------------------- | ------ | ----------------------------------------------- |
+| `/api/images/listEvents`        | GET    | List synced event images from Google Drive      |
+| `/api/images/[parent]/[image]`  | GET    | Serve cached images from `/tmp/`                |
+| `/api/send_mail`                | POST   | Send contact form email via Resend              |
+| `/api/donation-images/[folder]` | GET    | List donation-related images from public folder |
 
 ### Path Aliases
 

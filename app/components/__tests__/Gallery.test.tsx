@@ -6,14 +6,19 @@ import { Gallery } from "../Gallery";
 jest.mock("next/image", () => ({
   __esModule: true,
   default: (props: React.ImgHTMLAttributes<HTMLImageElement>) => {
-     
     return <img alt={props.alt ?? ""} src={props.src as string} {...props} />;
   },
 }));
 
 // Mock Lightbox
 jest.mock("../Lightbox", () => ({
-  Lightbox: ({ currentIndex, onClose }: { currentIndex: number; onClose: () => void }) => (
+  Lightbox: ({
+    currentIndex,
+    onClose,
+  }: {
+    currentIndex: number;
+    onClose: () => void;
+  }) => (
     <div data-testid="lightbox">
       <span>Image {currentIndex + 1}</span>
       <button onClick={onClose}>Close</button>
@@ -24,7 +29,9 @@ jest.mock("../Lightbox", () => ({
 describe("Gallery", () => {
   it("renders the section title", () => {
     render(<Gallery />);
-    expect(screen.getByRole("heading", { name: "Gallery" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "Gallery" }),
+    ).toBeInTheDocument();
   });
 
   it("renders all 13 gallery images", () => {
@@ -32,7 +39,7 @@ describe("Gallery", () => {
     const buttons = screen.getAllByRole("button");
     // 13 thumbnail buttons total (Gallery images only, not Lightbox nav)
     const thumbnails = buttons.filter((b) =>
-      b.getAttribute("aria-label")?.startsWith("View Gallery")
+      b.getAttribute("aria-label")?.startsWith("View Gallery"),
     );
     expect(thumbnails).toHaveLength(12);
   });
