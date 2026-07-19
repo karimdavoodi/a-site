@@ -1,5 +1,5 @@
 // Service worker for Al-Salaam Islamic Centre PWA
-const CACHE_NAME = "alsalaam-v1";
+const CACHE_NAME = "alsalaam-v3";
 
 const PRECACHE_URLS = ["/", "/manifest.json", "/data/info.json"];
 
