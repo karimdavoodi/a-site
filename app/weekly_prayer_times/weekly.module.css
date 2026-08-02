@@ -1,0 +1,188 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--color-bg);
+}
+
+.main {
+  flex: 1;
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: clamp(28px, 4vh, 44px) 24px clamp(36px, 6vh, 60px);
+}
+
+.eyebrow {
+  font-size: 0.74rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin: 0 0 10px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.6vw, 2.6rem);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.note {
+  color: var(--color-text-secondary);
+  margin: 8px 0 20px;
+  max-width: 60ch;
+}
+
+.note b {
+  color: #3f9c84;
+}
+
+.rows {
+  display: grid;
+  gap: 8px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 104px 1fr;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.day {
+  background: #0d3538;
+  color: #e8ece7;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 8px;
+  gap: 0;
+  text-align: center;
+}
+
+.dayName {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  line-height: 1.2;
+}
+
+.dayDate {
+  font-size: 0.8rem;
+  color: #9db4ae;
+}
+
+.dayYear {
+  font-size: 0.7rem;
+  color: #7e948f;
+}
+
+.cells {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+}
+
+.cell {
+  background: #12292c;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 4px;
+  gap: 1px;
+  text-align: center;
+}
+
+.cellName {
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.cellAzan {
+  font-size: 0.88rem;
+  color: var(--color-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.cellIqamah {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--color-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.cellJumuah {
+  border-color: rgba(208, 168, 53, 0.6);
+  background: #1c2a24;
+}
+
+.cellJumuah .cellName,
+.cellJumuah .cellIqamah {
+  color: var(--color-accent);
+}
+
+.error {
+  color: var(--color-text);
+  font-size: 0.9rem;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+@media (max-width: 860px) {
+  .rows {
+    gap: 6px;
+  }
+
+  .row {
+    grid-template-columns: 46px repeat(6, 1fr);
+    gap: 4px;
+  }
+
+  .day {
+    padding: 4px 2px;
+  }
+
+  .dayName {
+    font-size: 0.8rem;
+  }
+
+  .dayDate {
+    font-size: 0.56rem;
+  }
+
+  .dayYear {
+    display: none;
+  }
+
+  .cells {
+    display: contents;
+  }
+
+  .cell {
+    padding: 6px 1px;
+    gap: 0;
+    min-width: 0;
+  }
+
+  .cellName {
+    font-size: 0.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  .cellAzan {
+    font-size: 0.64rem;
+  }
+
+  .cellIqamah {
+    font-size: 0.8rem;
+  }
+}

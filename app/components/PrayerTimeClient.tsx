@@ -1,19 +1,26 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Link from "next/link";
 import infoData from "@public/data/info.json";
 import {
   getNextPrayerIndex,
   parsePrayerTimeToMinutes,
 } from "../utils/nextPrayer";
-import { getZonedNow } from "../utils/timezone";
+import { useMosqueClock } from "../utils/clientClock";
 import styles from "./PrayerTime.module.css";
 
 type PrayerData = {
   name: string;
   athan: string;
   iqamah: string;
+};
+
+const ARABIC_NAMES: Record<string, string> = {
+  Fajr: "الفجر",
+  Dhuhr: "الظهر",
+  Asr: "العصر",
+  Maghrib: "المغرب",
+  Isha: "العشاء",
 };
 
 type PrayerCardProps = {
@@ -25,29 +32,16 @@ type PrayerCardProps = {
 
 const PrayerCard = ({ name, athan, iqamah, isNext }: PrayerCardProps) => (
   <div className={`${styles.card} ${isNext ? styles.cardNext : ""}`}>
-    <div className={styles.name}>{name}</div>
-    <div className={styles.times}>
-      <div className={styles.timeBlock}>
-        <span className={styles.timeLabel}>Athan</span>
-        <span className={styles.timeValue}>{athan}</span>
-      </div>
-      <div className={styles.timeBlock}>
-        <span className={styles.timeLabel}>Iqamah</span>
-        <span className={`${styles.timeValue} ${styles.iqamaValue}`}>
-          {iqamah}
-        </span>
-      </div>
-    </div>
+    <span className={styles.name}>{name}</span>
+    <span className={styles.arabic} lang="ar" dir="rtl">
+      {ARABIC_NAMES[name] ?? ""}
+    </span>
+    <span className={styles.timeValue}>{athan}</span>
+    <span className={styles.iqamahLine}>
+      Iqamah <b>{iqamah}</b>
+    </span>
   </div>
 );
-
-function formatCountdown(totalSeconds: number): string {
-  if (totalSeconds <= 0) return "00:00:00";
-  const h = Math.floor(totalSeconds / 3600);
-  const m = Math.floor((totalSeconds % 3600) / 60);
-  const s = totalSeconds % 60;
-  return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
-}
 
 type NextPrayerCountdownProps = {
   prayers: PrayerData[];
@@ -61,13 +55,9 @@ export function NextPrayerCountdown({
   prayers,
   day,
 }: NextPrayerCountdownProps) {
-  // Tick on the mosque's clock so the countdown is correct for every visitor
-  const [now, setNow] = useState(() => getZonedNow());
+  const now = useMosqueClock();
 
-  useEffect(() => {
-    const timer = setInterval(() => setNow(getZonedNow()), 1000);
-    return () => clearInterval(timer);
-  }, []);
+  if (!now) return null;
 
   // Within 20 minutes after a prayer's iqamah time, show "IQAMEH" instead of
   // the counter (only when the loaded prayer data is for today)
@@ -109,17 +99,43 @@ export function NextPrayerCountdown({
     nextPrayer.iqamah,
     nextPrayer.name,
   );
-  const remainingSeconds =
-    (nextIqamaMinutes - currentMinutes) * 60 - now.seconds;
+  const remainingSeconds = Math.max(
+    0,
+    (nextIqamaMinutes - currentMinutes) * 60 - now.seconds,
+  );
+  const hh = Math.floor(remainingSeconds / 3600);
+  const mm = Math.floor((remainingSeconds % 3600) / 60);
+  const ss = remainingSeconds % 60;
+  const pad = (n: number) => String(n).padStart(2, "0");
 
   return (
-    <div className={styles.countdown}>
-      <span className={styles.countdownLabel}>
-        Next Iqamah: {nextPrayer.name} in
-      </span>
-      <span className={styles.countdownTimer}>
-        {formatCountdown(Math.max(0, remainingSeconds))}
-      </span>
+    <div className={styles.countdown} role="timer">
+      <p className={styles.countdownLabel}>
+        <strong>{nextPrayer.name}</strong> Iqamah is in
+      </p>
+      <div className={styles.countDigits}>
+        <div className={styles.countCell}>
+          <span className={styles.countNum}>{pad(hh)}</span>
+          <span className={styles.countUnit}>Hours</span>
+        </div>
+        <div className={styles.countSep} aria-hidden="true">
+          :
+        </div>
+        <div className={styles.countCell}>
+          <span className={styles.countNum}>{pad(mm)}</span>
+          <span className={styles.countUnit}>Minutes</span>
+        </div>
+        <div className={styles.countSep} aria-hidden="true">
+          :
+        </div>
+        <div className={styles.countCell}>
+          <span className={styles.countNum}>{pad(ss)}</span>
+          <span className={styles.countUnit}>Seconds</span>
+        </div>
+      </div>
+      <p className={styles.countAt}>
+        Athan at <b>{nextPrayer.athan}</b> · Iqamah at <b>{nextPrayer.iqamah}</b>
+      </p>
     </div>
   );
 }

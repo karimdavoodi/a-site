@@ -16,14 +16,16 @@ describe("Hero", () => {
   it("renders the masjid name", () => {
     render(<Hero />);
     expect(
-      screen.getByRole("heading", { name: "Al-Salaam Islamic Centre" }),
+      screen.getByText(/Al-Salaam Islamic Centre/),
     ).toBeInTheDocument();
   });
 
-  it("renders the masjid slogan", () => {
+  it("renders the masjid slogan as the heading", () => {
     render(<Hero />);
     expect(
-      screen.getByText("Serving the Community with Faith and Compassion!"),
+      screen.getByRole("heading", {
+        name: "Serving the Community with Faith and Compassion!",
+      }),
     ).toBeInTheDocument();
   });
 
