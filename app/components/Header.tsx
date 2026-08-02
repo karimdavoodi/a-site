@@ -17,6 +17,7 @@ export const Header = async () => {
           width={36}
           height={24}
         />
+        <span className={styles.brandName}>{infoData.masjidName}</span>
       </div>
 
       <DesktopNav />
