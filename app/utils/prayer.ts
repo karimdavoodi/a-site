@@ -3,7 +3,7 @@ import path from "path";
 import fs from "fs/promises";
 import { getZonedNow } from "./timezone";
 
-export const getPayerTime = async () => {
+export const getPrayerTime = async () => {
   const prayerTimes: PrayerTimes = {
     day: -1,
   };
@@ -49,7 +49,7 @@ export const getPayerTime = async () => {
       isha: yearlyData[key].Isha.iqamah,
     };
   } else {
-    console.log(`No player time for ${key} in data set lenght ${dir}`);
+    console.log(`No prayer time for ${key} in data set length ${dir}`);
   }
 
   return prayerTimes;

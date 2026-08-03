@@ -121,7 +121,7 @@
 /* ── Weekly link ────────────────────────────────────────────────────── */
 .weeklyLink {
   margin-top: var(--space-xl);
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-lg);
   color: var(--color-text-secondary);
   text-decoration: none;
   transition: color 0.2s ease;

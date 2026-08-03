@@ -1,4 +1,4 @@
-// TODO: FIX JUMA PRAYER TIME (waterloo has two iqamah for juma dhure prayer)
+// TODO: FIX JUMA PRAYER TIME (Waterloo has two iqamah for juma dhuhr prayer)
 // Run this script using: npx ts-node app/utils/get_yearly_prayer_time.ts
 // Run it yearly to prepare prayer times data for the current year.
 // CHROME_PATH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" npx ts-node app/utils/get_yearly_prayer_time.ts
@@ -15,7 +15,7 @@ interface ExtractedDay {
   prayers: Record<string, { azan: string; iqamah: string }>;
 }
 
-async function pageExtraxction(page: Page): Promise<(ExtractedDay | null)[]> {
+async function pageExtraction(page: Page): Promise<(ExtractedDay | null)[]> {
   return await page.evaluate(() => {
     const rows = Array.from(document.querySelectorAll(".row"));
     console.log(`Found ${rows.length} rows in the page`);
@@ -49,7 +49,7 @@ async function pageExtraxction(page: Page): Promise<(ExtractedDay | null)[]> {
         let iqamahTime =
           cell.querySelector(".time-iqamah")?.textContent?.trim() || "";
 
-        // Fix Juma iqame time to 1:30 from 'time, time'
+        // Fix Juma iqamah time to 1:30 from 'time, time'
         if (iqamahTime.split(",").length == 2) {
           iqamahTime = "1:30";
         }
@@ -105,7 +105,7 @@ async function extractPrayerTimes() {
     } = {};
 
     while (true) {
-      const extractedData = await pageExtraxction(page);
+      const extractedData = await pageExtraction(page);
       for (const dayData of extractedData) {
         if (dayData) {
           const key = `${dayData.year}-${dayData.month}-${dayData.day}`;

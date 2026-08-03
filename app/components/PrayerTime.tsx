@@ -1,4 +1,4 @@
-import { getPayerTime } from "../utils/prayer";
+import { getPrayerTime } from "../utils/prayer";
 import { PrayerTimesClient } from "./PrayerTimeClient";
 
 const PRAYER_NAMES = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"] as const;
@@ -19,7 +19,7 @@ export type PrayerTimesData = {
  * to pass data to multiple consumers (Hero countdown, PrayerTimes section).
  */
 export async function getPrayerTimesData(): Promise<PrayerTimesData | null> {
-  const prayerTimes = await getPayerTime();
+  const prayerTimes = await getPrayerTime();
   if (prayerTimes.day <= 0) {
     return null;
   }
