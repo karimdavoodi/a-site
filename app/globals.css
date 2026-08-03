@@ -134,6 +134,18 @@ button:not([class]) {
   outline: none;
 }
 
+/* ==========================================================================
+   Shared Components
+   ========================================================================== */
+
+.sectionTitle {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--color-accent);
+  margin: 0 0 var(--space-sm);
+  text-align: center;
+}
+
 /* Respect user motion preferences */
 @media (prefers-reduced-motion: reduce) {
   *,

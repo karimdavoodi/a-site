@@ -19,7 +19,7 @@ export function Section({
   return (
     <section id={id} className={`${styles.section} ${className ?? ""}`}>
       <div className={styles.inner}>
-        <h2 className={styles.title}>{title}</h2>
+        <h2 className="sectionTitle">{title}</h2>
         {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
         {children}
       </div>

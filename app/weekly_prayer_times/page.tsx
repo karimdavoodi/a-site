@@ -122,7 +122,7 @@ export default async function WeeklyPrayerTimes() {
     <div style={styles.page}>
       <Header />
       <div style={styles.content}>
-        <h2 style={styles.title}>Weekly Prayer Times</h2>
+        <h2 className="sectionTitle">Weekly Prayer Times</h2>
 
         {week.map(({ key, dayName, monthLabel, yearLabel }) => {
           const p = yearlyData[key];
@@ -199,14 +199,6 @@ const styles: Record<string, React.CSSProperties> = {
     alignItems: "stretch",
     padding: "0 0.35rem 0.5rem",
     gap: 2,
-  },
-
-  title: {
-    fontSize: "1.4rem",
-    fontWeight: 700,
-    color: "var(--color-text)",
-    margin: "0.5rem 0 0.3rem",
-    textAlign: "center",
   },
 
   /* ---- day row ---- */

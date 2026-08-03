@@ -10,7 +10,7 @@ export const News = async () => {
 
   return (
     <section className={styles.container}>
-      <h2 className={styles.title}>News</h2>
+      <h2 className={`sectionTitle ${styles.title}`}>News</h2>
       <div className={styles.list}>
         {newsItems.map((item, index) => (
           <article key={index} className={styles.item}>

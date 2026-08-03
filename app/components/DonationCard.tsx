@@ -10,13 +10,6 @@ const styles: Record<string, CSSProperties> = {
     flexDirection: "column",
     alignItems: "center",
   },
-  title: {
-    fontSize: "var(--font-size-2xl)",
-    fontWeight: 700,
-    color: "var(--color-accent)",
-    margin: "0 0 var(--space-xl)",
-    textAlign: "center",
-  },
   card: {
     width: "100%",
     maxWidth: "720px",
@@ -54,7 +47,7 @@ export const DonationCard = () => {
 
   return (
     <section id="donation" style={styles.container}>
-      <h2 style={styles.title}>Support Us</h2>
+      <h2 className="sectionTitle" style={{ margin: "0 0 var(--space-xl)" }}>Support Us</h2>
       <div style={styles.card}>
         <iframe
           title="Donation form"

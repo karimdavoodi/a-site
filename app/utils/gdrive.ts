@@ -8,7 +8,7 @@ export const syncGoogleDriveFolder = async (
   const folderId =
     gdriveFolderName === "Events" ? process.env.GDRIVE_EVENTS_FOLDER_ID : "";
   const key = process.env.GDRIVE_KEY;
-  console.log("GDRIVE_KEY is ", { key, folderId });
+  console.log("GDRIVE_KEY is", key ? "set" : "NOT SET", "| folderId:", folderId);
 
   if (!folderId) {
     console.error("GDRIVE_EVENTS_FOLDER_ID is not set");
@@ -23,7 +23,7 @@ export const syncGoogleDriveFolder = async (
     "https://www.googleapis.com/drive/v3/files?" +
     new URLSearchParams({
       q: `'${folderId}' in parents and trashed = false`,
-      fields: "files(id,name,mimeType,size,modifiedTime)",
+      fields: "files(id,name,mimeType,size,modifiedTime,webContentLink)",
       key: key,
     });
 
@@ -36,6 +36,7 @@ export const syncGoogleDriveFolder = async (
         mimeType: string;
         size: number;
         modifiedTime: string;
+        webContentLink?: string;
       }[];
       error?: { code: number; message: string };
     };
@@ -67,12 +68,18 @@ export const syncGoogleDriveFolder = async (
         file.mimeType === "image/gif" ||
         file.mimeType === "image/webp"
       ) {
-        const downloadUrl = `https://www.googleapis.com/drive/v3/files/${file.id}?alt=media&key=${key}`;
+        // webContentLink is a direct download URL that works without auth
+        // for files shared with "Anyone with the link"
+        const downloadUrl = file.webContentLink;
+        if (!downloadUrl) {
+          console.error(`No webContentLink for file ${file.name} — is it shared publicly?`);
+          continue;
+        }
         try {
           const fileRes = await fetch(downloadUrl);
           if (!fileRes.ok) {
             console.error(
-              `Failed to download file ${file.name}: ${fileRes.status}`,
+              `Failed to download file ${file.name}: ${fileRes.status}`,fileRes
             );
             continue;
           }

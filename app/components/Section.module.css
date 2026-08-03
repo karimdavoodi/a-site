@@ -8,14 +8,6 @@
   margin: 0 auto;
 }
 
-.title {
-  font-size: var(--font-size-2xl);
-  font-weight: 700;
-  color: var(--color-accent);
-  margin: 0 0 var(--space-sm);
-  text-align: center;
-}
-
 .subtitle {
   font-size: var(--font-size-base);
   color: var(--color-text-secondary);

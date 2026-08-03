@@ -7,7 +7,11 @@ export const SocialMedia = () => {
   return (
     <div style={styles.socialIcons}>
       {infoData.contact.socialMedia.x && (
-        <a href={infoData.contact.socialMedia.x}>
+        <a
+          href={infoData.contact.socialMedia.x}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <Image
             src="/assets/icons/x.svg"
             alt="X"
@@ -19,7 +23,11 @@ export const SocialMedia = () => {
       )}
 
       {infoData.contact.socialMedia.instagram && (
-        <a href={infoData.contact.socialMedia.instagram}>
+        <a
+          href={infoData.contact.socialMedia.instagram}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <Image
             src="/assets/icons/instagram.svg"
             alt="Instagram"
@@ -30,7 +38,11 @@ export const SocialMedia = () => {
         </a>
       )}
       {infoData.contact.socialMedia.youtube && (
-        <a href={infoData.contact.socialMedia.youtube}>
+        <a
+          href={infoData.contact.socialMedia.youtube}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <Image
             src="/assets/icons/youtube.svg"
             alt="YouTube"
@@ -41,7 +53,11 @@ export const SocialMedia = () => {
         </a>
       )}
       {infoData.contact.socialMedia.facebook && (
-        <a href={infoData.contact.socialMedia.facebook}>
+        <a
+          href={infoData.contact.socialMedia.facebook}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <Image
             src="/assets/icons/facebook.svg"
             alt="Facebook"
