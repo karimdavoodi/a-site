@@ -13,12 +13,12 @@ const ABOUT_ITEMS_DATA = [
   {
     id: "1",
     title: "About Us",
-    image: "/components/about_us/1/title.jpg",
+    image: "/assets/about_us.jpg",
     summary:
       "Al-Salaam Islamic Centre (AIC) is a welcoming and inclusive community that embraces the principles of Islam. We strive to foster unity, promote Islamic education, and serve the diverse needs of individuals and families. Join us as we create a vibrant and compassionate community that inspires spiritual growth and builds bridges of understanding within the wider community.",
     descriptionMarkdown: `<div style="clear:both"></div>
 
-![](/components/about_us/1/mission.png){style="float:left; width:200px; padding:10px"}
+![](/assets/about_us_mission.png){style="float:left; width:200px; padding:10px"}
 
 ### Mission:
 
@@ -26,7 +26,7 @@ At Al-Salaam Islamic Centre (AIC), our mission is to provide a vibrant and inclu
 
 <div style="clear:both"></div>
 
-![](/components/about_us/1/vision.png){style="float:left; width:200px; padding:10px"}
+![](/assets/about_us_vision.png){style="float:left; width:200px; padding:10px"}
 
 ### Vision:
 

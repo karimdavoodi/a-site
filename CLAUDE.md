@@ -50,11 +50,15 @@ Content is driven by the filesystem under `/public/`:
 
 ### Google Drive Integration
 
-Event images are pulled from Google Drive:
+Event and gallery images are pulled from Google Drive through a **server-side proxy** — the API key never reaches the browser:
 
-1. Client (`Events.tsx`) calls `/api/images/listEvents` → triggers `getImageListFromFolder("Events")`.
-2. If the local cache in `/tmp/Events` is older than 5 minutes, it syncs from Google Drive via `syncGoogleDriveFolder()`.
-3. Downloaded images are named `{modifiedTime}_{sanitized}.{ext}` and served from `/tmp/` via `/api/images/[parent]/[image]`.
+1. Client (`Events.tsx` / `Gallery.tsx`) calls `/api/images/listEvents` or `/api/images/listGallery`.
+2. Server calls `listDriveImages(folderId, apiKey)` to list files from Google Drive API.
+3. Returned image URLs point to `/api/images/proxy/{fileId}` (not Google directly).
+4. The proxy endpoint fetches the image bytes from Google Drive server-side and returns them with CDN-friendly cache headers (`s-maxage=86400, stale-while-revalidate`).
+5. Vercel's CDN edge caches the response globally — subsequent visitors get the cached copy without hitting the function or Google's API.
+
+This keeps all Google API traffic behind the server's IP — avoiding the "automated queries" block that happens when many different client IPs use the same API key.
 
 ### Overlay Coordination
 
@@ -72,8 +76,9 @@ Event images are pulled from Google Drive:
 
 | Route                           | Method | Purpose                                         |
 | ------------------------------- | ------ | ----------------------------------------------- |
-| `/api/images/listEvents`        | GET    | List synced event images from Google Drive      |
-| `/api/images/[parent]/[image]`  | GET    | Serve cached images from `/tmp/`                |
+| `/api/images/listEvents`        | GET    | List event images from Google Drive (URLs proxied)  |
+| `/api/images/listGallery`       | GET    | List gallery images from Google Drive (URLs proxied) |
+| `/api/images/proxy/[fileId]`    | GET    | Proxy/cache a Google Drive image server-side         |
 | `/api/send_mail`                | POST   | Send contact form email via Resend              |
 | `/api/donation-images/[folder]` | GET    | List donation-related images from public folder |
 

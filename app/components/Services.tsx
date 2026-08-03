@@ -13,7 +13,7 @@ const SERVICE_ITEMS_DATA = [
   {
     id: "1",
     title: "Daily prayers and weekly Halaqa",
-    image: "/components/services/1/title.png",
+    image: "/assets/daily_prayers_weekly_halaqa.png",
     summary:
       "The weekly halaqa complements daily prayers by fostering a collective environment of learning and fellowship that enriches spiritual life and promotes communal unity.",
     descriptionMarkdown:
@@ -22,7 +22,7 @@ const SERVICE_ITEMS_DATA = [
   {
     id: "2",
     title: "Qur'an Classes For All Ages",
-    image: "/components/services/2/title.png",
+    image: "/assets/quran_classes.png",
     summary:
       "Al-Salaam Quran Academy provides personalized, comprehensive Quranic education for all ages, focusing on recitation, memorization, and the practical application of Quranic wisdom in daily life.",
     descriptionMarkdown:
@@ -31,7 +31,7 @@ const SERVICE_ITEMS_DATA = [
   {
     id: "3",
     title: "Islamic Studies",
-    image: "/components/services/3/title.png",
+    image: "/assets/islamic_studies.png",
     summary:
       "Our mission is to provide transformative Islamic education that empowers learners of all ages to apply faith-driven values like compassion and justice to the challenges of the modern world.",
     descriptionMarkdown:
@@ -40,7 +40,7 @@ const SERVICE_ITEMS_DATA = [
   {
     id: "4",
     title: "Family Counselling",
-    image: "/components/services/4/title.png",
+    image: "/assets/family_counselling.png",
     summary:
       "Our family counseling provides holistic, Islamically-rooted support to resolve conflicts and strengthen the bonds of a thriving community.",
     descriptionMarkdown:
@@ -49,7 +49,7 @@ const SERVICE_ITEMS_DATA = [
   {
     id: "5",
     title: "Psychoeducation Sessions",
-    image: "/components/services/5/title.png",
+    image: "/assets/psychoeducation_sessions.png",
     summary:
       "Our psychoeducation sessions provide Islamically-integrated tools and strategies to enhance community mental health, resilience, and emotional well-being.",
     descriptionMarkdown:
@@ -58,7 +58,7 @@ const SERVICE_ITEMS_DATA = [
   {
     id: "6",
     title: "Youth Programs",
-    image: "/components/services/6/title.png",
+    image: "/assets/youth_programs.png",
     summary:
       "Our youth programs empower young individuals to develop leadership skills and a strong Islamic identity through mentorship and community service.",
     descriptionMarkdown:

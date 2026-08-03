@@ -1,5 +1,6 @@
 export interface DriveImage {
   name: string;
+  id: string;
   url: string;
   modifiedTime: string;
 }
@@ -53,7 +54,8 @@ export const listDriveImages = async (
     .filter((f) => imageTypes.includes(f.mimeType))
     .map((f) => ({
       name: f.name,
-      // Direct file content URL with API key — browser loads the raw image bytes
+      id: f.id,
+      // Direct file content URL — for server-side proxy use only (key never reaches client)
       url: `https://www.googleapis.com/drive/v3/files/${f.id}?alt=media&key=${apiKey}`,
       modifiedTime: f.modifiedTime,
     }));
