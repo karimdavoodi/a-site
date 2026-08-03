@@ -6,6 +6,7 @@ export const runtime = "nodejs";
 export async function GET() {
   try {
     const images = await getImageListFromFolder("Events");
+    console.log('IMAGES: ',images);
     if (!images) {
       return NextResponse.json(
         { error: "Failed to load events — sync error" },
