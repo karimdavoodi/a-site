@@ -2,18 +2,10 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { Lightbox } from "../Lightbox";
 
-// Mock next/image
-jest.mock("next/image", () => ({
-  __esModule: true,
-  default: (props: React.ImgHTMLAttributes<HTMLImageElement>) => {
-    return <img alt={props.alt ?? ""} src={props.src as string} {...props} />;
-  },
-}));
-
 const mockImages = [
-  { src: "/img/1.jpg", alt: "Image 1" },
-  { src: "/img/2.jpg", alt: "Image 2" },
-  { src: "/img/3.jpg", alt: "Image 3" },
+  { url: "/img/1.jpg", name: "Image 1" },
+  { url: "/img/2.jpg", name: "Image 2" },
+  { url: "/img/3.jpg", name: "Image 3" },
 ];
 
 describe("Lightbox", () => {

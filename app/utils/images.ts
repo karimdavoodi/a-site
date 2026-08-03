@@ -13,11 +13,15 @@ export const getImageListFromFolder = async (
   folderName: string,
 ): Promise<ImageItem[] | null> => {
   const folderId =
-    folderName === "Events" ? process.env.GDRIVE_EVENTS_FOLDER_ID : "";
+    folderName === "Events"
+      ? process.env.GDRIVE_EVENTS_FOLDER_ID
+      : folderName === "Gallery"
+        ? process.env.GDRIVE_GALERY_FOLDER_ID
+        : "";
   const key = process.env.GDRIVE_KEY;
 
   if (!folderId) {
-    console.error("GDRIVE_EVENTS_FOLDER_ID is not set");
+    console.error(`GDRIVE_${folderName.toUpperCase()}_FOLDER_ID is not set`);
     return null;
   }
   if (!key) {

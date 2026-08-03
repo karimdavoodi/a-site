@@ -5,12 +5,9 @@ export interface DriveImage {
 }
 
 /**
- * Lists image files from a Google Drive folder and returns their
- * thumbnailLink URLs (Google CDN) — browser loads directly, no download needed.
- *
- * thumbnailLink points to lh3.googleusercontent.com and serves raw image bytes
- * (unlike webContentLink which returns an HTML download page).
- * We replace the default =s220 size with =s2000 for full resolution.
+ * Lists image files from a Google Drive folder and returns direct download URLs
+ * that the browser can load in <img> tags. Uses the Drive API with the key
+ * inlined so no auth or public sharing is required.
  */
 export const listDriveImages = async (
   folderId: string,
@@ -20,7 +17,7 @@ export const listDriveImages = async (
     "https://www.googleapis.com/drive/v3/files?" +
     new URLSearchParams({
       q: `'${folderId}' in parents and trashed = false`,
-      fields: "files(id,name,mimeType,thumbnailLink,modifiedTime)",
+      fields: "files(id,name,mimeType,modifiedTime)",
       key: apiKey,
     });
 
@@ -30,7 +27,6 @@ export const listDriveImages = async (
       id: string;
       name: string;
       mimeType: string;
-      thumbnailLink?: string;
       modifiedTime: string;
     }[];
     error?: { code: number; message: string };
@@ -54,11 +50,11 @@ export const listDriveImages = async (
   ];
 
   return data.files
-    .filter((f) => f.thumbnailLink && imageTypes.includes(f.mimeType))
+    .filter((f) => imageTypes.includes(f.mimeType))
     .map((f) => ({
       name: f.name,
-      // Replace =s220 (default thumbnail size) with =s2000 for full resolution
-      url: f.thumbnailLink!.replace(/=s\d+$/, "=s2000"),
+      // Direct file content URL with API key — browser loads the raw image bytes
+      url: `https://www.googleapis.com/drive/v3/files/${f.id}?alt=media&key=${apiKey}`,
       modifiedTime: f.modifiedTime,
     }));
 };

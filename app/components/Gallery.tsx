@@ -1,26 +1,36 @@
 "use client";
 
 import { useState, useRef, useCallback, useEffect } from "react";
-import Image from "next/image";
 import { Section } from "./Section";
 import { Lightbox } from "./Lightbox";
 import styles from "./Gallery.module.css";
 
 interface GalleryImage {
-  src: string;
-  alt: string;
+  url: string;
+  name: string;
 }
 
-const GALLERY_IMAGES: GalleryImage[] = Array.from({ length: 12 }, (_, i) => ({
-  src: `/components/gallery/1/${i + 1}.jpg`,
-  alt: `Gallery image ${i + 1}`,
-}));
-
 export function Gallery() {
+  const [images, setImages] = useState<GalleryImage[]>([]);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [{ left: canScrollLeft, right: canScrollRight }, setCanScroll] =
     useState({ left: false, right: true });
   const trackRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    async function fetchImages() {
+      try {
+        const res = await fetch("/api/images/listGallery", {
+          cache: "no-store",
+        });
+        const data: GalleryImage[] = await res.json();
+        setImages(data);
+      } catch (error) {
+        console.error("Error fetching gallery images:", error);
+      }
+    }
+    fetchImages();
+  }, []);
 
   const scrollBy = useCallback((direction: "prev" | "next") => {
     const track = trackRef.current;
@@ -42,10 +52,14 @@ export function Gallery() {
     });
   }, []);
 
-  // Initialize arrow visibility once the track is mounted
+  // Initialize arrow visibility once images render into the track
   useEffect(() => {
     handleScroll();
-  }, [handleScroll]);
+  }, [images, handleScroll]);
+
+  if (!images || !images.length) {
+    return null;
+  }
 
   return (
     <Section title="Gallery">
@@ -61,18 +75,16 @@ export function Gallery() {
         )}
 
         <div className={styles.track} ref={trackRef} onScroll={handleScroll}>
-          {GALLERY_IMAGES.map((img, i) => (
+          {images.map((img, i) => (
             <button
-              key={img.src}
+              key={`${img.name}-${i}`}
               className={styles.slide}
               onClick={() => setLightboxIndex(i)}
-              aria-label={`View ${img.alt}`}
+              aria-label={`View ${img.name}`}
             >
-              <Image
-                src={img.src}
-                alt={img.alt}
-                width={400}
-                height={300}
+              <img
+                src={img.url}
+                alt={img.name}
                 className={styles.image}
               />
             </button>
@@ -92,14 +104,14 @@ export function Gallery() {
 
       {lightboxIndex !== null && (
         <Lightbox
-          images={GALLERY_IMAGES}
+          images={images}
           currentIndex={lightboxIndex}
           onClose={() => setLightboxIndex(null)}
           onPrev={() =>
             setLightboxIndex((prev) =>
               prev !== null
                 ? prev === 0
-                  ? GALLERY_IMAGES.length - 1
+                  ? images.length - 1
                   : prev - 1
                 : null,
             )
@@ -107,7 +119,7 @@ export function Gallery() {
           onNext={() =>
             setLightboxIndex((prev) =>
               prev !== null
-                ? prev === GALLERY_IMAGES.length - 1
+                ? prev === images.length - 1
                   ? 0
                   : prev + 1
                 : null,

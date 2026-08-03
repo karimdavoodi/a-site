@@ -79,7 +79,6 @@ export const Events = ({ title }: { title: string }) => {
                 src={image.url}
                 alt={image.name}
                 className={styles.image}
-                loading="lazy"
               />
             </div>
           ))}

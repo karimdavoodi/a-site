@@ -1,21 +1,15 @@
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { Gallery } from "../Gallery";
-
-// Mock next/image
-jest.mock("next/image", () => ({
-  __esModule: true,
-  default: (props: React.ImgHTMLAttributes<HTMLImageElement>) => {
-    return <img alt={props.alt ?? ""} src={props.src as string} {...props} />;
-  },
-}));
 
 // Mock Lightbox
 jest.mock("../Lightbox", () => ({
   Lightbox: ({
+    images,
     currentIndex,
     onClose,
   }: {
+    images: { url: string; name: string }[];
     currentIndex: number;
     onClose: () => void;
   }) => (
@@ -26,29 +20,63 @@ jest.mock("../Lightbox", () => ({
   ),
 }));
 
+const MOCK_IMAGES = [
+  { url: "https://example.com/1.jpg", name: "Gallery image 1" },
+  { url: "https://example.com/2.jpg", name: "Gallery image 2" },
+  { url: "https://example.com/3.jpg", name: "Gallery image 3" },
+];
+
 describe("Gallery", () => {
-  it("renders the section title", () => {
+  beforeEach(() => {
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        json: () => Promise.resolve(MOCK_IMAGES),
+      }),
+    ) as jest.Mock;
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  it("renders the section title", async () => {
     render(<Gallery />);
     expect(
-      screen.getByRole("heading", { name: "Gallery" }),
+      await screen.findByRole("heading", { name: "Gallery" }),
     ).toBeInTheDocument();
   });
 
-  it("renders all 13 gallery images", () => {
+  it("fetches images from the API and renders them", async () => {
     render(<Gallery />);
-    const buttons = screen.getAllByRole("button");
-    // 13 thumbnail buttons total (Gallery images only, not Lightbox nav)
-    const thumbnails = buttons.filter((b) =>
-      b.getAttribute("aria-label")?.startsWith("View Gallery"),
-    );
-    expect(thumbnails).toHaveLength(12);
+    expect(global.fetch).toHaveBeenCalledWith("/api/images/listGallery", {
+      cache: "no-store",
+    });
+
+    await waitFor(() => {
+      expect(screen.getByLabelText("View Gallery image 1")).toBeInTheDocument();
+      expect(screen.getByLabelText("View Gallery image 2")).toBeInTheDocument();
+      expect(screen.getByLabelText("View Gallery image 3")).toBeInTheDocument();
+    });
   });
 
-  it("opens lightbox when an image is clicked", () => {
+  it("opens lightbox when an image is clicked", async () => {
     render(<Gallery />);
-    const firstThumb = screen.getByLabelText("View Gallery image 1");
+    const firstThumb = await screen.findByLabelText("View Gallery image 1");
     fireEvent.click(firstThumb);
     expect(screen.getByTestId("lightbox")).toBeInTheDocument();
     expect(screen.getByText("Image 1")).toBeInTheDocument();
+  });
+
+  it("returns null when no images are available", async () => {
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        json: () => Promise.resolve([]),
+      }),
+    ) as jest.Mock;
+
+    const { container } = render(<Gallery />);
+    await waitFor(() => {
+      expect(container.firstChild).toBeNull();
+    });
   });
 });

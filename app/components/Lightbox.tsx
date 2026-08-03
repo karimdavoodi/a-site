@@ -1,12 +1,11 @@
 "use client";
 
 import { useEffect, useCallback } from "react";
-import Image from "next/image";
 import styles from "./Lightbox.module.css";
 
 interface LightboxImage {
-  src: string;
-  alt: string;
+  url: string;
+  name: string;
 }
 
 interface LightboxProps {
@@ -31,14 +30,14 @@ export function Lightbox({
           onClose();
           break;
         case "ArrowLeft":
-          if (currentIndex > 0) onPrev();
+          onPrev();
           break;
         case "ArrowRight":
-          if (currentIndex < images.length - 1) onNext();
+          onNext();
           break;
       }
     },
-    [onClose, onPrev, onNext, currentIndex, images.length],
+    [onClose, onPrev, onNext],
   );
 
   useEffect(() => {
@@ -102,11 +101,9 @@ export function Lightbox({
       )}
 
       <div className={styles.content} onClick={(e) => e.stopPropagation()}>
-        <Image
-          src={image.src}
-          alt={image.alt}
-          width={1200}
-          height={900}
+        <img
+          src={image.url}
+          alt={image.name}
           className={styles.image}
         />
         <p className={styles.counter}>
