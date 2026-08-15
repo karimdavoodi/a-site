@@ -5,11 +5,9 @@ import { Gallery } from "../Gallery";
 // Mock Lightbox
 jest.mock("../Lightbox", () => ({
   Lightbox: ({
-    images,
     currentIndex,
     onClose,
   }: {
-    images: { url: string; name: string }[];
     currentIndex: number;
     onClose: () => void;
   }) => (
