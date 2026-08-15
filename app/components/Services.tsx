@@ -1,13 +1,7 @@
-import { ServicesClient } from "./ServicesClient";
+import { ExpandableContentSection } from "./ExpandableContent";
 import { renderMarkdown } from "../utils/markdown";
-
-interface ServiceItem {
-  id: string;
-  title: string;
-  image: string;
-  summary: string;
-  descriptionHtml: string;
-}
+import type { ContentItem } from "../types";
+import styles from "./Services.module.css";
 
 const SERVICE_ITEMS_DATA = [
   {
@@ -66,11 +60,18 @@ const SERVICE_ITEMS_DATA = [
   },
 ];
 
-const SERVICE_ITEMS: ServiceItem[] = SERVICE_ITEMS_DATA.map((item) => ({
+const SERVICE_ITEMS: ContentItem[] = SERVICE_ITEMS_DATA.map((item) => ({
   ...item,
   descriptionHtml: renderMarkdown(item.descriptionMarkdown),
 }));
 
 export function Services() {
-  return <ServicesClient items={SERVICE_ITEMS} />;
+  return (
+    <ExpandableContentSection
+      title="Services"
+      id="services"
+      items={SERVICE_ITEMS}
+      styles={styles}
+    />
+  );
 }

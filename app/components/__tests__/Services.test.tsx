@@ -1,6 +1,7 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { ServicesClient } from "../ServicesClient";
+import { ExpandableContentSection } from "../ExpandableContent";
+import styles from "../Services.module.css";
 
 // Mock next/image
 jest.mock("next/image", () => ({
@@ -56,15 +57,25 @@ const mockItems = [
 ];
 
 describe("Services", () => {
+  const renderServices = () =>
+    render(
+      <ExpandableContentSection
+        title="Services"
+        id="services"
+        items={mockItems}
+        styles={styles}
+      />,
+    );
+
   it("renders the section title", () => {
-    render(<ServicesClient items={mockItems} />);
+    renderServices();
     expect(
       screen.getByRole("heading", { name: "Services" }),
     ).toBeInTheDocument();
   });
 
   it("renders all 6 service cards", () => {
-    render(<ServicesClient items={mockItems} />);
+    renderServices();
     expect(
       screen.getByText("Daily prayers and weekly Halaqa"),
     ).toBeInTheDocument();
@@ -76,7 +87,7 @@ describe("Services", () => {
   });
 
   it("toggles description on card click", () => {
-    render(<ServicesClient items={mockItems} />);
+    renderServices();
     const buttons = screen.getAllByText("Read More ▼");
     expect(buttons).toHaveLength(6);
 

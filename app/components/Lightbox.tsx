@@ -1,15 +1,11 @@
 "use client";
 
 import { useEffect, useCallback } from "react";
+import type { ImageItem } from "../types";
 import styles from "./Lightbox.module.css";
 
-interface LightboxImage {
-  url: string;
-  name: string;
-}
-
 interface LightboxProps {
-  images: LightboxImage[];
+  images: ImageItem[];
   currentIndex: number;
   onClose: () => void;
   onPrev: () => void;

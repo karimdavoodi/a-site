@@ -1,18 +1,8 @@
 import { getPrayerTime } from "../utils/prayer";
 import { PrayerTimesClient } from "./PrayerTimeClient";
+import type { PrayerTimesData } from "../types";
 
 const PRAYER_NAMES = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"] as const;
-
-export type PrayerData = {
-  name: string;
-  athan: string;
-  iqamah: string;
-};
-
-export type PrayerTimesData = {
-  prayers: PrayerData[];
-  day: number;
-};
 
 /**
  * Fetch and return prayer times data. Use this at the page level

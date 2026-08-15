@@ -1,9 +1,5 @@
 import { listDriveImages } from "./gdrive";
-
-export interface ImageItem {
-  name: string;
-  url: string;
-}
+import type { ImageItem } from "../types";
 
 /**
  * Returns image metadata for a named Google Drive folder.

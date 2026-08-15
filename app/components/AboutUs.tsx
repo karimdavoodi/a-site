@@ -1,13 +1,7 @@
-import { AboutUsClient } from "./AboutUsClient";
+import { ExpandableContentSection } from "./ExpandableContent";
 import { renderMarkdown } from "../utils/markdown";
-
-interface AboutItem {
-  id: string;
-  title: string;
-  image: string;
-  summary: string;
-  descriptionHtml: string;
-}
+import type { ContentItem } from "../types";
+import styles from "./AboutUs.module.css";
 
 const ABOUT_ITEMS_DATA = [
   {
@@ -64,11 +58,19 @@ We are committed to upholding the principles and teachings of Islam in all our a
   },
 ];
 
-const ABOUT_ITEMS: AboutItem[] = ABOUT_ITEMS_DATA.map((item) => ({
+const ABOUT_ITEMS: ContentItem[] = ABOUT_ITEMS_DATA.map((item) => ({
   ...item,
   descriptionHtml: renderMarkdown(item.descriptionMarkdown),
 }));
 
 export function AboutUs() {
-  return <AboutUsClient items={ABOUT_ITEMS} />;
+  return (
+    <ExpandableContentSection
+      title="About Us"
+      items={ABOUT_ITEMS}
+      styles={styles}
+      imageWidth={400}
+      imageHeight={300}
+    />
+  );
 }

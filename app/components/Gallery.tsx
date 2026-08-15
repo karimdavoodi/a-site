@@ -3,15 +3,11 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import { Section } from "./Section";
 import { Lightbox } from "./Lightbox";
+import type { ImageItem } from "../types";
 import styles from "./Gallery.module.css";
 
-interface GalleryImage {
-  url: string;
-  name: string;
-}
-
 export function Gallery() {
-  const [images, setImages] = useState<GalleryImage[]>([]);
+  const [images, setImages] = useState<ImageItem[]>([]);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [{ left: canScrollLeft, right: canScrollRight }, setCanScroll] =
     useState({ left: false, right: true });
@@ -23,7 +19,7 @@ export function Gallery() {
         const res = await fetch("/api/images/listGallery", {
           cache: "no-store",
         });
-        const data: GalleryImage[] = await res.json();
+        const data: ImageItem[] = await res.json();
         setImages(data);
       } catch (error) {
         console.error("Error fetching gallery images:", error);

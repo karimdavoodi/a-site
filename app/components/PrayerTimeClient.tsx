@@ -8,13 +8,8 @@ import {
   parsePrayerTimeToMinutes,
 } from "../utils/nextPrayer";
 import { getZonedNow } from "../utils/timezone";
+import type { PrayerData } from "../types";
 import styles from "./PrayerTime.module.css";
-
-type PrayerData = {
-  name: string;
-  athan: string;
-  iqamah: string;
-};
 
 type PrayerCardProps = {
   name: string;

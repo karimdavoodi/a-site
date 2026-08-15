@@ -2,15 +2,11 @@
 
 import { useEffect, useState, useRef, useCallback } from "react";
 import { Section } from "./Section";
+import type { ImageItem } from "../types";
 import styles from "./Events.module.css";
 
-interface EventImage {
-  url: string;
-  name: string;
-}
-
 export const Events = ({ title }: { title: string }) => {
-  const [images, setImages] = useState<EventImage[]>([]);
+  const [images, setImages] = useState<ImageItem[]>([]);
   const [{ left: canScrollLeft, right: canScrollRight }, setCanScroll] =
     useState({ left: false, right: true });
   const trackRef = useRef<HTMLDivElement>(null);
@@ -21,7 +17,7 @@ export const Events = ({ title }: { title: string }) => {
         const imagesRes = await fetch("/api/images/listEvents", {
           cache: "no-store",
         });
-        const imagesData: EventImage[] = await imagesRes.json();
+        const imagesData: ImageItem[] = await imagesRes.json();
         setImages(imagesData);
       } catch (error) {
         console.error("Error fetching images:", error);

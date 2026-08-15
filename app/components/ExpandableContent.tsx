@@ -3,17 +3,31 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Section } from "./Section";
-import styles from "./Services.module.css";
+import type { ContentItem } from "../types";
 
-interface ServiceItem {
-  id: string;
+type CSSModuleStyles = Record<string, string>;
+
+interface ExpandableContentSectionProps {
   title: string;
-  image: string;
-  summary: string;
-  descriptionHtml: string;
+  id?: string;
+  items: ContentItem[];
+  /** CSS module class map from the section's own `.module.css`. */
+  styles: CSSModuleStyles;
+  imageWidth?: number;
+  imageHeight?: number;
 }
 
-function ServiceCard({ item }: { item: ServiceItem }) {
+function ExpandableCard({
+  item,
+  styles,
+  imageWidth,
+  imageHeight,
+}: {
+  item: ContentItem;
+  styles: CSSModuleStyles;
+  imageWidth: number;
+  imageHeight: number;
+}) {
   const [expanded, setExpanded] = useState(false);
   const plainDescription = item.descriptionHtml.replace(/<[^>]*>/g, "").trim();
   const hasMore = plainDescription !== item.summary;
@@ -24,8 +38,8 @@ function ServiceCard({ item }: { item: ServiceItem }) {
         <Image
           src={item.image}
           alt={item.title}
-          width={300}
-          height={200}
+          width={imageWidth}
+          height={imageHeight}
           className={styles.image}
         />
       </div>
@@ -54,12 +68,30 @@ function ServiceCard({ item }: { item: ServiceItem }) {
   );
 }
 
-export function ServicesClient({ items }: { items: ServiceItem[] }) {
+/**
+ * A titled section of expandable "read more" cards. Shared by the Services
+ * and About Us sections, which differ only in content, styling, and the
+ * section id.
+ */
+export function ExpandableContentSection({
+  title,
+  id,
+  items,
+  styles,
+  imageWidth = 300,
+  imageHeight = 200,
+}: ExpandableContentSectionProps) {
   return (
-    <Section title="Services" id="services">
+    <Section title={title} id={id}>
       <div className={styles.grid}>
         {items.map((item) => (
-          <ServiceCard key={item.id} item={item} />
+          <ExpandableCard
+            key={item.id}
+            item={item}
+            styles={styles}
+            imageWidth={imageWidth}
+            imageHeight={imageHeight}
+          />
         ))}
       </div>
     </Section>
