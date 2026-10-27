@@ -69,7 +69,7 @@ All prayer-time logic runs on the mosque's local clock (`America/Toronto`) via `
 
 ### Weekly Prayer Times Page
 
-`/weekly_prayer_times` is a standalone server-rendered page (`app/weekly_prayer_times/page.tsx`) that reads the same yearly JSON and renders a 7-day table starting from today, with day labels, azan/iqamah times, and special Friday highlighting.
+`/weekly_prayer_times` is a standalone server-rendered page (`app/weekly_prayer_times/page.tsx`) that reads the same yearly JSON and renders a 7-day table starting from today, with day labels, azan/iqamah times, and special Friday highlighting. The `?week=N` search param shifts the window by N weeks (the `Previous week` / `Next week` links); when a week spans two years, both yearly JSON files are loaded.
 
 ### Prayer Times Scraper
 

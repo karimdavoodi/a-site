@@ -1,6 +1,7 @@
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { MobileNav } from "../components/MobileNav";
+import Link from "next/link";
 import fs from "fs/promises";
 import path from "path";
 import { getZonedNow, MONTH_NAMES } from "../utils/timezone";
@@ -51,26 +52,24 @@ function ordinal(n: number): string {
   return s + "th";
 }
 
-function buildWeek(): {
+type WeekDay = {
   key: string;
   dayName: string;
   monthLabel: string;
   yearLabel: string;
-}[] {
+  date: Date;
+};
+
+function buildWeek(weekOffset: number): WeekDay[] {
   // Anchor "today" to the mosque's timezone (deployed servers run in UTC),
   // then do day arithmetic in UTC so DST can't shift a date.
   const now = getZonedNow();
   const anchor = new Date(Date.UTC(now.year, now.monthIndex, now.day));
-  const days: {
-    key: string;
-    dayName: string;
-    monthLabel: string;
-    yearLabel: string;
-  }[] = [];
+  const days: WeekDay[] = [];
 
   for (let i = 0; i < 7; i++) {
     const d = new Date(anchor);
-    d.setUTCDate(anchor.getUTCDate() + i);
+    d.setUTCDate(anchor.getUTCDate() + weekOffset * 7 + i);
 
     const year = d.getUTCFullYear().toString();
     const month = MONTH_NAMES[d.getUTCMonth()];
@@ -80,28 +79,75 @@ function buildWeek(): {
       dayName: DAY_ABBR[d.getUTCDay()],
       monthLabel: `${MONTH_ABBR[d.getUTCMonth()]} ${ordinal(d.getUTCDate())}`,
       yearLabel: year,
+      date: d,
     });
   }
 
   return days;
 }
 
-// ---- page ----
+function parseWeekOffset(raw?: string): number {
+  const n = Number.parseInt(raw ?? "0", 10);
+  if (!Number.isFinite(n)) return 0;
+  return Math.max(-104, Math.min(104, n));
+}
 
-export default async function WeeklyPrayerTimes() {
-  const currentYear = getZonedNow().year.toString();
-  const filePath = path.join(
-    process.cwd(),
-    "public",
-    "data",
-    `${currentYear}_prayer_times.json`,
+function weekHref(weekOffset: number): string {
+  return weekOffset === 0
+    ? "/weekly_prayer_times"
+    : `/weekly_prayer_times?week=${weekOffset}`;
+}
+
+function formatWeekRange(first: Date, last: Date): string {
+  const fm = MONTH_ABBR[first.getUTCMonth()];
+  const lm = MONTH_ABBR[last.getUTCMonth()];
+  const fy = first.getUTCFullYear();
+  const ly = last.getUTCFullYear();
+  if (fy !== ly) {
+    return `${fm} ${first.getUTCDate()}, ${fy} – ${lm} ${last.getUTCDate()}, ${ly}`;
+  }
+  if (fm !== lm) {
+    return `${fm} ${first.getUTCDate()} – ${lm} ${last.getUTCDate()}, ${fy}`;
+  }
+  return `${fm} ${first.getUTCDate()} – ${last.getUTCDate()}, ${fy}`;
+}
+
+async function loadPrayerData(years: number[]): Promise<YearlyPrayerData | null> {
+  const files = await Promise.all(
+    years.map(async (year) => {
+      try {
+        const filePath = path.join(
+          process.cwd(),
+          "public",
+          "data",
+          `${year}_prayer_times.json`,
+        );
+        return JSON.parse(await fs.readFile(filePath, "utf-8")) as YearlyPrayerData;
+      } catch {
+        return null;
+      }
+    }),
   );
 
-  let yearlyData: YearlyPrayerData = {};
-  try {
-    const raw = await fs.readFile(filePath, "utf-8");
-    yearlyData = JSON.parse(raw);
-  } catch {
+  const loaded = files.filter((f): f is YearlyPrayerData => f !== null);
+  return loaded.length ? Object.assign({}, ...loaded) : null;
+}
+
+// ---- page ----
+
+export default async function WeeklyPrayerTimes({
+  searchParams,
+}: {
+  searchParams: Promise<{ week?: string }>;
+}) {
+  const weekOffset = parseWeekOffset((await searchParams).week);
+  const week = buildWeek(weekOffset);
+  const years = [...new Set(week.map((d) => d.date.getUTCFullYear()))];
+  const loadedData = await loadPrayerData(years);
+
+  // Only today's year failing to load means the site's data is broken;
+  // other years may simply not have been generated yet.
+  if (!loadedData && years.includes(getZonedNow().year)) {
     return (
       <div style={styles.page}>
         <Header />
@@ -116,13 +162,38 @@ export default async function WeeklyPrayerTimes() {
     );
   }
 
-  const week = buildWeek();
+  const yearlyData = loadedData ?? {};
+  const hasAnyData = week.some((d) => yearlyData[d.key]);
 
   return (
     <div style={styles.page}>
       <Header />
       <div style={styles.content}>
-        <h2 className="sectionTitle">Weekly Prayer Times</h2>
+        <div style={styles.titleRow}>
+          <Link
+            href={weekHref(weekOffset - 1)}
+            style={styles.navButton}
+            aria-label="Previous week"
+          >
+            ‹ Previous week
+          </Link>
+          <h2 style={styles.title}>Weekly Prayer Times</h2>
+          <Link
+            href={weekHref(weekOffset + 1)}
+            style={styles.navButton}
+            aria-label="Next week"
+          >
+            Next week ›
+          </Link>
+        </div>
+        <p style={styles.rangeLabel}>
+          {formatWeekRange(week[0].date, week[6].date)}
+        </p>
+        {!hasAnyData && (
+          <p style={styles.notice}>
+            Prayer times for this week are not available yet.
+          </p>
+        )}
 
         {week.map(({ key, dayName, monthLabel, yearLabel }) => {
           const p = yearlyData[key];
@@ -199,6 +270,53 @@ const styles: Record<string, React.CSSProperties> = {
     alignItems: "stretch",
     padding: "0 0.35rem 0.5rem",
     gap: 2,
+  },
+
+  /* ---- title + week navigation ---- */
+
+  titleRow: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: "var(--space-xs)",
+    padding: "0 0.35rem",
+  },
+
+  title: {
+    flex: 1,
+    margin: 0,
+    textAlign: "center",
+    fontSize: "clamp(1.05rem, 4vw, 1.5rem)",
+    fontWeight: 700,
+    color: "var(--color-accent)",
+    lineHeight: 1.15,
+  },
+
+  navButton: {
+    flexShrink: 0,
+    padding: "0.35rem 0.6rem",
+    borderRadius: "var(--radius-full)",
+    backgroundColor: "var(--color-surface)",
+    color: "var(--color-accent)",
+    fontSize: "var(--font-size-sm)",
+    fontWeight: 700,
+    textDecoration: "none",
+    whiteSpace: "nowrap",
+    boxShadow: "var(--shadow-card)",
+  },
+
+  rangeLabel: {
+    margin: 0,
+    textAlign: "center",
+    fontSize: "var(--font-size-sm)",
+    color: "var(--color-text-secondary)",
+  },
+
+  notice: {
+    margin: "0.25rem 0 0",
+    textAlign: "center",
+    fontSize: "var(--font-size-sm)",
+    color: "var(--color-text-muted)",
   },
 
   /* ---- day row ---- */
