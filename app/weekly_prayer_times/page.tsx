@@ -38,6 +38,7 @@ const MONTH_ABBR = [
   "Dec",
 ];
 const PRAYERS = ["Fajr", "Sunrise", "Dhuhr", "Asr", "Magrib", "Isha"];
+const MAX_WEEK_OFFSET = 104;
 
 // ---- helpers ----
 
@@ -89,7 +90,7 @@ function buildWeek(weekOffset: number): WeekDay[] {
 function parseWeekOffset(raw?: string): number {
   const n = Number.parseInt(raw ?? "0", 10);
   if (!Number.isFinite(n)) return 0;
-  return Math.max(-104, Math.min(104, n));
+  return Math.max(-MAX_WEEK_OFFSET, Math.min(MAX_WEEK_OFFSET, n));
 }
 
 function weekHref(weekOffset: number): string {
@@ -112,7 +113,9 @@ function formatWeekRange(first: Date, last: Date): string {
   return `${fm} ${first.getUTCDate()} – ${last.getUTCDate()}, ${fy}`;
 }
 
-async function loadPrayerData(years: number[]): Promise<YearlyPrayerData | null> {
+async function loadPrayerData(
+  years: number[],
+): Promise<YearlyPrayerData | null> {
   const files = await Promise.all(
     years.map(async (year) => {
       try {
@@ -122,7 +125,9 @@ async function loadPrayerData(years: number[]): Promise<YearlyPrayerData | null>
           "data",
           `${year}_prayer_times.json`,
         );
-        return JSON.parse(await fs.readFile(filePath, "utf-8")) as YearlyPrayerData;
+        return JSON.parse(
+          await fs.readFile(filePath, "utf-8"),
+        ) as YearlyPrayerData;
       } catch {
         return null;
       }
@@ -142,7 +147,13 @@ export default async function WeeklyPrayerTimes({
 }) {
   const weekOffset = parseWeekOffset((await searchParams).week);
   const week = buildWeek(weekOffset);
-  const years = [...new Set(week.map((d) => d.date.getUTCFullYear()))];
+  const prevWeek = buildWeek(weekOffset - 1);
+  const nextWeek = buildWeek(weekOffset + 1);
+  const years = [
+    ...new Set(
+      [...week, ...prevWeek, ...nextWeek].map((d) => d.date.getUTCFullYear()),
+    ),
+  ];
   const loadedData = await loadPrayerData(years);
 
   // Only today's year failing to load means the site's data is broken;
@@ -163,7 +174,10 @@ export default async function WeeklyPrayerTimes({
   }
 
   const yearlyData = loadedData ?? {};
-  const hasAnyData = week.some((d) => yearlyData[d.key]);
+  const weekHasData = (days: WeekDay[]) => days.some((d) => yearlyData[d.key]);
+  const hasAnyData = weekHasData(week);
+  const hasPrevData = weekOffset > -MAX_WEEK_OFFSET && weekHasData(prevWeek);
+  const hasNextData = weekOffset < MAX_WEEK_OFFSET && weekHasData(nextWeek);
 
   return (
     <div style={styles.page}>
@@ -172,7 +186,10 @@ export default async function WeeklyPrayerTimes({
         <div style={styles.titleRow}>
           <Link
             href={weekHref(weekOffset - 1)}
-            style={styles.navButton}
+            style={{
+              ...styles.navButton,
+              visibility: hasPrevData ? "visible" : "hidden",
+            }}
             aria-label="Previous week"
           >
             ‹ Previous week
@@ -180,7 +197,10 @@ export default async function WeeklyPrayerTimes({
           <h2 style={styles.title}>Weekly Prayer Times</h2>
           <Link
             href={weekHref(weekOffset + 1)}
-            style={styles.navButton}
+            style={{
+              ...styles.navButton,
+              visibility: hasNextData ? "visible" : "hidden",
+            }}
             aria-label="Next week"
           >
             Next week ›
