@@ -178,7 +178,6 @@ export default async function WeeklyPrayerTimes({
   const hasAnyData = weekHasData(week);
   const hasPrevData = weekOffset > -MAX_WEEK_OFFSET && weekHasData(prevWeek);
   const hasNextData = weekOffset < MAX_WEEK_OFFSET && weekHasData(nextWeek);
-  let i = 0;
   return (
     <div style={styles.page}>
       <Header />
@@ -218,9 +217,8 @@ export default async function WeeklyPrayerTimes({
         {week.map(({ key, dayName, monthLabel, yearLabel }) => {
           const p = yearlyData[key];
           const isFriday = dayName === "Fri";
-          i++;
           return (
-            <div key={key} style={i % 2 ? styles.dayRow : styles.dayRow1}>
+            <div key={key} style={styles.dayRow}>
               {/* day label — left side, 3 lines */}
               <div style={styles.dayLabel}>
                 <span style={isFriday ? styles.dayNameRed : styles.dayName}>
@@ -318,7 +316,7 @@ const styles: Record<string, React.CSSProperties> = {
     padding: "0.35rem 0.6rem",
     borderRadius: "var(--radius-sm)",
     backgroundColor: "var(--color-surface)",
-    color: "var(--color-accent)",
+    color: "#ffd166",
     fontSize: "var(--font-size-sm)",
     fontWeight: 700,
     textDecoration: "none",
@@ -347,15 +345,7 @@ const styles: Record<string, React.CSSProperties> = {
     flexDirection: "row",
     alignItems: "stretch",
     backgroundColor: "rgb(10, 45, 4)",
-    borderRadius: "var(--radius-md)",
-    boxShadow: "var(--shadow-card)",
-    overflow: "hidden",
-  },
-  dayRow1: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "stretch",
-    backgroundColor: "rgb(25, 45, 4)",
+    border: "1px solid rgba(232, 184, 48, 0.75)",
     borderRadius: "var(--radius-md)",
     boxShadow: "var(--shadow-card)",
     overflow: "hidden",
@@ -386,13 +376,13 @@ const styles: Record<string, React.CSSProperties> = {
   dayNameRed: {
     fontSize: "1.3rem",
     fontWeight: 600,
-    color: "#e53e3e",
+    color: "#ff8a80",
     lineHeight: 1.15,
   },
 
   monthLabel: {
     fontSize: "0.85rem",
-    fontWeight: 300,
+    fontWeight: 500,
     color: "#ffe566",
     lineHeight: 1.15,
     whiteSpace: "nowrap",
@@ -431,14 +421,14 @@ const styles: Record<string, React.CSSProperties> = {
   prayerName: {
     fontSize: "0.95rem",
     fontWeight: 500,
-    color: "#ffff00",
+    color: "#ffe566",
     textTransform: "uppercase",
     letterSpacing: "0.02em",
     lineHeight: 1.15,
   },
 
   azan: {
-    fontSize: "0.7rem",
+    fontSize: "0.85rem",
     fontFamily: "monospace",
     color: "#f7f7f7",
     lineHeight: 1.15,
@@ -464,7 +454,7 @@ const styles: Record<string, React.CSSProperties> = {
     fontSize: "1.1rem",
     fontWeight: 700,
     fontFamily: "monospace",
-    color: "#ff0000",
+    color: "#ff8a80",
     lineHeight: 1.15,
   },
 
