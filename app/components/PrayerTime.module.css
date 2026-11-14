@@ -96,12 +96,12 @@
 .countdownLabel {
   font-size: var(--font-size-lg);
   color: var(--color-text-secondary);
-  font-family: var(--font-geist-mono), monospace;
+  font-family: monospace;
   margin-bottom: 4px;
 }
 
 .countdownTimer {
-  font-family: var(--font-geist-mono), monospace;
+  font-family: monospace;
   font-size: var(--font-size-2xl);
   font-weight: 500;
   color: var(--color-text);
@@ -112,7 +112,7 @@
 /* ── Weekly link ────────────────────────────────────────────────────── */
 .weeklyLink {
   margin-top: var(--space-xl);
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-xl);
   color: var(--color-text-secondary);
   text-decoration: none;
   transition: color 0.2s ease;
