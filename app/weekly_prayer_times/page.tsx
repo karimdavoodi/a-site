@@ -178,7 +178,7 @@ export default async function WeeklyPrayerTimes({
   const hasAnyData = weekHasData(week);
   const hasPrevData = weekOffset > -MAX_WEEK_OFFSET && weekHasData(prevWeek);
   const hasNextData = weekOffset < MAX_WEEK_OFFSET && weekHasData(nextWeek);
-
+  let i = 0;
   return (
     <div style={styles.page}>
       <Header />
@@ -218,8 +218,9 @@ export default async function WeeklyPrayerTimes({
         {week.map(({ key, dayName, monthLabel, yearLabel }) => {
           const p = yearlyData[key];
           const isFriday = dayName === "Fri";
+          i++;
           return (
-            <div key={key} style={styles.dayRow}>
+            <div key={key} style={i % 2 ? styles.dayRow : styles.dayRow1}>
               {/* day label — left side, 3 lines */}
               <div style={styles.dayLabel}>
                 <span style={isFriday ? styles.dayNameRed : styles.dayName}>
@@ -299,7 +300,7 @@ const styles: Record<string, React.CSSProperties> = {
     alignItems: "center",
     justifyContent: "space-between",
     gap: "var(--space-xs)",
-    padding: "0 0.35rem",
+    paddingTop: "1rem",
   },
 
   title: {
@@ -315,7 +316,7 @@ const styles: Record<string, React.CSSProperties> = {
   navButton: {
     flexShrink: 0,
     padding: "0.35rem 0.6rem",
-    borderRadius: "var(--radius-full)",
+    borderRadius: "var(--radius-sm)",
     backgroundColor: "var(--color-surface)",
     color: "var(--color-accent)",
     fontSize: "var(--font-size-sm)",
@@ -328,7 +329,7 @@ const styles: Record<string, React.CSSProperties> = {
   rangeLabel: {
     margin: 0,
     textAlign: "center",
-    fontSize: "var(--font-size-sm)",
+    fontSize: "var(--font-size-md)",
     color: "var(--color-text-secondary)",
   },
 
@@ -345,7 +346,16 @@ const styles: Record<string, React.CSSProperties> = {
     display: "flex",
     flexDirection: "row",
     alignItems: "stretch",
-    backgroundColor: "rgb(22, 85, 14)",
+    backgroundColor: "rgb(10, 45, 4)",
+    borderRadius: "var(--radius-md)",
+    boxShadow: "var(--shadow-card)",
+    overflow: "hidden",
+  },
+  dayRow1: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "stretch",
+    backgroundColor: "rgb(25, 45, 4)",
     borderRadius: "var(--radius-md)",
     boxShadow: "var(--shadow-card)",
     overflow: "hidden",
@@ -368,28 +378,28 @@ const styles: Record<string, React.CSSProperties> = {
 
   dayName: {
     fontSize: "1.3rem",
-    fontWeight: 700,
+    fontWeight: 600,
     color: "var(--color-text)",
     lineHeight: 1.15,
   },
 
   dayNameRed: {
     fontSize: "1.3rem",
-    fontWeight: 700,
+    fontWeight: 600,
     color: "#e53e3e",
     lineHeight: 1.15,
   },
 
   monthLabel: {
     fontSize: "0.85rem",
-    fontWeight: 600,
+    fontWeight: 300,
     color: "#ffe566",
     lineHeight: 1.15,
     whiteSpace: "nowrap",
   },
 
   yearLabel: {
-    fontSize: "0.75rem",
+    fontSize: "0.9rem",
     color: "#d0d0d0",
     lineHeight: 1.15,
   },
@@ -400,7 +410,6 @@ const styles: Record<string, React.CSSProperties> = {
     flex: 1,
     display: "flex",
     flexWrap: "wrap",
-    gap: 2,
     padding: 2,
   },
 
@@ -414,46 +423,48 @@ const styles: Record<string, React.CSSProperties> = {
     alignItems: "center",
     justifyContent: "center",
     padding: "0.3rem 0.35rem",
-    borderRadius: 4,
-    backgroundColor: "rgba(255,255,255,0.16)",
+    backgroundColor: "rgba(255,255,255,0.1)",
     lineHeight: 1.2,
     gap: 1,
   },
 
   prayerName: {
     fontSize: "0.95rem",
-    fontWeight: 700,
-    color: "#ffe566",
+    fontWeight: 500,
+    color: "#ffff00",
     textTransform: "uppercase",
     letterSpacing: "0.02em",
     lineHeight: 1.15,
   },
 
   azan: {
-    fontSize: "1.05rem",
-    fontWeight: 500,
-    color: "#f0f0f0",
+    fontSize: "0.7rem",
+    fontFamily: "monospace",
+    color: "#f7f7f7",
     lineHeight: 1.15,
   },
 
   sunriseTime: {
-    fontSize: "1.15rem",
+    fontSize: "1.1rem",
     fontWeight: 700,
+    fontFamily: "monospace",
     color: "var(--color-text)",
     lineHeight: 1.15,
   },
 
   iqamah: {
-    fontSize: "1.3rem",
+    fontSize: "1.1rem",
     fontWeight: 700,
+    fontFamily: "monospace",
     color: "var(--color-text)",
     lineHeight: 1.15,
   },
 
   iqamahRed: {
-    fontSize: "1.3rem",
+    fontSize: "1.1rem",
     fontWeight: 700,
-    color: "#e53e3e",
+    fontFamily: "monospace",
+    color: "#ff0000",
     lineHeight: 1.15,
   },
 
